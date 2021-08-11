@@ -13,24 +13,123 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Default">
+      <UniqueIdentifier>{39d32833-19d3-489b-8471-fcb127f17a13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Include">
+      <UniqueIdentifier>{0542f807-59bc-4442-a6bd-1c8823b4caed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\00.MainGame">
+      <UniqueIdentifier>{e9e1e00f-9a92-48dd-bc6c-e2bd11a6bb71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99.Tool">
+      <UniqueIdentifier>{172f2cbb-3bd4-4bb3-81be-afc10b681b60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99.Tool\00.GraphicDevice">
+      <UniqueIdentifier>{02e889ca-76b9-479f-a1ca-d9217bd9cd95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Object">
+      <UniqueIdentifier>{d3c214c6-9240-4419-95a1-8d3af98c6d88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\01.Object\00.Player">
+      <UniqueIdentifier>{c2a79b29-00ec-427e-a850-c0d3ef97419a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Texture">
+      <UniqueIdentifier>{d882bddf-54ab-4a02-8e13-b119e88bdd0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Texture\00.SingleTexture">
+      <UniqueIdentifier>{3f37a04a-0799-417b-9168-f60915a9c0ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02.Texture\01.MultiTexture">
+      <UniqueIdentifier>{a56ec15e-d347-49b3-b66b-18e2aab75f51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Manager">
+      <UniqueIdentifier>{453b4965-cc9e-4382-8e1d-b4b1f564d769}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\03.Manager\TextManager">
+      <UniqueIdentifier>{e8c0437e-0a18-4947-ad04-e1511625fe1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Default</Filter>
     </ClInclude>
     <ClInclude Include="GeoMetriDesh.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Include.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicDevice.h">
+      <Filter>소스 파일\99.Tool\00.GraphicDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>헤더 파일\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Extern.h">
+      <Filter>헤더 파일\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>소스 파일\00.MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>헤더 파일\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>소스 파일\01.Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>소스 파일\01.Object\00.Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>소스 파일\02.Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleTexture.h">
+      <Filter>소스 파일\02.Texture\00.SingleTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiTexture.h">
+      <Filter>소스 파일\02.Texture\01.MultiTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>소스 파일\03.Manager\TextManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Function.h">
+      <Filter>헤더 파일\Include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeoMetriDesh.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicDevice.cpp">
+      <Filter>소스 파일\99.Tool\00.GraphicDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>소스 파일\00.MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>소스 파일\01.Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>소스 파일\01.Object\00.Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>소스 파일\02.Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleTexture.cpp">
+      <Filter>소스 파일\02.Texture\00.SingleTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiTexture.cpp">
+      <Filter>소스 파일\02.Texture\01.MultiTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>소스 파일\03.Manager\TextManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
