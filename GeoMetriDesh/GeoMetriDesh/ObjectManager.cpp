@@ -36,9 +36,11 @@ void ObjectManager::Update()
         //}
 
         for (auto& rObj : objList[i]) {
-            rObj->UpdateObject();
-        }
 
+            if (!rObj->GetDeadCheck()) {
+                rObj->UpdateObject();
+            }
+        }
     }
 }
 
@@ -46,7 +48,9 @@ void ObjectManager::LateUpdate()
 {
     for (int i = 0; i < OBJECT_ID_END; i++) {
         for (auto& rObject : objList[i]) {
-            rObject->LateUpdateObject();
+            if (!rObject->GetDeadCheck()) {
+                rObject->LateUpdateObject();
+            }
         }
     }
 }
@@ -55,9 +59,15 @@ void ObjectManager::Render()
 {
     for (int i = 0; i < OBJECT_ID_END; i++) {
         for (auto& rObject : objList[i]) {
-            rObject->RenderObject();
+            if (!rObject->GetDeadCheck()) {
+                rObject->RenderObject();
+            }
         }
     }
+
+    WCHAR szBuff[32] = L"";
+    swprintf_s(szBuff, L"objCount : %d", objList[PLAYER].size());
+    SetWindowText(g_hWnd, szBuff);
 }
 
 void ObjectManager::Release()

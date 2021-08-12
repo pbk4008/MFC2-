@@ -55,6 +55,18 @@
     <Filter Include="소스 파일\03.Manager\KeyManager">
       <UniqueIdentifier>{c67ec574-4042-4f32-a55d-6db9093a01c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\03.Manager\SceneManager">
+      <UniqueIdentifier>{09cbdedd-6808-4b1c-882d-c762032fb6aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\04.Scene">
+      <UniqueIdentifier>{e94432ea-fc4b-4212-8df4-2448e7dadef6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\04.Scene\Logo">
+      <UniqueIdentifier>{e830c411-5940-4e80-80c5-8ad4a601a333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\04.Scene\Menu">
+      <UniqueIdentifier>{cbc236cd-80b4-4d42-adab-a43c619b1919}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -117,6 +129,18 @@
     <ClInclude Include="KeyManager.h">
       <Filter>소스 파일\03.Manager\KeyManager</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>소스 파일\04.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Logo.h">
+      <Filter>소스 파일\04.Scene\Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>소스 파일\04.Scene\Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>소스 파일\03.Manager\SceneManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeoMetriDesh.cpp">
@@ -151,6 +175,18 @@
     </ClCompile>
     <ClCompile Include="KeyManager.cpp">
       <Filter>소스 파일\03.Manager\KeyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>소스 파일\04.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Logo.cpp">
+      <Filter>소스 파일\04.Scene\Logo</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>소스 파일\04.Scene\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>소스 파일\03.Manager\SceneManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

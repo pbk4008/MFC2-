@@ -5,11 +5,15 @@
 class KeyManager
 {
 	DECLARE_SINGLETON(KeyManager)
+private:
+	explicit KeyManager() {};
 public:
+	virtual ~KeyManager() {};
+	
 
-	static void KeyPressing();
-	static void KeyDown();
-	static void KeyUp();
+	bool KeyPressing(int _key);
+	bool KeyDown(int _key);
+	bool KeyUp(int _key);
 
 
 private:

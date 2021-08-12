@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "GraphicDevice.h"
 #include "TextureManager.h"
+#include "KeyManager.h"
 
 HRESULT Player::ReadObject()
 {
@@ -15,7 +16,16 @@ HRESULT Player::ReadObject()
 
 int Player::UpdateObject()
 {
-    deadCheck;
+    
+    if (KeyManager::GetInstance()->KeyPressing(VK_SPACE)) {
+        SetDeadCheck(true);
+    };
+
+
+    if (KeyManager::GetInstance()->KeyPressing('W')) {
+        SetDeadCheck(false);
+    };
+
     test++;
     return NOEVENT;
 }
@@ -32,8 +42,8 @@ void Player::RenderObject()
 {
     const TEXTINFO* pTexInfo = TextureManager::GetInstance()->GetTextInfo(L"Player", L"Attack", test);
 
-    float centerX = pTexInfo->imageInfo.Width >> 1;
-    float centerY = pTexInfo->imageInfo.Height >> 1;
+    float centerX = (float)(pTexInfo->imageInfo.Width >> 1);
+    float centerY = (float)(pTexInfo->imageInfo.Height >> 1);
 
     D3DXVECTOR3 temp = { centerX, centerY, 0.f};
 
