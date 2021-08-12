@@ -6,7 +6,7 @@
 #define WINCX 800
 #define WINCY 600
 
-
+#define VK_MAX 0xFF
 
 #define DECLARE_SINGLETON(CLASSNAME)				\
 	public:																	    \
@@ -32,6 +32,10 @@
 
 
 #define SAFE_DELETE(p) if(&p) {delete p; p = nullptr;}
+
+
+#define NOEVENT 0
+#define OBJDEAD 1
 
 
 #endif // !__DEFINE_H__

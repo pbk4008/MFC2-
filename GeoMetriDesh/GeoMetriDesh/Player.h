@@ -13,11 +13,13 @@ public:
 	virtual HRESULT ReadObject() override;
 	virtual int UpdateObject() override;
 	virtual void LateUpdateObject() override;
-	virtual void RenderObject(HDC _hdc) override;
+	virtual void RenderObject() override;
 	virtual void ReleaseObject() override;
 
 private:
 	float speed;
+
+	int test;
 };
 
 

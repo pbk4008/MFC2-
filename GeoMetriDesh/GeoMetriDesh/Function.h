@@ -1,14 +1,14 @@
 #pragma once
 #ifndef __FUNCTION_H__
 #define __FUNCTION_H__
-template<class T>
-void Safe_Delete(T& rObj)
+
+template <typename T>
+void Safe_Delete(T& _Dst)
 {
-	if (rObj)
+	if (_Dst)
 	{
-		delete rObj;
-		rObj = nullptr;
+		delete _Dst;
+		_Dst = nullptr;
 	}
 }
-
 #endif // !__FUNCTION_H__

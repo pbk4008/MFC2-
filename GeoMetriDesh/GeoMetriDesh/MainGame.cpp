@@ -1,10 +1,13 @@
 #include "framework.h"
 #include "MainGame.h"
 #include "TextureManager.h"
+#include "ObjectManager.h"
+#include "Player.h"
 
 MainGame::MainGame()
 {
 	graphicDevice = GraphicDevice::GetInstance();
+	objectManager = ObjectManager::GetInstance();
 }
 
 MainGame::~MainGame()
@@ -16,36 +19,38 @@ HRESULT MainGame::ReadyMainGame()
 {
 	g_hDC = GetDC(g_hWnd);
 	graphicDevice->ReadyGraphicDevice();
+	objectManager->Intialize();
+	
+
+
+	objectManager->InsertObject<Player>(ObjectManager::PLAYER);
 
 	return S_OK;
 }
 
 void MainGame::UpdateMainGame()
 {
+	objectManager->Update();
 }
 
 void MainGame::LateUpdateMainGame()
 {
+	objectManager->LateUpdate();
 }
 
 void MainGame::RenderMainGame()
 {
-	graphicDevice->GetDevice()->Clear(0, nullptr, D3DCLEAR_STENCIL | D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(255, 255, 255, 255), 1, 0);
-	graphicDevice->GetDevice()->BeginScene();
-	// 아직 스프라이트 모름
-	graphicDevice->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
+	graphicDevice->GetInstance()->RenderBegin();
 
-	const TEXTINFO* pTexInfo = TextureManager::GetInstance()->GetTextInfo(L"Logo");
+	objectManager->Render();
 
-
-	//아직 스프라이트 없음
-	graphicDevice->GetSprite()->End();
-	graphicDevice->GetDevice()->EndScene();
-	graphicDevice->GetDevice()->Present(nullptr, nullptr, nullptr, nullptr);
+	graphicDevice->GetInstance()->RenderEnd();
 }
 
 void MainGame::ReleaseMainGame()
 {
+	objectManager->Release();
+
 	graphicDevice->DestroyInstance();
 }
 

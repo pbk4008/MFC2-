@@ -6,6 +6,7 @@
 #include "Extern.h"
 #include "Struct.h"
 #include "Function.h"
+#include "AbstractFactory.h"
 
 #include "GraphicDevice.h"
 

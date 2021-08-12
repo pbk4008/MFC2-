@@ -14,8 +14,10 @@ public:
 
 	LPDIRECT3DDEVICE9 GetDevice() { return mDevice; };
 	LPD3DXSPRITE GetSprite() { return mSprite; };
-
 	void ReleaseDevice();
+
+	void RenderBegin();
+	void RenderEnd();
 
 public:
 	// 사용할 장치 받아오기

@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbstractFactory.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Extern.h" />
     <ClInclude Include="framework.h" />
@@ -150,9 +151,11 @@
     <ClInclude Include="GeoMetriDesh.h" />
     <ClInclude Include="GraphicDevice.h" />
     <ClInclude Include="Include.h" />
+    <ClInclude Include="KeyManager.h" />
     <ClInclude Include="MainGame.h" />
     <ClInclude Include="MultiTexture.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SingleTexture.h" />
@@ -164,9 +167,11 @@
   <ItemGroup>
     <ClCompile Include="GeoMetriDesh.cpp" />
     <ClCompile Include="GraphicDevice.cpp" />
+    <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="MainGame.cpp" />
     <ClCompile Include="MultiTexture.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SingleTexture.cpp" />
     <ClCompile Include="Texture.cpp" />

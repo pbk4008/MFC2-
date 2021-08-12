@@ -3,7 +3,7 @@
 #ifndef __MAINGAME_H__
 #define __MAINGAME_H__
 
-class Player;
+class ObjectManager;
 class GraphicDevice;
 class MainGame
 {
@@ -22,12 +22,12 @@ public:
 	void RenderMainGame();
 	void ReleaseMainGame();
 
+public:
 	static MainGame* Create();
 
 private:
 	GraphicDevice* graphicDevice;
-
-	Player* player;
+	ObjectManager* objectManager;
 };
 
 

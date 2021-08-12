@@ -86,3 +86,18 @@ void GraphicDevice::ReleaseDevice()
 		mSdk->Release();
 	}
 }
+
+void GraphicDevice::RenderBegin()
+{
+	mDevice->Clear(0, nullptr, D3DCLEAR_STENCIL | D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(255, 0, 0, 255), 1, 0);
+	mDevice->BeginScene();
+	mSprite->Begin(D3DXSPRITE_ALPHABLEND);
+}
+
+void GraphicDevice::RenderEnd()
+{
+	mSprite->End();
+	mDevice->EndScene();
+	mDevice->Present(nullptr, nullptr, nullptr, nullptr);
+
+}
