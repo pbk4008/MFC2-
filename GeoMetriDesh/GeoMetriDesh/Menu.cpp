@@ -6,11 +6,11 @@ HRESULT Menu::Initialize()
 {
     // 출력할 이미지!
 
-    //// 싱글 텍스쳐
-    //TextureManager::GetInstance()->InsertTexture(
-    //    TextureManager::SINGLE, 
-    //    L"../Texture/DaHyounNim.jpg",
-    //    L"Menu" );
+    // 싱글 텍스쳐
+    TextureManager::GetInstance()->InsertTexture(
+        TextureManager::SINGLE, 
+        L"../Texture/DaHyounNim.png",
+        L"Menu" );
 
 
     return S_OK;
@@ -27,17 +27,17 @@ void Menu::LateUpdate()
 
 void Menu::Render()
 {
-   /* TEXTINFO* pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Menu");
+    TEXTINFO* pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Menu");
 
     D3DXVECTOR3 centerVec = {
-        pTextInfo->imageInfo.Width * 0.5f,
-        pTextInfo->imageInfo.Height * 0.5f,
+        float(pTextInfo->imageInfo.Width >> 1),
+        float(pTextInfo->imageInfo.Height >> 1),
         0.f
     };
 
     GraphicDevice::GetInstance()->GetSprite()->Draw(
-        pTextInfo->texture, nullptr, nullptr,nullptr,D3DCOLOR_ARGB(255,255,255,255)
-    );*/
+        pTextInfo->texture, nullptr, &centerVec,nullptr,D3DCOLOR_ARGB(255,255,255,255)
+    );
 
 }
 

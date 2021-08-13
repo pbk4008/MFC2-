@@ -3,7 +3,7 @@
 #ifndef __MAINGAME_H__
 #define __MAINGAME_H__
 
-class SceneManager;
+class ObjectManager;
 class GraphicDevice;
 class MainGame
 {
@@ -27,7 +27,7 @@ public:
 
 private:
 	GraphicDevice* graphicDevice;
-	SceneManager* sceneManager;
+	ObjectManager* objectManager;
 };
 
 

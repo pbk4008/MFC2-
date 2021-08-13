@@ -7,14 +7,14 @@ class SceneManager
 {
 	DECLARE_SINGLETON(SceneManager)
 public:
-	enum SCENE_ID {LOGO, MENU, EDIT, STAGE, SCENE_ID_END};
+	enum SCENE_ID {LOGO, MENU, STATE, END};
 private:
-	inline explicit SceneManager() : scene(nullptr), currScene(LOGO), preScene(SCENE_ID_END){};
+	inline explicit SceneManager() {};
 public:
 	inline virtual ~SceneManager() {};
 
 
-	void ChangeScene(SCENE_ID _ID);
+	void ChangeScene();
 	void Update();
 	void LateUpdate();
 	void Render();
@@ -24,7 +24,7 @@ public:
 private:
 	Scene* scene;
 	SCENE_ID currScene;
-	SCENE_ID preScene;
+	SCENE_ID preSCENE;
 };
 
 

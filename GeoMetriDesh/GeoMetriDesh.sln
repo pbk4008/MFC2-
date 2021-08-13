@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31605.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GeoMetriDesh", "GeoMetriDesh\GeoMetriDesh.vcxproj", "{8CB4F885-0622-435F-A27F-6575E39C51F7}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GeoMetriDesh", "GeoMetriDesh\GeoMetriDesh.vcxproj", "{CEEC32C9-0694-410D-AE0B-52FD8269A245}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,19 +13,19 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8CB4F885-0622-435F-A27F-6575E39C51F7}.Debug|x64.ActiveCfg = Debug|x64
-		{8CB4F885-0622-435F-A27F-6575E39C51F7}.Debug|x64.Build.0 = Debug|x64
-		{8CB4F885-0622-435F-A27F-6575E39C51F7}.Debug|x86.ActiveCfg = Debug|Win32
-		{8CB4F885-0622-435F-A27F-6575E39C51F7}.Debug|x86.Build.0 = Debug|Win32
-		{8CB4F885-0622-435F-A27F-6575E39C51F7}.Release|x64.ActiveCfg = Release|x64
-		{8CB4F885-0622-435F-A27F-6575E39C51F7}.Release|x64.Build.0 = Release|x64
-		{8CB4F885-0622-435F-A27F-6575E39C51F7}.Release|x86.ActiveCfg = Release|Win32
-		{8CB4F885-0622-435F-A27F-6575E39C51F7}.Release|x86.Build.0 = Release|Win32
+		{CEEC32C9-0694-410D-AE0B-52FD8269A245}.Debug|x64.ActiveCfg = Debug|x64
+		{CEEC32C9-0694-410D-AE0B-52FD8269A245}.Debug|x64.Build.0 = Debug|x64
+		{CEEC32C9-0694-410D-AE0B-52FD8269A245}.Debug|x86.ActiveCfg = Debug|Win32
+		{CEEC32C9-0694-410D-AE0B-52FD8269A245}.Debug|x86.Build.0 = Debug|Win32
+		{CEEC32C9-0694-410D-AE0B-52FD8269A245}.Release|x64.ActiveCfg = Release|x64
+		{CEEC32C9-0694-410D-AE0B-52FD8269A245}.Release|x64.Build.0 = Release|x64
+		{CEEC32C9-0694-410D-AE0B-52FD8269A245}.Release|x86.ActiveCfg = Release|Win32
+		{CEEC32C9-0694-410D-AE0B-52FD8269A245}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3CEBBED3-6079-4F30-8CF4-230EB95738DC}
+		SolutionGuid = {2514D97A-677F-4E62-A292-EB7191DFA510}
 	EndGlobalSection
 EndGlobal
