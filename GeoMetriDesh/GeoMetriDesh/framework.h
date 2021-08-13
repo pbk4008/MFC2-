@@ -20,6 +20,7 @@
 #include <vector>
 #include <algorithm>
 #include <functional>
+#include <string>
 using namespace std;
 
 #include "d3d9.h"
@@ -31,5 +32,3 @@ using namespace std;
 // 추가 include
 #include "Include.h"
 
-
-#include <string>

@@ -2,7 +2,7 @@
 #include "SceneManager.h"
 #include "Logo.h"
 #include "Menu.h"
-//#include "Edit.h"
+#include "Edit.h"
 
 
 IMPLEMENT_SINGLETON(SceneManager)
@@ -24,14 +24,14 @@ void SceneManager::ChangeScene(SCENE_ID _ID)
 			scene = new Menu;
 			break;
 		case SceneManager::EDIT:
-			//scene = new Edit;
+			scene = CEdit::Create();
 			break;
 		case SceneManager::STAGE:
 			// scene = new State;
 			break;
 		}
 
-		scene->Initialize();
+		/*scene->Initialize();*/
 		preScene = currScene;
 	}
 }

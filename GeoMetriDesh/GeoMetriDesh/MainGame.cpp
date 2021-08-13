@@ -4,13 +4,15 @@
 #include "ObjectManager.h"
 #include "SceneManager.h"
 #include "KeyManager.h"
+#include "Player.h"
 
 MainGame::MainGame()
 {
 	graphicDevice = GraphicDevice::GetInstance();
-	ObjectManager::GetInstance();
-	SceneManager::GetInstance();
-	KeyManager::GetInstance();
+	//objectManager=ObjectManager::GetInstance();
+	
+	sceneManager = SceneManager::GetInstance();
+	keyManager = KeyManager::GetInstance();
 }
 
 MainGame::~MainGame()
@@ -21,32 +23,32 @@ MainGame::~MainGame()
 HRESULT MainGame::ReadyMainGame()
 {
 	// 메인 진입점
-
-
 	// HDC 필요한지 모르겠지만 일단 넣어놨습니다.
 	g_hDC = GetDC(g_hWnd);
 
 	// 그래픽카드한테 일 시킬 준비
 	graphicDevice->ReadyGraphicDevice();
 
+	sceneManager->ChangeScene(SceneManager::EDIT);
 	return S_OK;
 }
 
 void MainGame::UpdateMainGame()
 {
+	sceneManager->Update();
 }
 
 void MainGame::LateUpdateMainGame()
 {
+	sceneManager->LateUpdate();
+	
 }
 
 void MainGame::RenderMainGame()
 {
 	// 모든 랜더의 시작
 	graphicDevice->GetInstance()->RenderBegin();
-
-
-
+	sceneManager->Render();
 	// 모든 랜더의 끝
 	graphicDevice->GetInstance()->RenderEnd();
 }

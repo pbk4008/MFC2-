@@ -5,6 +5,8 @@
 
 class ObjectManager;
 class GraphicDevice;
+class SceneManager;
+class KeyManager;
 class MainGame
 {
 private:
@@ -28,6 +30,8 @@ public:
 private:
 	GraphicDevice* graphicDevice;
 	ObjectManager* objectManager;
+	SceneManager* sceneManager;
+	KeyManager* keyManager;
 };
 
 

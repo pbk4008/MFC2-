@@ -9,7 +9,7 @@ class SceneManager
 public:
 	enum SCENE_ID {LOGO, MENU, EDIT, STAGE, SCENE_ID_END};
 private:
-	inline explicit SceneManager() : scene(nullptr), currScene(LOGO), preScene(SCENE_ID_END){};
+	inline explicit SceneManager() : scene(nullptr), currScene(EDIT), preScene(SCENE_ID_END){};
 public:
 	inline virtual ~SceneManager() {};
 

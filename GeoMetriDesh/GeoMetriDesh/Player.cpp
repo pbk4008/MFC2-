@@ -48,9 +48,7 @@ void Player::RenderObject()
     D3DXVECTOR3 temp = { centerX, centerY, 0.f};
 
 
-    GraphicDevice::GetInstance()->GetSprite()->Draw(pTexInfo->texture, nullptr, 
-                                                                                    &temp,
-                                                                                    &info.pos, D3DCOLOR_ARGB(255,255,255,255));
+    GraphicDevice::GetInstance()->GetSprite()->Draw(pTexInfo->texture, nullptr,&temp,&info.pos, D3DCOLOR_ARGB(255,255,255,255));
 }
 
 void Player::ReleaseObject()
