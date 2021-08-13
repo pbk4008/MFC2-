@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="99.Default">
+      <UniqueIdentifier>{b6b0a808-4541-4a69-8501-421e3f76235e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98.Include">
+      <UniqueIdentifier>{88f08c82-baeb-4670-8cd4-840819cfbd7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Manager">
+      <UniqueIdentifier>{a7f53221-44ba-4bfb-980d-45b2135a1304}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Manager\00.ObjectMgr">
+      <UniqueIdentifier>{4c774abf-464d-431b-8077-f6700f8fe612}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Manager\01.KeyMgr">
+      <UniqueIdentifier>{9ad500e8-eebe-4e87-876c-0f6a5393d6a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Manager\02.SceneMgr">
+      <UniqueIdentifier>{0eec9f4a-5ccf-47ea-9a93-8d049c1a196c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Manager\03.TextureMgr">
+      <UniqueIdentifier>{89f28729-16cb-4f10-ada8-529027a282b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.MainGame">
+      <UniqueIdentifier>{9f39312f-e744-4c37-a414-64ee9fd5f274}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object">
+      <UniqueIdentifier>{6fea3d70-8155-4140-9d49-5dcbb8704937}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\00.Player">
+      <UniqueIdentifier>{84f2a325-857e-499e-9651-cad485176315}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene">
+      <UniqueIdentifier>{dd70d20c-8518-465f-87c0-87662c275211}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene\00.Logo">
+      <UniqueIdentifier>{54fa15c3-a5ac-42ed-890d-8a5bc019eb08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene\01.Menu">
+      <UniqueIdentifier>{0e45d702-d879-4611-8c53-93a4ca74b231}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="96.Tool">
+      <UniqueIdentifier>{3cb0e6f2-e279-4897-839c-a7c7192584cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Texture">
+      <UniqueIdentifier>{6bed00b9-fa09-41d1-b9c5-4148fdae87ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Texture\00.SingleTexture">
+      <UniqueIdentifier>{60705819-9abd-43c1-a63a-fad002cb6d9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Texture\01.MultiTexture">
+      <UniqueIdentifier>{f344cc19-9d95-4c6a-82a5-f8db20e2cdfa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GeoMetriDesh.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>99.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>97.Manager\00.ObjectMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyManager.h">
+      <Filter>97.Manager\01.KeyMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>97.Manager\02.SceneMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>97.Manager\03.TextureMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="AbstractFactory.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Extern.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Function.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MainGame.h">
+      <Filter>00.MainGame</Filter>
+    </ClInclude>
+    <ClInclude Include="Include.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>01.Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>01.Object\00.Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>02.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Logo.h">
+      <Filter>02.Scene\00.Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>02.Scene\01.Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>03.Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleTexture.h">
+      <Filter>03.Texture\00.SingleTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiTexture.h">
+      <Filter>03.Texture\01.MultiTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicDevice.h">
+      <Filter>96.Tool</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="GeoMetriDesh.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="GeoMetriDesh.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GeoMetriDesh.cpp">
+      <Filter>99.Default</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>97.Manager\00.ObjectMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyManager.cpp">
+      <Filter>97.Manager\01.KeyMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>97.Manager\02.SceneMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>97.Manager\03.TextureMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="MainGame.cpp">
+      <Filter>00.MainGame</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>01.Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>01.Object\00.Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>02.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Logo.cpp">
+      <Filter>02.Scene\00.Logo</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>02.Scene\01.Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>03.Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleTexture.cpp">
+      <Filter>03.Texture\00.SingleTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiTexture.cpp">
+      <Filter>03.Texture\01.MultiTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicDevice.cpp">
+      <Filter>96.Tool</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

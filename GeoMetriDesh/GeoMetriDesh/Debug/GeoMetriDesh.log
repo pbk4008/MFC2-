@@ -1,0 +1,18 @@
+﻿  GeoMetriDesh.cpp
+  GraphicDevice.cpp
+  KeyManager.cpp
+  Logo.cpp
+  MainGame.cpp
+  Menu.cpp
+  MultiTexture.cpp
+C:\Users\pbk40\Desktop\2차팀과제\GeoMetriDesh\GeoMetriDesh\MultiTexture.cpp(15,29): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Object.cpp
+  ObjectManager.cpp
+  Player.cpp
+  Scene.cpp
+  SceneManager.cpp
+  SingleTexture.cpp
+  Texture.cpp
+  TextureManager.cpp
+  코드를 생성하고 있습니다...
+  GeoMetriDesh.vcxproj -> C:\Users\pbk40\Desktop\2차팀과제\GeoMetriDesh\Debug\GeoMetriDesh.exe
