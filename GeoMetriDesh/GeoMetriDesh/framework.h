@@ -13,23 +13,3 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
-
-// 기본 include
-#include <map>
-#include <list>
-#include <vector>
-#include <algorithm>
-#include <functional>
-using namespace std;
-
-#include "d3d9.h"
-#pragma comment(lib, "d3d9.lib")
-
-#include "d3dx9.h"
-#pragma comment(lib, "d3dx9.lib")
-
-// 추가 include
-#include "Include.h"
-
-
-#include <string>
