@@ -6,51 +6,67 @@
 
 HRESULT Player::ReadObject()
 {
-    test = 1;
-    TextureManager::GetInstance()->InsertTexture(TextureManager::MULTI, L"../Texture/Stage/Player/Attack/AKIHA_AKI01_00%d.png", L"Player", L"Attack", 6);
+    // 텍스트 정보를 추가하고 불러야함
+    // 추가!
+    TextureManager::GetInstance()->InsertTexture(TextureManager::SINGLE, L"../Texture/Player/Player.png", L"Player");
+    // 부르기!
+    pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Player");
 
-    info.pos = { 400, 100, 0.f };
+    // info의 pos, size, dir는 직접 지정해줘야 한다
+    info.pos = { 100.f, 200.f, 0.f };
+    info.size = { 100.f, 100.f, 0.f };
+    info.dir = { 1.f, 0.f, 0.f };
 
+    // 반복 연산을 줄이기 위해 선언!
+    keyMgr = KeyManager::GetInstance();
+
+    SetObjectInfo(); // 필수!
     return S_OK;
 }
 
 int Player::UpdateObject()
 {
-    
-    if (KeyManager::GetInstance()->KeyPressing(VK_SPACE)) {
-        SetDeadCheck(true);
-    };
-
-
-    if (KeyManager::GetInstance()->KeyPressing('W')) {
-        SetDeadCheck(false);
-    };
-
-    test++;
+    KeyChecking();
     return NOEVENT;
 }
 
 void Player::LateUpdateObject()
 {
-    if (test >= 6) {
-        test = 0;
-    }
-
+    UpdateObjectInfo(); // 필수!
 }
 
 void Player::RenderObject()
 {
-    const TEXTINFO* pTexInfo = TextureManager::GetInstance()->GetTextInfo(L"Player", L"Attack", test);
-
-    float centerX = (float)(pTexInfo->imageInfo.Width >> 1);
-    float centerY = (float)(pTexInfo->imageInfo.Height >> 1);
-
-    D3DXVECTOR3 temp = { centerX, centerY, 0.f};
-
-
-    GraphicDevice::GetInstance()->GetSprite()->Draw(pTexInfo->texture, nullptr,&temp,&info.pos, D3DCOLOR_ARGB(255,255,255,255));
+    DrawImage(); // 필수!
 }
 
 void Player::ReleaseObject()
 {
+    SAFE_DELETE(keyMgr);
+}
+
+void Player::KeyChecking()
+{
+    // 풀링 테스트
+    if (keyMgr->KeyPressing(VK_SPACE)) {
+        SetDeadCheck(true);
+    };
+    if (keyMgr->KeyPressing('W')) {
+        SetDeadCheck(false);
+    };
+
+    // 키 테스트
+    if (keyMgr->KeyPressing(VK_LEFT)) {
+        info.pos.x -= 5.f;
+    }
+    if (keyMgr->KeyPressing(VK_RIGHT)) {
+        info.pos.x += 5.f;
+    }
+    if (keyMgr->KeyPressing(VK_UP)) {
+        info.pos.y -= 5.f;
+    }
+    if (keyMgr->KeyPressing(VK_DOWN)) {
+        info.pos.y += 5.f;
+    }
+
 }

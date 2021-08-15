@@ -7,11 +7,15 @@ class KeyManager
 	DECLARE_SINGLETON(KeyManager)
 private:
 	explicit KeyManager() {};
-	virtual ~KeyManager() {};
 public:
+	virtual ~KeyManager() {};
+	
+
 	bool KeyPressing(int _key);
 	bool KeyDown(int _key);
 	bool KeyUp(int _key);
+
+
 private:
 	bool keyState[VK_MAX];
 };

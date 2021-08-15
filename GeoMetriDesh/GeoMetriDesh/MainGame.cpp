@@ -1,18 +1,15 @@
 #include "framework.h"
 #include "MainGame.h"
-#include "TextureManager.h"
-#include "ObjectManager.h"
 #include "SceneManager.h"
+
+#include "TextureManager.h"
 #include "KeyManager.h"
-#include "Player.h"
+
 
 MainGame::MainGame()
 {
 	graphicDevice = GraphicDevice::GetInstance();
-	//objectManager=ObjectManager::GetInstance();
-	
 	sceneManager = SceneManager::GetInstance();
-	keyManager = KeyManager::GetInstance();
 }
 
 MainGame::~MainGame()
@@ -28,8 +25,8 @@ HRESULT MainGame::ReadyMainGame()
 
 	// 그래픽카드한테 일 시킬 준비
 	graphicDevice->ReadyGraphicDevice();
+	sceneManager->ChangeScene(SceneManager::STAGE);
 
-	sceneManager->ChangeScene(SceneManager::EDIT);
 	return S_OK;
 }
 
@@ -41,24 +38,23 @@ void MainGame::UpdateMainGame()
 void MainGame::LateUpdateMainGame()
 {
 	sceneManager->LateUpdate();
-	
 }
 
 void MainGame::RenderMainGame()
 {
 	// 모든 랜더의 시작
 	graphicDevice->GetInstance()->RenderBegin();
+
 	sceneManager->Render();
+
+
 	// 모든 랜더의 끝
 	graphicDevice->GetInstance()->RenderEnd();
 }
 
 void MainGame::ReleaseMainGame()
 {
-	ObjectManager::DestroyInstance();
 	SceneManager::DestroyInstance();
-	KeyManager::DestroyInstance();
-
 	// 그래픽카드 장치 반납
 	graphicDevice->DestroyInstance();
 }

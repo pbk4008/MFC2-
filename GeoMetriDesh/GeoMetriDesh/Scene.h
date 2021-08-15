@@ -13,6 +13,8 @@ public:
 	inline virtual void LateUpdate() PURE;
 	inline virtual void Render() PURE;
 	inline virtual void Release() PURE;
+
+
 };
 
 
