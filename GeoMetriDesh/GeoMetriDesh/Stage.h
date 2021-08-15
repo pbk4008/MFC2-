@@ -2,6 +2,7 @@
 #include "Scene.h"
 
 class ObjectManager;
+class CLineMgr;
 class Stage : public Scene
 {
     // Scene을(를) 통해 상속됨
@@ -10,10 +11,8 @@ class Stage : public Scene
     virtual void LateUpdate() override;
     virtual void Render() override;
     virtual void Release() override;
-
-
-
 private:
     ObjectManager* objMgr;
+    CLineMgr* lineMgr;
 };
 
