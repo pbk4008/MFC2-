@@ -150,6 +150,7 @@
     <ClInclude Include="AbstractFactory.h" />
     <ClInclude Include="CollisionMgr.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="Edit.h" />
     <ClInclude Include="Extern.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Function.h" />
@@ -157,6 +158,8 @@
     <ClInclude Include="GraphicDevice.h" />
     <ClInclude Include="Include.h" />
     <ClInclude Include="KeyManager.h" />
+    <ClInclude Include="Line.h" />
+    <ClInclude Include="LineMgr.h" />
     <ClInclude Include="Logo.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
@@ -171,6 +174,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="ScrollMgr.h" />
     <ClInclude Include="SingleTexture.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="SubObject.h" />
@@ -180,9 +184,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CollisionMgr.cpp" />
+    <ClCompile Include="Edit.cpp" />
     <ClCompile Include="GeoMetriDesh.cpp" />
     <ClCompile Include="GraphicDevice.cpp" />
     <ClCompile Include="KeyManager.cpp" />
+    <ClCompile Include="Line.cpp" />
+    <ClCompile Include="LineMgr.cpp" />
     <ClCompile Include="Logo.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -196,6 +203,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="ScrollMgr.cpp" />
     <ClCompile Include="SingleTexture.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="SubObject.cpp" />

@@ -2,9 +2,8 @@
 #include "Stage.h"
 #include "ObjectManager.h"
 #include "TextureManager.h"
+#include "LineMgr.h"
 #include "Player.h"
-
-
 #include "SubObject.h"
 
 HRESULT Stage::Initialize()
@@ -14,6 +13,8 @@ HRESULT Stage::Initialize()
 	objMgr->InsertObject<Player>(ObjectManager::PLAYER);
 	objMgr->InsertObject<SubObject>(ObjectManager::TERRAIN);
 
+	lineMgr = CLineMgr::GetInstance();
+	lineMgr->LoadLine();
 	return S_OK;
 }
 
@@ -32,6 +33,7 @@ void Stage::LateUpdate()
 void Stage::Render()
 {
 	objMgr->Render();
+	lineMgr->Render();
 }
 
 void Stage::Release()

@@ -2,10 +2,11 @@
 #include "Edit.h"
 #include "TextureManager.h"
 #include "KeyManager.h"
+#include "ScrollMgr.h"
 #include "LineMgr.h"
 #include "Line.h"
 
-CEdit::CEdit() : m_pSprite(nullptr),m_pTextureMgr(nullptr), m_pKeyMgr(nullptr), m_pLineMgr(nullptr),
+CEdit::CEdit() : m_pScrollMgr(nullptr),m_pSprite(nullptr),m_pTextureMgr(nullptr), m_pKeyMgr(nullptr), m_pLineMgr(nullptr),
 m_bTile(false), m_bFirst(false),
 m_iIndex(0)
 {
@@ -22,6 +23,8 @@ HRESULT CEdit::Initialize()
 	m_pSprite = GraphicDevice::GetInstance()->GetSprite();
 	m_pTextureMgr = TextureManager::GetInstance();
 	m_pKeyMgr = KeyManager::GetInstance();
+	m_pLineMgr = CLineMgr::GetInstance();
+	m_pScrollMgr = CScrollMgr::GetInstance();
 
 	m_pTextureMgr->InsertTexture(TextureManager::MULTI, L"../Texture/Obstacle/Obstacle00%d.png", L"Tile", L"Obstacle", 6);
 	return S_OK;
@@ -35,6 +38,16 @@ int CEdit::Update()
 		m_bTile = false;
 	if (m_pKeyMgr->KeyDown('2'))
 		m_bTile = true;
+
+	if (m_pKeyMgr->KeyPressing(VK_RIGHT))
+		m_pScrollMgr->setScrollX(5.f);
+	if(m_pKeyMgr->KeyPressing(VK_LEFT))
+		m_pScrollMgr->setScrollX(-5.f);
+
+	if (m_pKeyMgr->KeyDown('S'))
+		m_pLineMgr->SaveLine();
+	if (m_pKeyMgr->KeyDown('A'))
+		m_pLineMgr->LoadLine();
 
 	if (m_bTile)
 		CreateTile();
@@ -65,6 +78,7 @@ void CEdit::Render()
 		D3DXVECTOR3 vecMouse{ float(m_tMouse.x), float(m_tMouse.y), 0.f };
 		m_pSprite->Draw(pTexture->texture, nullptr, &vecCenter, &vecMouse, D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
+	m_pLineMgr->Render();
 }
 
 void CEdit::Release()
@@ -85,18 +99,24 @@ void CEdit::CreateTile()
 
 void CEdit::CreateLine()
 {
+	float fScrollX = m_pScrollMgr->getScrollX();
+	float fScrollY = m_pScrollMgr->getScrollY();
 	if (m_pKeyMgr->KeyDown(VK_LBUTTON))
 	{
 		if (m_bFirst)
 		{
-			m_tLinePos[1] = { float(m_tMouse.x), float(m_tMouse.y), 0.f };
+			if (m_pKeyMgr->KeyPressing(VK_SHIFT))
+				m_tLinePos[1] = { float(m_tMouse.x+ fScrollX), m_tLinePos[0].y,0.f };
+			else
+				m_tLinePos[1] = { float(m_tMouse.x+ fScrollX), float(m_tMouse.y+ fScrollY), 0.f };
+			
 			CLine* pLine = CLine::Create(m_tLinePos[0], m_tLinePos[1]);
 			m_pLineMgr->AddLine(pLine);
 			memcpy(m_tLinePos[0], m_tLinePos[1], sizeof(D3DXVECTOR3));
 		}
 		else
 		{
-			m_tLinePos[0] = { float(m_tMouse.x), float(m_tMouse.y), 0.f };
+			m_tLinePos[0] = { float(m_tMouse.x+ fScrollX), float(m_tMouse.y+ fScrollY), 0.f };
 			m_bFirst = true;
 		}
 
@@ -104,14 +124,7 @@ void CEdit::CreateLine()
 	if (m_pKeyMgr->KeyDown(VK_RBUTTON))
 	{
 		ZeroMemory(m_tLinePos, sizeof(m_tLinePos));
-		m_bTile = false;
+		m_bFirst = false;
 	}
 }
 
-Scene* CEdit::Create()
-{
-	Scene* pInstance = new CEdit();
-	if (FAILED(pInstance->Initialize()))
-		SAFE_DELETE(pInstance);
-	return pInstance;
-}

@@ -4,7 +4,7 @@
 #include "SceneManager.h"
 #include "Logo.h"
 #include "Menu.h"
-//#include "Edit.h"
+#include "Edit.h"
 #include "Stage.h"
 
 
@@ -27,7 +27,7 @@ void SceneManager::ChangeScene(SCENE_ID _ID)
 			scene = new Menu;
 			break;
 		case SceneManager::EDIT:
-			//scene = new Edit;
+			scene = new CEdit;
 			break;
 		case SceneManager::STAGE:
 			scene = new Stage;
