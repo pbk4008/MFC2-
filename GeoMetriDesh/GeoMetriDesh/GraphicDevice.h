@@ -14,6 +14,7 @@ public:
 
 	LPDIRECT3DDEVICE9 GetDevice() { return mDevice; };
 	LPD3DXSPRITE GetSprite() { return mSprite; };
+	LPD3DXLINE GetLine() { return mLine; }//라인그리기용 있으면 지워도 됨
 	void ReleaseDevice();
 
 	void RenderBegin();
@@ -27,6 +28,8 @@ public:
 
 	// 실질적으로 사용할 장치
 	LPDIRECT3DDEVICE9 mDevice;
+
+	LPD3DXLINE mLine;//라인그리기용 있으면 지워도 됨
 
 };
 

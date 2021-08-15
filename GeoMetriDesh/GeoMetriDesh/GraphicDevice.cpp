@@ -69,6 +69,9 @@ HRESULT GraphicDevice::ReadyGraphicDevice()
 		return E_FAIL;
 	}
 
+	//라인그리기용 있으면 지워도 됨(LineMgr만든다고 만듬)
+	if (FAILED(D3DXCreateLine(mDevice, &mLine)))
+		return E_FAIL;
 	//g_hDC = mDevice->GetBackBuffer();
 
 	return S_OK;

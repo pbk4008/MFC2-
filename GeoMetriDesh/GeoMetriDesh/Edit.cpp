@@ -2,10 +2,15 @@
 #include "Edit.h"
 #include "TextureManager.h"
 #include "KeyManager.h"
+#include "LineMgr.h"
+#include "Line.h"
 
-CEdit::CEdit() : m_pSprite(nullptr),m_pTextureMgr(nullptr), m_pKeyMgr(nullptr), m_iIndex(0)
+CEdit::CEdit() : m_pSprite(nullptr),m_pTextureMgr(nullptr), m_pKeyMgr(nullptr), m_pLineMgr(nullptr),
+m_bTile(false), m_bFirst(false),
+m_iIndex(0)
 {
 	ZeroMemory(&m_tMouse, sizeof(POINT));
+	ZeroMemory(m_tLinePos, sizeof(m_tLinePos));
 }
 
 CEdit::~CEdit()
@@ -26,11 +31,15 @@ int CEdit::Update()
 {
 	GetCursorPos(&m_tMouse);
 	ScreenToClient(g_hWnd, &m_tMouse);
-	if (m_pKeyMgr->KeyDown(VK_UP))
-		m_iIndex++;
-	
-	if (m_pKeyMgr->KeyDown(VK_DOWN))
-		m_iIndex--;
+	if (m_pKeyMgr->KeyDown('1'))
+		m_bTile = false;
+	if (m_pKeyMgr->KeyDown('2'))
+		m_bTile = true;
+
+	if (m_bTile)
+		CreateTile();
+	else
+		CreateLine();
 	
 	return 0;
 }
@@ -45,18 +54,58 @@ void CEdit::LateUpdate()
 
 void CEdit::Render()
 {
-	const TEXTINFO* pTexture = m_pTextureMgr->GetTextInfo(L"Tile", L"Obstacle", m_iIndex);
+	if (m_bTile)
+	{
+		const TEXTINFO* pTexture = m_pTextureMgr->GetTextInfo(L"Tile", L"Obstacle", m_iIndex);
 
-	float fCenterX = float(pTexture->imageInfo.Width >> 1);
-	float fCenterY = float(pTexture->imageInfo.Height >> 1);
+		float fCenterX = float(pTexture->imageInfo.Width >> 1);
+		float fCenterY = float(pTexture->imageInfo.Height >> 1);
 
-	D3DXVECTOR3 vecCenter{ fCenterX, fCenterY, 0.f };
-	D3DXVECTOR3 vecMouse{ float(m_tMouse.x), float(m_tMouse.y), 0.f };
-	m_pSprite->Draw(pTexture->texture, nullptr, &vecCenter, &vecMouse, D3DCOLOR_ARGB(255, 255, 255, 255));
+		D3DXVECTOR3 vecCenter{ fCenterX, fCenterY, 0.f };
+		D3DXVECTOR3 vecMouse{ float(m_tMouse.x), float(m_tMouse.y), 0.f };
+		m_pSprite->Draw(pTexture->texture, nullptr, &vecCenter, &vecMouse, D3DCOLOR_ARGB(255, 255, 255, 255));
+	}
 }
 
 void CEdit::Release()
 {
+}
+
+void CEdit::CreateTile()
+{
+	if (m_bTile)
+	{
+		if (m_pKeyMgr->KeyDown(VK_UP))
+			m_iIndex++;
+
+		if (m_pKeyMgr->KeyDown(VK_DOWN))
+			m_iIndex--;
+	}
+}
+
+void CEdit::CreateLine()
+{
+	if (m_pKeyMgr->KeyDown(VK_LBUTTON))
+	{
+		if (m_bFirst)
+		{
+			m_tLinePos[1] = { float(m_tMouse.x), float(m_tMouse.y), 0.f };
+			CLine* pLine = CLine::Create(m_tLinePos[0], m_tLinePos[1]);
+			m_pLineMgr->AddLine(pLine);
+			memcpy(m_tLinePos[0], m_tLinePos[1], sizeof(D3DXVECTOR3));
+		}
+		else
+		{
+			m_tLinePos[0] = { float(m_tMouse.x), float(m_tMouse.y), 0.f };
+			m_bFirst = true;
+		}
+
+	}
+	if (m_pKeyMgr->KeyDown(VK_RBUTTON))
+	{
+		ZeroMemory(m_tLinePos, sizeof(m_tLinePos));
+		m_bTile = false;
+	}
 }
 
 Scene* CEdit::Create()

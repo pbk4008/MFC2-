@@ -15,4 +15,5 @@ typedef struct TEXTINFO {
 	LPDIRECT3DTEXTURE9 texture; // HBITMAP //즉, 이미지 한장을 제어할 컴객체. 
 	D3DXIMAGE_INFO		imageInfo;
 }TEXTINFO;
+
 #endif // !__STRUCT_H__
