@@ -1,0 +1,20 @@
+﻿  CollisionMgr.cpp
+  GeoMetriDesh.cpp
+  GraphicDevice.cpp
+  KeyManager.cpp
+  MainGame.cpp
+  MultiTexture.cpp
+C:\Users\Admin\Desktop\MFC 2 - Teamproject\GeoMetriDesh\GeoMetriDesh\MultiTexture.cpp(15,29): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Object.cpp
+  ObjectManager.cpp
+  Player.cpp
+  Scene.cpp
+  SceneManager.cpp
+  SingleTexture.cpp
+  Stage.cpp
+  SubObject.cpp
+  Texture.cpp
+  TextureManager.cpp
+  Logo.cpp
+  Menu.cpp
+  GeoMetriDesh.vcxproj -> C:\Users\Admin\Desktop\MFC 2 - Teamproject\GeoMetriDesh\Debug\GeoMetriDesh.exe
