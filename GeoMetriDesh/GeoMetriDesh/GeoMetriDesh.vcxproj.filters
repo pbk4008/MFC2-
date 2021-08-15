@@ -67,14 +67,23 @@
     <Filter Include="02.Scene\03.Stage">
       <UniqueIdentifier>{9fcd24db-4506-4ebe-b3a1-6fbffee56e3c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.Line">
-      <UniqueIdentifier>{71f4678e-b277-4af8-95ce-36d931503d14}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01.Object\99.SubObject">
       <UniqueIdentifier>{39f818d5-a0f3-4963-9414-8737b32aed00}</UniqueIdentifier>
     </Filter>
     <Filter Include="97.Manager\04.CollisionMgr">
       <UniqueIdentifier>{95423144-acb3-4dd4-b5be-d7be165d55e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Manager\05.LineMgr">
+      <UniqueIdentifier>{c471ec68-dfce-4f3a-8a58-e76f7f8744bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Manager\05.LineMgr\00.Line">
+      <UniqueIdentifier>{c0043c0c-7b37-42ec-8f05-ca465834b789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Manager\06.ScrollMgr">
+      <UniqueIdentifier>{c90c55ad-4e19-43a9-829a-e78038587914}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene\04.Edit">
+      <UniqueIdentifier>{c3767d9c-b1e0-4cee-93bf-245c4a5198d3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +165,18 @@
     <ClInclude Include="CollisionMgr.h">
       <Filter>97.Manager\04.CollisionMgr</Filter>
     </ClInclude>
+    <ClInclude Include="LineMgr.h">
+      <Filter>97.Manager\05.LineMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>97.Manager\05.LineMgr\00.Line</Filter>
+    </ClInclude>
+    <ClInclude Include="ScrollMgr.h">
+      <Filter>97.Manager\06.ScrollMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Edit.h">
+      <Filter>02.Scene\04.Edit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GeoMetriDesh.rc">
@@ -224,6 +245,18 @@
     </ClCompile>
     <ClCompile Include="CollisionMgr.cpp">
       <Filter>97.Manager\04.CollisionMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="LineMgr.cpp">
+      <Filter>97.Manager\05.LineMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>97.Manager\05.LineMgr\00.Line</Filter>
+    </ClCompile>
+    <ClCompile Include="ScrollMgr.cpp">
+      <Filter>97.Manager\06.ScrollMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Edit.cpp">
+      <Filter>02.Scene\04.Edit</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
