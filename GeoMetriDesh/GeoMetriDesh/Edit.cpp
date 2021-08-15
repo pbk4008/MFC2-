@@ -44,6 +44,10 @@ int CEdit::Update()
 	if(m_pKeyMgr->KeyPressing(VK_LEFT))
 		m_pScrollMgr->setScrollX(-5.f);
 
+	if (m_pKeyMgr->KeyDown('S'))
+		m_pLineMgr->SaveLine();
+	if (m_pKeyMgr->KeyDown('A'))
+		m_pLineMgr->LoadLine();
 
 	if (m_bTile)
 		CreateTile();
