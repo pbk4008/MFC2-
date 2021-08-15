@@ -1,6 +1,12 @@
 #include "framework.h"
 #include "Logo.h"
+
 #include "TextureManager.h"
+#include "KeyManager.h"
+#include "SceneManager.h"
+
+
+
 HRESULT Logo::Initialize()
 {
 	// 출력할 이미지 저장!
@@ -8,7 +14,7 @@ HRESULT Logo::Initialize()
 	// 싱글 텍스쳐
 	TextureManager::GetInstance()->InsertTexture(
 		TextureManager::SINGLE,
-		L"../Texture/Sana.png",
+		L"../Texture/Sana.jpg",
 		L"Logo");
 
 
@@ -17,7 +23,10 @@ HRESULT Logo::Initialize()
 
 int Logo::Update()
 {
-	return 0;
+
+
+
+	return NOEVENT;
 }
 
 void Logo::LateUpdate()
@@ -36,7 +45,7 @@ void Logo::Render()
 	};
 
 	GraphicDevice::GetInstance()->GetSprite()->Draw(
-		pTextInfo->texture, nullptr, &centerVec, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255)
+		pTextInfo->texture, nullptr, nullptr, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255)
 	);
 
 }

@@ -58,20 +58,36 @@ HRESULT GraphicDevice::ReadyGraphicDevice()
 	d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
 	d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 
+	// 그래픽카드 장치 준비
 	if (FAILED(mSdk->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, g_hWnd, vp, &d3dpp, &mDevice)))
 	{
 		return E_FAIL;
 	}
 
-	// 아직 스프라이트 뭔지 모름
+	// 스프라이트 == 그림 그리는 도구
 	if (FAILED(D3DXCreateSprite(mDevice, &mSprite)))
 	{
 		return E_FAIL;
 	}
 
-	//라인그리기용 있으면 지워도 됨(LineMgr만든다고 만듬)
-	if (FAILED(D3DXCreateLine(mDevice, &mLine)))
+	D3DXFONT_DESCW tDesc;
+	ZeroMemory(&tDesc, sizeof(D3DXFONT_DESCW));
+	tDesc.Height = 20;
+	tDesc.Width = 15;
+	tDesc.Weight = FW_HEAVY;
+	tDesc.CharSet = HANGUL_CHARSET;
+	// 사용할 폰트
+	//lstrcpy(tDesc.FaceName, L"");
+
+	// 폰트 생성
+	if (FAILED(D3DXCreateFontIndirectW(mDevice, &tDesc, &mFont))) {
 		return E_FAIL;
+	}
+	// 라인 생성
+	if (FAILED(D3DXCreateLine(mDevice, &mLine))) {
+		return E_FAIL;
+	}
+
 	//g_hDC = mDevice->GetBackBuffer();
 
 	return S_OK;

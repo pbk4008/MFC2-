@@ -3,6 +3,7 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 
+class KeyManager;
 class Player : public Object
 {
 public:
@@ -16,10 +17,11 @@ public:
 	virtual void RenderObject() override;
 	virtual void ReleaseObject() override;
 
-private:
-	float speed;
+	void KeyChecking();
 
-	int test;
+private:
+	float speed; // 필요 없을듯?
+	KeyManager* keyMgr;
 };
 
 

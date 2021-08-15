@@ -1,5 +1,7 @@
 #include "framework.h"
 #include "ObjectManager.h"
+#include "KeyManager.h"
+#include "CollisionMgr.h"
 #include "Object.h"
 
 IMPLEMENT_SINGLETON(ObjectManager)
@@ -10,10 +12,8 @@ ObjectManager::~ObjectManager()
 
 HRESULT ObjectManager::Intialize()
 {
-    /// <summary>
-    /// 여기다 뭐 넣을까?
-    /// </summary>
-    /// <returns></returns>
+    keyMgr = KeyManager::GetInstance();
+    collisionMgr = CollisionMgr::GetInstance();
 
     return S_OK;
 }
@@ -42,6 +42,11 @@ void ObjectManager::Update()
             }
         }
     }
+
+    collisionMgr->CollisionObject( objList[PLAYER], objList[TERRAIN] );
+
+
+    KeyChecking();
 }
 
 void ObjectManager::LateUpdate()
@@ -65,9 +70,6 @@ void ObjectManager::Render()
         }
     }
 
-    WCHAR szBuff[32] = L"";
-    swprintf_s(szBuff, L"objCount : %d", objList[PLAYER].size());
-    SetWindowText(g_hWnd, szBuff);
 }
 
 void ObjectManager::Release()
@@ -77,4 +79,21 @@ void ObjectManager::Release()
         objList[i].clear(); 
     }
 
+
+    SAFE_DELETE(keyMgr);
+    SAFE_DELETE(collisionMgr);
+}
+
+void ObjectManager::KeyChecking()
+{
+    if (keyMgr->KeyPressing('L')) {
+        SetShowLineCheck(true);
+    }
+    if (keyMgr->KeyPressing('K')) {
+        SetShowLineCheck(false);
+    }
+
+    WCHAR szBuff[32] = L"";
+    swprintf_s(szBuff, L"objPlayerCount : %d", objList[PLAYER].size());
+    SetWindowText(g_hWnd, szBuff);
 }

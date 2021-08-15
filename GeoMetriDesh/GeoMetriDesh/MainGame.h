@@ -3,10 +3,8 @@
 #ifndef __MAINGAME_H__
 #define __MAINGAME_H__
 
-class ObjectManager;
-class GraphicDevice;
 class SceneManager;
-class KeyManager;
+class GraphicDevice;
 class MainGame
 {
 private:
@@ -29,9 +27,7 @@ public:
 
 private:
 	GraphicDevice* graphicDevice;
-	ObjectManager* objectManager;
 	SceneManager* sceneManager;
-	KeyManager* keyManager;
 };
 
 

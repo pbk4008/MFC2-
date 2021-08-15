@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "LineMgr.h"
 #include "Line.h"
+
 IMPLEMENT_SINGLETON(CLineMgr)
 
 CLineMgr::CLineMgr()

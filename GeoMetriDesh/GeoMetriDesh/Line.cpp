@@ -1,5 +1,6 @@
 #include "framework.h"
 #include "Line.h"
+#include "ScrollMgr.h"
 
 CLine::CLine()
 {
@@ -13,8 +14,14 @@ CLine::~CLine()
 
 void CLine::Render()
 {
+	float fScrollX = CScrollMgr::GetInstance()->getScrollX();
+	float fScrollY = CScrollMgr::GetInstance()->getScrollY();
+
+	D3DXVECTOR2 argLinePos[2] = { {m_tLinePos[0].x - fScrollX, m_tLinePos[0].y - fScrollY},
+		{m_tLinePos[1].x - fScrollX, m_tLinePos[1].y - fScrollY} };
+	
 	m_pLine->SetWidth(3.f);
-	m_pLine->Draw(m_tLinePos, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
+	m_pLine->Draw(argLinePos, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
 }
 
 void CLine::Release()

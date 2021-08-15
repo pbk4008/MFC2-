@@ -5,7 +5,14 @@
 class Object
 {
 public:
-	inline explicit Object() : deadCheck(false){};
+	inline explicit Object() : deadCheck(false)
+	{
+		ZeroMemory(&info, sizeof(info));
+		ZeroMemory(&rc, sizeof(rc));
+		ZeroMemory(&pTextInfo, sizeof(pTextInfo));
+		ZeroMemory(&centerVec, sizeof(centerVec));
+		memset(lineList, 0, sizeof(lineList));
+	};
 	inline ~Object() {};
 
 	inline virtual HRESULT ReadObject() PURE;
@@ -27,11 +34,28 @@ public:
 	inline void SetSize(D3DXVECTOR3 _vecSize) { info.size = _vecSize; };
 	inline void SetMat(D3DXMATRIX _vecMat) { info.mat = _vecMat; };
 
+	inline RECT& GetRect() { return rc; };
+
+	void SetObjectInfo();
+	void UpdateObjectInfo();
+	void DrawImage();
+
 protected:
 	INFO info;
+	RECT rc;
 
+	// 불러올 이미지 저장할 공간
+	TEXTINFO* pTextInfo;
+
+	// 이미지 라인
+	// 충돌 그릴 용도
+	D3DXVECTOR2 lineList[5];
+
+	// 이미지 센터
+	D3DXVECTOR3 centerVec;
+
+	// 풀링 check
 	bool deadCheck;
-
 };
 
 

@@ -64,14 +64,26 @@
     <Filter Include="03.Texture\01.MultiTexture">
       <UniqueIdentifier>{f344cc19-9d95-4c6a-82a5-f8db20e2cdfa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Scene\02.Edit">
-      <UniqueIdentifier>{236e8967-6c8b-4280-856b-46661f88294e}</UniqueIdentifier>
+    <Filter Include="02.Scene\03.Stage">
+      <UniqueIdentifier>{9fcd24db-4506-4ebe-b3a1-6fbffee56e3c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="97.Manager\04.LineMgr">
-      <UniqueIdentifier>{5fbe4973-c230-4b74-b8d3-458b32de45b8}</UniqueIdentifier>
+    <Filter Include="01.Object\99.SubObject">
+      <UniqueIdentifier>{39f818d5-a0f3-4963-9414-8737b32aed00}</UniqueIdentifier>
     </Filter>
-    <Filter Include="97.Manager\04.LineMgr\00.Line">
-      <UniqueIdentifier>{09175d2c-94c1-4538-8b93-503e82302435}</UniqueIdentifier>
+    <Filter Include="97.Manager\04.CollisionMgr">
+      <UniqueIdentifier>{95423144-acb3-4dd4-b5be-d7be165d55e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Manager\05.LineMgr">
+      <UniqueIdentifier>{68666216-7f9c-4e81-8851-b1547df325e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Manager\05.LineMgr\00.Line">
+      <UniqueIdentifier>{7d1544fc-6dcb-47b5-ab35-34ac0c0cd872}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene\04.Edit">
+      <UniqueIdentifier>{c1b7c9d8-0413-4a77-94a9-466076a1a0c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Manager\06.ScrollMgr">
+      <UniqueIdentifier>{d5d10bb1-a54d-44c1-adf9-7d79200b549d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -144,17 +156,26 @@
     <ClInclude Include="GraphicDevice.h">
       <Filter>96.Tool</Filter>
     </ClInclude>
-    <ClInclude Include="Edit.h">
-      <Filter>02.Scene\02.Edit</Filter>
+    <ClInclude Include="Stage.h">
+      <Filter>02.Scene\03.Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="SubObject.h">
+      <Filter>01.Object\99.SubObject</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionMgr.h">
+      <Filter>97.Manager\04.CollisionMgr</Filter>
     </ClInclude>
     <ClInclude Include="LineMgr.h">
-      <Filter>97.Manager\04.LineMgr</Filter>
+      <Filter>97.Manager\05.LineMgr</Filter>
     </ClInclude>
     <ClInclude Include="Line.h">
-      <Filter>97.Manager\04.LineMgr\00.Line</Filter>
+      <Filter>97.Manager\05.LineMgr\00.Line</Filter>
     </ClInclude>
-    <ClInclude Include="Struct.h">
-      <Filter>98.Include</Filter>
+    <ClInclude Include="Edit.h">
+      <Filter>02.Scene\04.Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="ScrollMgr.h">
+      <Filter>97.Manager\06.ScrollMgr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -216,14 +237,26 @@
     <ClCompile Include="GraphicDevice.cpp">
       <Filter>96.Tool</Filter>
     </ClCompile>
-    <ClCompile Include="Edit.cpp">
-      <Filter>02.Scene\02.Edit</Filter>
+    <ClCompile Include="Stage.cpp">
+      <Filter>02.Scene\03.Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="SubObject.cpp">
+      <Filter>01.Object\99.SubObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionMgr.cpp">
+      <Filter>97.Manager\04.CollisionMgr</Filter>
     </ClCompile>
     <ClCompile Include="LineMgr.cpp">
-      <Filter>97.Manager\04.LineMgr</Filter>
+      <Filter>97.Manager\05.LineMgr</Filter>
     </ClCompile>
     <ClCompile Include="Line.cpp">
-      <Filter>97.Manager\04.LineMgr\00.Line</Filter>
+      <Filter>97.Manager\05.LineMgr\00.Line</Filter>
+    </ClCompile>
+    <ClCompile Include="Edit.cpp">
+      <Filter>02.Scene\04.Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="ScrollMgr.cpp">
+      <Filter>97.Manager\06.ScrollMgr</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,6 +1,10 @@
 #include "framework.h"
 #include "Menu.h"
 #include "TextureManager.h"
+//#include "KeyManager.h"
+#include "SceneManager.h"
+
+
 
 HRESULT Menu::Initialize()
 {
@@ -9,7 +13,7 @@ HRESULT Menu::Initialize()
     // ½Ì±Û ÅØ½ºÃÄ
     TextureManager::GetInstance()->InsertTexture(
         TextureManager::SINGLE, 
-        L"../Texture/DaHyounNim.png",
+        L"../Texture/DaHyounNim.jpg",
         L"Menu" );
 
 
@@ -18,6 +22,11 @@ HRESULT Menu::Initialize()
 
 int Menu::Update()
 {
+
+    //if (KeyManager::GetInstance()->KeyPressing('W')) {
+    //    SceneManager::GetInstance()->ChangeScene(SceneManager::LOGO);
+    //}
+
     return NOEVENT;
 }
 
@@ -36,7 +45,7 @@ void Menu::Render()
     };
 
     GraphicDevice::GetInstance()->GetSprite()->Draw(
-        pTextInfo->texture, nullptr, &centerVec,nullptr,D3DCOLOR_ARGB(255,255,255,255)
+        pTextInfo->texture, nullptr, nullptr,nullptr,D3DCOLOR_ARGB(255,255,255,255)
     );
 
 }
