@@ -6,7 +6,6 @@
 
 HRESULT Player::ReadObject()
 {
-  
    // 텍스트 정보를 추가하고 불러야함
     // 추가!
     TextureManager::GetInstance()->InsertTexture(TextureManager::SINGLE, L"../Texture/Cube.png", L"Player");
@@ -18,6 +17,11 @@ HRESULT Player::ReadObject()
     info.pos = { 100.f, 200.f, 0.f };
     info.size = { 100.f, 100.f, 0.f };
     info.dir = { 1.f, 0.f, 0.f };
+
+    rgb.A = 255;
+    rgb.R = 0;
+    rgb.G = 0;
+    rgb.B = 255;
 
     // 반복 연산을 줄이기 위해 선언!
     keyMgr = KeyManager::GetInstance();

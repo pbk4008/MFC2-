@@ -5,7 +5,9 @@
 class Scene
 {
 public:
-	inline explicit Scene() {};
+	inline explicit Scene() {
+		ZeroMemory(&rgb, sizeof(rgb));
+	};
 	inline virtual ~Scene() {};
 
 	inline virtual HRESULT Initialize() PURE;
@@ -14,7 +16,8 @@ public:
 	inline virtual void Render() PURE;
 	inline virtual void Release() PURE;
 
-
+protected:
+	ARGB rgb;
 };
 
 

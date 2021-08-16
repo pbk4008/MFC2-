@@ -79,9 +79,14 @@ void ObjectManager::Release()
         objList[i].clear(); 
     }
 
-
     SAFE_DELETE(keyMgr);
     SAFE_DELETE(collisionMgr);
+}
+
+void ObjectManager::ReleaseObject(OBJECT_ID _ID)
+{
+    for_each(objList[_ID].begin(), objList[_ID].end(), Safe_Delete<Object*>);
+    objList[_ID].clear();
 }
 
 void ObjectManager::KeyChecking()
@@ -93,7 +98,4 @@ void ObjectManager::KeyChecking()
         SetShowLineCheck(false);
     }
 
-    WCHAR szBuff[32] = L"";
-    swprintf_s(szBuff, L"objPlayerCount : %d", objList[PLAYER].size());
-    SetWindowText(g_hWnd, szBuff);
 }

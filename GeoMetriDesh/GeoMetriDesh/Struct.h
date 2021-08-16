@@ -18,3 +18,10 @@ typedef struct TEXTINFO {
 	D3DXIMAGE_INFO		imageInfo;
 }TEXTINFO;
 #endif // !__STRUCT_H__
+
+typedef struct RGBINFO {
+	int A;
+	int R;
+	int G;
+	int B;
+}ARGB;

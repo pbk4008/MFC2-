@@ -8,6 +8,23 @@
 
 HRESULT Stage::Initialize()
 {
+	// 배경!
+	TextureManager::GetInstance()->InsertTexture(
+		TextureManager::SINGLE,
+		L"../Texture/BackGround/Square.png",
+		L"BackGround");
+
+	TextureManager::GetInstance()->InsertTexture(
+		TextureManager::SINGLE,
+		L"../Texture/BackGround/Square1.png",
+		L"BackGround1");
+
+	// RGB값 조정 가능
+	rgb.A = 150;
+	rgb.R = 0;
+	rgb.G = 255;
+	rgb.B = 0;
+
 	// 플레이어 오브젝트
 	objMgr = ObjectManager::GetInstance();
 	objMgr->InsertObject<Player>(ObjectManager::PLAYER);
@@ -32,6 +49,19 @@ void Stage::LateUpdate()
 
 void Stage::Render()
 {
+	TEXTINFO* pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"BackGround");
+
+	D3DXVECTOR3 centerVec = {
+		float(pTextInfo->imageInfo.Width >> 1),
+		float(pTextInfo->imageInfo.Height >> 1),
+		0.f
+	};
+
+	GraphicDevice::GetInstance()->GetSprite()->Draw(
+		pTextInfo->texture, nullptr, nullptr, nullptr, D3DCOLOR_ARGB(rgb.A, rgb.R, rgb.G, rgb.B)
+	);
+	// 배경 끝나고
+
 	objMgr->Render();
 	lineMgr->Render();
 }

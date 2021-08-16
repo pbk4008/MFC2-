@@ -87,6 +87,15 @@
     </Filter>
     <Filter Include="01.Object\02.Land">
       <UniqueIdentifier>{2272e10e-ae70-48eb-9676-3a26361fa944}</UniqueIdentifier>
+	</Filter>
+    <Filter Include="01.Object\98.UI">
+      <UniqueIdentifier>{90542cf2-fc6e-472c-82ce-45b231d33260}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\98.UI\PlayeBtn">
+      <UniqueIdentifier>{e82801d7-f804-43a3-ba3c-f96016e439b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\98.UI\Title">
+      <UniqueIdentifier>{c81ec554-fe38-4cb2-89fb-927a6151dd17}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +191,12 @@
     </ClInclude>
     <ClInclude Include="Land.h">
       <Filter>01.Object\02.Land</Filter>
+	</ClInclude>
+    <ClInclude Include="PlayBtn.h">
+      <Filter>01.Object\98.UI\PlayeBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="Title.h">
+      <Filter>01.Object\98.UI\Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -266,6 +281,12 @@
     </ClCompile>
     <ClCompile Include="Land.cpp">
       <Filter>01.Object\02.Land</Filter>
+	</ClCompile>
+    <ClCompile Include="PlayBtn.cpp">
+      <Filter>01.Object\98.UI\PlayeBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="Title.cpp">
+      <Filter>01.Object\98.UI\Title</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
