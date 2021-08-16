@@ -25,7 +25,8 @@ HRESULT MainGame::ReadyMainGame()
 
 	// 그래픽카드한테 일 시킬 준비
 	graphicDevice->ReadyGraphicDevice();
-	sceneManager->ChangeScene(SceneManager::MENU);
+	//sceneManager->ChangeScene(SceneManager::MENU);
+	sceneManager->ChangeScene(SceneManager::EDIT);
 
 	return S_OK;
 }

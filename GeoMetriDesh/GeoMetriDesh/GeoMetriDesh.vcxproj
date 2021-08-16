@@ -171,6 +171,7 @@
     <ClInclude Include="MultiTexture.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
+    <ClInclude Include="Obstacle.h" />
     <ClInclude Include="PlayBtn.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
@@ -205,6 +206,7 @@
     <ClCompile Include="MultiTexture.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="PlayBtn.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />

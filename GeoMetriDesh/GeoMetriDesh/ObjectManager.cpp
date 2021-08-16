@@ -3,6 +3,7 @@
 #include "KeyManager.h"
 #include "CollisionMgr.h"
 #include "Object.h"
+#include "Obstacle.h"
 
 IMPLEMENT_SINGLETON(ObjectManager)
 ObjectManager::~ObjectManager()
@@ -98,4 +99,22 @@ void ObjectManager::KeyChecking()
         SetShowLineCheck(false);
     }
 
+}
+
+void ObjectManager::SaveObject()
+{
+    HANDLE hFile = CreateFile(L"../Data/Tile.dat", GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (INVALID_HANDLE_VALUE == hFile)
+    {
+        MessageBox(g_hWnd, L"저장 실패", L"실패", MB_OK);
+        return;
+    }
+    DWORD dwByte = 0;
+    for (auto& pObj : objList[OBSTACLE])
+    {
+        OBSTACLEINFO argInfo = dynamic_cast<CObstacle*>(pObj)->getObstacleInfo();
+        WriteFile(hFile, &argInfo, sizeof(OBSTACLEINFO), &dwByte, nullptr);
+    }
+
+    CloseHandle(hFile);
 }

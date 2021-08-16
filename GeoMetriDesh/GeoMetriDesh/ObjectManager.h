@@ -10,7 +10,7 @@ class ObjectManager
 {
 	DECLARE_SINGLETON(ObjectManager)
 public:
-	enum OBJECT_ID {BACKGROUND, UI, PLAYER, TERRAIN, EFFECT, OBJECT_ID_END};
+	enum OBJECT_ID {BACKGROUND, UI, PLAYER, TERRAIN, EFFECT, OBSTACLE, OBJECT_ID_END};
 private:
 	explicit ObjectManager() : showLineCheck(false){};
 public:
@@ -46,10 +46,10 @@ public:
 
 	inline list<Object*>& GetList(OBJECT_ID _ID) { return objList[_ID]; };
 
-	
-	list<Object*> objList[OBJECT_ID_END];
-
+	void SaveObject();//타일 저장용
+	void LoadObject();//타일 로드
 private:
+	list<Object*> objList[OBJECT_ID_END];
 	bool showLineCheck;
 
 	KeyManager* keyMgr;

@@ -4,6 +4,7 @@ class TextureManager;
 class KeyManager;
 class CLineMgr;
 class CScrollMgr;
+class ObjectManager;
 class Object;
 class CEdit :
     public Scene
@@ -13,6 +14,7 @@ private:
     TextureManager* m_pTextureMgr;
     KeyManager* m_pKeyMgr;
     CLineMgr* m_pLineMgr;
+    ObjectManager* m_pObjMgr;
     CScrollMgr* m_pScrollMgr;
     LPD3DXSPRITE m_pSprite;
     D3DXVECTOR3 m_tLinePos[2];
@@ -21,6 +23,11 @@ private:
     bool m_bFirst;
 
     Object* m_pLand;
+
+
+    D3DXMATRIX m_matWorld;
+    float m_fSize;
+    float m_fAngle;
 public:
     explicit CEdit();
     virtual ~CEdit();

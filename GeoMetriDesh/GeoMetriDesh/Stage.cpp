@@ -5,6 +5,7 @@
 #include "LineMgr.h"
 #include "Player.h"
 #include "SubObject.h"
+#include "Land.h"
 
 HRESULT Stage::Initialize()
 {
@@ -19,12 +20,20 @@ HRESULT Stage::Initialize()
 		L"../Texture/BackGround/Square1.png",
 		L"BackGround1");
 
+	TextureManager::GetInstance()->InsertTexture(
+		TextureManager::MULTI, 
+		L"../Texture/Obstacle/Obstacle00%d.png", 
+		L"Tile", 
+		L"Obstacle", 6);
+
 	// RGB값 조정 가능
 	rgb.A = 150;
 	rgb.R = 0;
-	rgb.G = 255;
-	rgb.B = 0;
+	rgb.G = 0;
+	rgb.B = 255;
 
+	eColor = BLUE;
+	dwCurTime = GetTickCount64();//색깔 체인지 시간
 	// 플레이어 오브젝트
 	objMgr = ObjectManager::GetInstance();
 	objMgr->InsertObject<Player>(ObjectManager::PLAYER);
@@ -32,13 +41,16 @@ HRESULT Stage::Initialize()
 
 	lineMgr = CLineMgr::GetInstance();
 	lineMgr->LoadLine();
+
+	objMgr->InsertObject<CLand>(ObjectManager::TERRAIN);
+	
 	return S_OK;
 }
 
 int Stage::Update()
 {
 	objMgr->Update();
-
+	ChangeColor();
 	return NOEVENT;
 }
 
@@ -63,10 +75,45 @@ void Stage::Render()
 	// 배경 끝나고
 
 	objMgr->Render();
-	lineMgr->Render();
+	//lineMgr->Render();
 }
 
 void Stage::Release()
 {
 	SAFE_DELETE(objMgr);
+}
+
+void Stage::ChangeColor()
+{
+	if (dwCurTime + 10000 < GetTickCount64())
+	{
+		eColor = COLOR(eColor + 1);
+		if (eColor == END)
+			eColor = BLUE;
+		dwCurTime = GetTickCount64();
+	}
+	switch (eColor)
+	{
+	case BLUE:
+		rgb.R += 1.0f;
+		if (rgb.R >= 255)
+			rgb.R = 255;
+		break;
+	case PURPLE:
+		rgb.B -= 1.f;
+		if (rgb.B <= 0)
+			rgb.B = 0;
+		break;
+	case RED:
+		rgb.B += 1.f;
+		if (rgb.B >= 255)
+			rgb.B = 255;
+		break;
+	case REPURPLE:
+		rgb.R -= 1.f;
+		if (rgb.R <= 0)
+			rgb.R = 0;
+		break;
+	}
+	dynamic_cast<CLand*>(objMgr->GetList(ObjectManager::TERRAIN).front())->setColor(rgb);
 }
