@@ -4,6 +4,7 @@ class TextureManager;
 class KeyManager;
 class CLineMgr;
 class CScrollMgr;
+class Object;
 class CEdit :
     public Scene
 {
@@ -18,6 +19,8 @@ private:
     int m_iIndex;
     bool m_bTile;//타일그릴건지 라인 그릴건지 판단
     bool m_bFirst;
+
+    Object* m_pLand;
 public:
     explicit CEdit();
     virtual ~CEdit();

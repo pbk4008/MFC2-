@@ -5,8 +5,9 @@
 #include "ScrollMgr.h"
 #include "LineMgr.h"
 #include "Line.h"
+#include "Land.h"
 
-CEdit::CEdit() : m_pScrollMgr(nullptr),m_pSprite(nullptr),m_pTextureMgr(nullptr), m_pKeyMgr(nullptr), m_pLineMgr(nullptr),
+CEdit::CEdit() : m_pLand(nullptr),m_pScrollMgr(nullptr),m_pSprite(nullptr),m_pTextureMgr(nullptr), m_pKeyMgr(nullptr), m_pLineMgr(nullptr),
 m_bTile(false), m_bFirst(false),
 m_iIndex(0)
 {
@@ -16,6 +17,7 @@ m_iIndex(0)
 
 CEdit::~CEdit()
 {
+	Release();
 }
 
 HRESULT CEdit::Initialize()
@@ -25,8 +27,11 @@ HRESULT CEdit::Initialize()
 	m_pKeyMgr = KeyManager::GetInstance();
 	m_pLineMgr = CLineMgr::GetInstance();
 	m_pScrollMgr = CScrollMgr::GetInstance();
+	m_pLineMgr->LoadLine();
 
 	m_pTextureMgr->InsertTexture(TextureManager::MULTI, L"../Texture/Obstacle/Obstacle00%d.png", L"Tile", L"Obstacle", 6);
+	
+	m_pLand = CLand::Create();
 	return S_OK;
 }
 
@@ -46,13 +51,15 @@ int CEdit::Update()
 
 	if (m_pKeyMgr->KeyDown('S'))
 		m_pLineMgr->SaveLine();
-	if (m_pKeyMgr->KeyDown('A'))
-		m_pLineMgr->LoadLine();
+	/*if (m_pKeyMgr->KeyDown('A'))
+		m_pLineMgr->LoadLine();*/
 
 	if (m_bTile)
 		CreateTile();
 	else
 		CreateLine();
+
+	m_pLand->UpdateObject();
 	
 	return 0;
 }
@@ -78,11 +85,13 @@ void CEdit::Render()
 		D3DXVECTOR3 vecMouse{ float(m_tMouse.x), float(m_tMouse.y), 0.f };
 		m_pSprite->Draw(pTexture->texture, nullptr, &vecCenter, &vecMouse, D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
-	m_pLineMgr->Render();
+	//m_pLineMgr->Render();
+	m_pLand->RenderObject();
 }
 
 void CEdit::Release()
 {
+	Safe_Delete(m_pLand);
 }
 
 void CEdit::CreateTile()

@@ -67,13 +67,27 @@ void CLineMgr::LoadLine()
 	CloseHandle(hfile);
 }
 
-float CLineMgr::getLineDist()
+float CLineMgr::getLineDist(D3DXVECTOR2& _start, D3DXVECTOR2& _end)
 {
 	float argDist=0.f;
-	D3DXVECTOR2 tmp = {};
+	D3DXVECTOR2 min = {};
+	D3DXVECTOR2 tmp;
+	ZeroMemory(&tmp, sizeof(D3DXVECTOR2));
+	ZeroMemory(&min, sizeof(D3DXVECTOR2));
 	for (auto& pLine : m_LineList)
 	{
-		tmp = pLine->getPos()[1];
+		if (0==D3DXVec2Length(&tmp))
+		{
+			min = pLine->getPos()[0];
+			tmp = pLine->getPos()[1];
+			continue;
+		}
+		if (tmp != pLine->getPos()[0])
+			break;
 	}
-	return 0.0f;
+	_start = min;
+	_end = tmp;
+	D3DXVECTOR2 DistVec = tmp - min;
+	float fDist = D3DXVec2Length(&DistVec);
+	return fDist;
 }

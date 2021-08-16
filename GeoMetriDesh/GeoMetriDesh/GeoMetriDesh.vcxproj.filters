@@ -198,6 +198,9 @@
     <ClInclude Include="Title.h">
       <Filter>01.Object\98.UI\Title</Filter>
     </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GeoMetriDesh.rc">

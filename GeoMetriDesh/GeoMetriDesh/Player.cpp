@@ -8,10 +8,9 @@ HRESULT Player::ReadObject()
 {
    // 텍스트 정보를 추가하고 불러야함
     // 추가!
-    TextureManager::GetInstance()->InsertTexture(TextureManager::SINGLE, L"../Texture/Cube.png", L"Player");
+    TextureManager::GetInstance()->InsertTexture(TextureManager::SINGLE, L"../Texture/Player/Player.png", L"Player");
     // 부르기!
     pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Player");
-    // 이미지들 경로 및 정보를 수기입력
 
     // info의 pos, size, dir는 직접 지정해줘야 한다
     info.pos = { 100.f, 200.f, 0.f };
