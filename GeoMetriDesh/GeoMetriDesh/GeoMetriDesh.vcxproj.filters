@@ -183,6 +183,9 @@
     <ClInclude Include="Land.h">
       <Filter>01.Object\02.Land</Filter>
     </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>98.Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GeoMetriDesh.rc">
