@@ -66,3 +66,14 @@ void CLineMgr::LoadLine()
 	/*MessageBox(g_hWnd, L"로드 성공", L"성공", MB_OK);*/
 	CloseHandle(hfile);
 }
+
+float CLineMgr::getLineDist()
+{
+	float argDist=0.f;
+	D3DXVECTOR2 tmp = {};
+	for (auto& pLine : m_LineList)
+	{
+		tmp = pLine->getPos()[1];
+	}
+	return 0.0f;
+}
