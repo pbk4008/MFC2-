@@ -13,7 +13,6 @@ CLand::~CLand()
 HRESULT CLand::ReadObject()
 {
 	pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Tile",L"Obstacle",5);
-	m_fLandDist = 
 	return S_OK;
 }
 

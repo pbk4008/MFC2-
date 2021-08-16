@@ -5,7 +5,7 @@
 class Object
 {
 public:
-	inline explicit Object() : deadCheck(false), checkClickEvent(false)
+	inline explicit Object() : deadCheck(false), checkClickEvent(false), imageCheck(false)
 	{
 		ZeroMemory(&info, sizeof(info));
 		ZeroMemory(&rc, sizeof(rc));
@@ -44,6 +44,8 @@ public:
 	void UpdateObjectInfo();
 	void DrawImage();
 
+	void SetCheck(bool _b) { imageCheck = _b; };
+	
 protected:
 	INFO info;
 	RECT rc;
@@ -65,6 +67,10 @@ protected:
 
 	// 마우스 클릭 이벤트 상호작용 사용유무
 	bool checkClickEvent;
+
+
+	// ㅋㅋ 이거 힘드네
+	bool imageCheck;
 };
 
 

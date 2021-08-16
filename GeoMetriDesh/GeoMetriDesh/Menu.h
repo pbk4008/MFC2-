@@ -22,6 +22,8 @@ public:
 
 private:
 	bool btnCollisionCheck;
+
+	int subScroll;
 };
 
 
