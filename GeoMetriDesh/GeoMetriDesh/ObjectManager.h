@@ -10,7 +10,7 @@ class ObjectManager
 {
 	DECLARE_SINGLETON(ObjectManager)
 public:
-	enum OBJECT_ID {BACKGROUND, PLAYER, TERRAIN, EFFECT, OBJECT_ID_END};
+	enum OBJECT_ID {BACKGROUND, UI, PLAYER, TERRAIN, EFFECT, OBJECT_ID_END};
 private:
 	explicit ObjectManager() : showLineCheck(false){};
 public:
@@ -21,6 +21,8 @@ public:
 	void LateUpdate();
 	void Render();
 	void Release();
+
+	void ReleaseObject(OBJECT_ID _ID);
 
 	template<typename T>
 	void InsertObject(OBJECT_ID _typeID)
@@ -41,6 +43,8 @@ public:
 	inline void SetShowLineCheck(bool _b) { showLineCheck = _b; };
 
 	void KeyChecking();
+
+	inline list<Object*>& GetList(OBJECT_ID _ID) { return objList[_ID]; };
 
 	
 	list<Object*> objList[OBJECT_ID_END];

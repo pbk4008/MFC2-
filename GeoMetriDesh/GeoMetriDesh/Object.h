@@ -5,12 +5,14 @@
 class Object
 {
 public:
-	inline explicit Object() : deadCheck(false)
+	inline explicit Object() : deadCheck(false), checkClickEvent(false)
 	{
 		ZeroMemory(&info, sizeof(info));
 		ZeroMemory(&rc, sizeof(rc));
 		ZeroMemory(&pTextInfo, sizeof(pTextInfo));
 		ZeroMemory(&centerVec, sizeof(centerVec));
+		ZeroMemory(&rgb, sizeof(rgb));
+
 		memset(lineList, 0, sizeof(lineList));
 	};
 	inline ~Object() {};
@@ -27,6 +29,8 @@ public:
 	inline D3DXMATRIX& GetMat() { return  info.mat; };
 
 	inline bool GetDeadCheck() { return deadCheck; };
+	inline bool GetCheckClickEvent() { return checkClickEvent;	}
+
 	inline void SetDeadCheck(bool _b) { deadCheck = _b; };
 
 	inline void SetPos(D3DXVECTOR3 _vecPos) { info.pos = _vecPos; };
@@ -43,6 +47,8 @@ public:
 protected:
 	INFO info;
 	RECT rc;
+	ARGB rgb;
+
 
 	// 불러올 이미지 저장할 공간
 	TEXTINFO* pTextInfo;
@@ -56,6 +62,9 @@ protected:
 
 	// 풀링 check
 	bool deadCheck;
+
+	// 마우스 클릭 이벤트 상호작용 사용유무
+	bool checkClickEvent;
 };
 
 
