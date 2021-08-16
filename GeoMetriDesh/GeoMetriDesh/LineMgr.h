@@ -16,8 +16,10 @@ public:
 public:
 	void SaveLine();
 	void LoadLine();
+	float getLineDist();
 public:
 	inline void AddLine(CLine* _Line) { m_LineList.emplace_back(_Line); }
+
 
 };
 #endif
