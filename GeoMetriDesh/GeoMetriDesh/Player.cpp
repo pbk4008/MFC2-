@@ -8,7 +8,7 @@ HRESULT Player::ReadObject()
 {
    // 텍스트 정보를 추가하고 불러야함
     // 추가!
-    TextureManager::GetInstance()->InsertTexture(TextureManager::SINGLE, L"../Texture/Player/Player.png", L"Player");
+    TextureManager::GetInstance()->InsertTexture(TextureManager::SINGLE, L"../Texture/Cube.png", L"Player");
     // 부르기!
     pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Player");
 

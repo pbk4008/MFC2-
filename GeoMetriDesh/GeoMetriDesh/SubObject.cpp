@@ -4,7 +4,7 @@
 
 HRESULT SubObject::ReadObject()
 {
-    TextureManager::GetInstance()->InsertTexture(TextureManager::SINGLE, L"../Texture/Player/Player.png", L"Player");
+    TextureManager::GetInstance()->InsertTexture(TextureManager::SINGLE, L"../Texture/Cube.png", L"Player");
     // ºÎ¸£±â!
     pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Player");
 
