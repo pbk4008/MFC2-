@@ -17,7 +17,6 @@ typedef struct TEXTINFO {
 	LPDIRECT3DTEXTURE9 texture; // HBITMAP //즉, 이미지 한장을 제어할 컴객체. 
 	D3DXIMAGE_INFO		imageInfo;
 }TEXTINFO;
-#endif // !__STRUCT_H__
 
 typedef struct RGBINFO {
 	int A;
@@ -25,3 +24,14 @@ typedef struct RGBINFO {
 	int G;
 	int B;
 }ARGB;
+
+typedef struct tagObstacle
+{
+	D3DXMATRIX tMatrix;
+	int iIndex;
+}OBSTACLEINFO;
+#endif // !__STRUCT_H__
+
+
+
+

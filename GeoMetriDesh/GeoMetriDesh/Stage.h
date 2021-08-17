@@ -5,6 +5,9 @@ class ObjectManager;
 class CLineMgr;
 class Stage : public Scene
 {
+private:
+    enum COLOR { BLUE, PURPLE, RED, REPURPLE, END };
+public:
     // Scene을(를) 통해 상속됨
     virtual HRESULT Initialize() override;
     virtual int Update() override;
@@ -12,7 +15,12 @@ class Stage : public Scene
     virtual void Render() override;
     virtual void Release() override;
 private:
+    void ChangeColor();
+private:
     ObjectManager* objMgr;
     CLineMgr* lineMgr;
+    
+    DWORD dwCurTime;
+    COLOR eColor;
 };
 

@@ -14,9 +14,9 @@ private:
     LPD3DXSPRITE m_pSprite;
 
     CScrollMgr* m_pScrollMgr;
-private:
-    explicit CLand();
+    RGBINFO m_tRGBInfo;
 public:
+    explicit CLand();
     virtual ~CLand();
 public:
     // Object을(를) 통해 상속됨
@@ -26,6 +26,6 @@ public:
     virtual void RenderObject() override;
     virtual void ReleaseObject() override;
 public:
-    static Object* Create();
+    inline void setColor(const RGBINFO& _rInfo) { m_tRGBInfo = _rInfo; }
 };
 

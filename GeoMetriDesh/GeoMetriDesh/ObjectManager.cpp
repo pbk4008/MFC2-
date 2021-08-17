@@ -3,6 +3,7 @@
 #include "KeyManager.h"
 #include "CollisionMgr.h"
 #include "Object.h"
+#include "Obstacle.h"
 
 IMPLEMENT_SINGLETON(ObjectManager)
 ObjectManager::~ObjectManager()
@@ -14,7 +15,12 @@ HRESULT ObjectManager::Intialize()
 {
     keyMgr = KeyManager::GetInstance();
     collisionMgr = CollisionMgr::GetInstance();
-
+    m_hFile = CreateFile(L"../Data/Tile.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (m_hFile == INVALID_HANDLE_VALUE)
+    {
+        MessageBox(g_hWnd, L"파일 개방 실패", L"실패", MB_OK);
+        return E_FAIL;
+    }
     return S_OK;
 }
 
@@ -79,6 +85,7 @@ void ObjectManager::Release()
         objList[i].clear(); 
     }
 
+    CloseHandle(m_hFile);
     SAFE_DELETE(keyMgr);
     SAFE_DELETE(collisionMgr);
 }
@@ -99,3 +106,23 @@ void ObjectManager::KeyChecking()
     }
 
 }
+
+void ObjectManager::SaveObject()
+{
+    HANDLE hFile = CreateFile(L"../Data/Tile.dat", GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (INVALID_HANDLE_VALUE == hFile)
+    {
+        MessageBox(g_hWnd, L"저장 실패", L"실패", MB_OK);
+        return;
+    }
+    DWORD dwByte = 0;
+    for (auto& pObj : objList[OBSTACLE])
+    {
+        OBSTACLEINFO argInfo = dynamic_cast<CObstacle*>(pObj)->getObstacleInfo();
+        WriteFile(hFile, &argInfo, sizeof(OBSTACLEINFO), &dwByte, nullptr);
+    }
+    MessageBox(g_hWnd, L"저장 성공", L"성공", MB_OK);
+    CloseHandle(hFile);
+}
+
+
