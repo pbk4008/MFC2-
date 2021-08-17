@@ -37,7 +37,7 @@ HRESULT Stage::Initialize()
 	// 플레이어 오브젝트
 	objMgr = ObjectManager::GetInstance();
 	objMgr->InsertObject<Player>(ObjectManager::PLAYER);
-	objMgr->InsertObject<SubObject>(ObjectManager::TERRAIN);
+	//objMgr->InsertObject<SubObject>(ObjectManager::TERRAIN);
 
 	lineMgr = CLineMgr::GetInstance();
 	lineMgr->LoadLine();

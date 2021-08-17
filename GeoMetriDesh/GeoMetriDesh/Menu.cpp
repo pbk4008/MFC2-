@@ -72,10 +72,6 @@ void Menu::Render()
     );
     // 배경 끝나고
 
-    // 아 모르겠다!!! 내일한다!!
-    WCHAR szBuff[50] = L"";
-    swprintf_s(szBuff, L"%d", subScroll);
-    SetWindowText(g_hWnd, szBuff);
 
     if (subScroll >= 100) {
         TEXTINFO* pTextInfo2 = TextureManager::GetInstance()->GetTextInfo(L"BackGround");

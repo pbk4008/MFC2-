@@ -3,6 +3,7 @@
 #include "GraphicDevice.h"
 #include "TextureManager.h"
 #include "KeyManager.h"
+#include "LineMgr.h"
 
 Player::Player()
     : m_fAngle(0.f)
@@ -28,12 +29,22 @@ HRESULT Player::ReadObject()
     info.dir = { 1.f, 0.f, 0.f };
 
     rgb.A = 255;
-    rgb.R = 0;
+    rgb.R = 255;
     rgb.G = 0;
-    rgb.B = 255;
+    rgb.B = 0;
 
     // 반복 연산을 줄이기 위해 선언!
     keyMgr = KeyManager::GetInstance();
+
+
+    // 점프!
+    GRAVITIY = 9.8f;
+
+    jumpState = false;
+    jumpTime = 0.f;
+    jumpPower = 20.f;
+    jumpY = 0;
+
 
     SetObjectInfo(); // 필수!
     return S_OK;
@@ -42,7 +53,7 @@ HRESULT Player::ReadObject()
 int Player::UpdateObject()
 {
     KeyChecking();
-    
+    Jumping();
     return NOEVENT;
 }
 
@@ -63,7 +74,7 @@ void Player::RenderObject()
         &centerVec,
         nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 
-    //DrawImage(); // 필수!
+    DrawImage(); // 필수!
 }
 
 void Player::ReleaseObject()
@@ -71,35 +82,68 @@ void Player::ReleaseObject()
     SAFE_DELETE(keyMgr);
 }
 
+void Player::Jumping()
+{
+  
+
+
+
+    // 내가 떨어질 Y값을 담을 변수
+    float fY = 0.f;
+    bool lineCheck = CLineMgr::GetInstance()->CollisionLine(info.pos.x, info.pos.y, &fY);
+
+
+    if (lineCheck) {
+
+        jumpTime += 0.2f;
+        info.pos.y = jumpY - ((jumpPower * jumpTime) - (0.5f * GRAVITIY * jumpTime * jumpTime));
+
+        if (lineCheck && info.pos.y >= fY) {
+            jumpState = false;
+            jumpTime = 0.f;
+            info.pos.y = fY;
+
+        }
+    }
+    else if(lineCheck){
+        info.pos.y = fY;
+    }
+
+
+}
+
 void Player::KeyChecking()
 {
     // 풀링 테스트
-    if (keyMgr->KeyPressing(VK_SPACE)) {
+    if (keyMgr->KeyDown(VK_SPACE)) {
         int iCount = 0;
         for (0; iCount <= 18; ++iCount)
         {
             m_fAngle += 5.f;
         }
         iCount = 0;
-       // SetDeadCheck(true);
-    };
-    if (keyMgr->KeyPressing('W')) {
-        SetDeadCheck(false);
+
+        jumpState = true;
     };
 
-    // 키 테스트
-    if (keyMgr->KeyPressing(VK_LEFT)) {
-        info.pos.x -= 5.f;
-    }
-    if (keyMgr->KeyPressing(VK_RIGHT)) {
-        info.pos.x += 5.f;
-    }
-    if (keyMgr->KeyPressing(VK_UP)) {
-        info.pos.y -= 5.f;
-    }
-    if (keyMgr->KeyPressing(VK_DOWN)) {
-        info.pos.y += 5.f;
-    }
+
+    //if (keyMgr->KeyPressing('W')) {
+    //    SetDeadCheck(false);
+    //};
+
+    //// 키 테스트
+    //if (keyMgr->KeyPressing(VK_LEFT)) {
+    //    info.pos.x -= 5.f;
+    //}
+    //if (keyMgr->KeyPressing(VK_RIGHT)) {
+    //    info.pos.x += 5.f;
+    //}
+    //if (keyMgr->KeyPressing(VK_UP)) {
+    //    info.pos.y -= 5.f;
+    //}
+    //if (keyMgr->KeyPressing(VK_DOWN)) {
+    //    info.pos.y += 5.f;
+    //}
 
 }
 

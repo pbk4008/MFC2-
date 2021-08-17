@@ -17,6 +17,8 @@ public:
 	virtual void RenderObject() override;
 	virtual void ReleaseObject() override;
 
+	void Jumping();
+
 	void KeyChecking();
 	void WriteMatrix();
 
@@ -29,6 +31,13 @@ private:
 	D3DXMATRIX	matRotZ;
 	D3DXMATRIX	matWorld;
 	D3DXMATRIX  matTrans;
+
+	float GRAVITIY;
+
+	bool jumpState;
+	float jumpTime;
+	float jumpPower;
+	float jumpY;
 };
 
 
