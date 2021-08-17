@@ -47,13 +47,14 @@ public:
 	inline list<Object*>& GetList(OBJECT_ID _ID) { return objList[_ID]; };
 
 	void SaveObject();//타일 저장용
-	void LoadObject();//타일 로드
 private:
 	list<Object*> objList[OBJECT_ID_END];
 	bool showLineCheck;
 
 	KeyManager* keyMgr;
 	CollisionMgr* collisionMgr;
+
+	HANDLE m_hFile;
 };
 
 
