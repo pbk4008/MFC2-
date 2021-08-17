@@ -9,8 +9,14 @@ HRESULT PlayBtn::ReadObject()
     // 플레이 버튼
     TextureManager::GetInstance()->InsertTexture(
         TextureManager::SINGLE,
-        L"../Texture/Menu/PlayBtn.png",
+        L"../Texture/Menu/Btn/PlayBtn1.png",
+        L"PlayBtn1");
+
+    TextureManager::GetInstance()->InsertTexture(
+        TextureManager::SINGLE,
+        L"../Texture/Menu/Btn/PlayBtn.png",
         L"PlayBtn");
+
     pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"PlayBtn");
 
     info.pos = { float(WINCX>>1), 350, 0.f };
@@ -21,6 +27,8 @@ HRESULT PlayBtn::ReadObject()
     rgb.R = 255;
     rgb.G = 0;
     rgb.B = 0;
+
+    imageCheck = false;
 
     SetObjectInfo(); // 필수!
     return S_OK;
@@ -38,6 +46,13 @@ void PlayBtn::LateUpdateObject()
 
 void PlayBtn::RenderObject()
 {
+    if (imageCheck) {
+        pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"PlayBtn1");
+    }
+    else {
+        pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"PlayBtn");
+    }
+   
     SetMatrix();
     DrawImage();
 }

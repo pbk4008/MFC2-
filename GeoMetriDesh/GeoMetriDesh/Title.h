@@ -13,6 +13,14 @@ class Title : public Object
 	virtual void ReleaseObject() override;
 
 	void SetMatrix();
+
+	void SetCheck(bool _b) { imageCheck = _b; };
+
+private:
+	bool imageCheck;
+	DWORD dwTime;
+	int setImage;
+	float size;
 };
 
 
