@@ -7,8 +7,8 @@ class KeyManager;
 class Player : public Object
 {
 public:
-	explicit Player() {};
-	virtual ~Player() {};
+	explicit Player();
+	virtual ~Player();
 
 	// Object을(를) 통해 상속됨
 	virtual HRESULT ReadObject() override;
@@ -18,10 +18,17 @@ public:
 	virtual void ReleaseObject() override;
 
 	void KeyChecking();
+	void WriteMatrix();
 
 private:
-	float speed; // 필요 없을듯?
+	float		m_fAngle;
+
 	KeyManager* keyMgr;
+
+	D3DXMATRIX	matScale;
+	D3DXMATRIX	matRotZ;
+	D3DXMATRIX	matWorld;
+	D3DXMATRIX  matTrans;
 };
 
 

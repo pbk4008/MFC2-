@@ -11,6 +11,12 @@ class SubObject : public Object
     virtual void LateUpdateObject() override;
     virtual void RenderObject() override;
     virtual void ReleaseObject() override;
+
+public:
+    void WriteMatrix();
+
+private:
+    D3DXMATRIX	matScale;
 };
 
 
