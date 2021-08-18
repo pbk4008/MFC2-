@@ -117,13 +117,13 @@ bool CLineMgr::CollisionLine(float _infoX, float _infoY, float* _Y)
 			float	y2 = rLine->getPos()[1].y;
 
 			*_Y = ((y2 - y1) / (x2 - x1)) * (_infoX - x1) + y1;
-			//
-			//// y Å½»ö
-			//for (auto& pLine : m_LineList) {
-			//	if (pLine->getPos()->y <= *_Y) {
-			//		*_Y = pLine->getPos()->y;
-			//	}
-			//}
+			
+			// y Å½»ö -> ¿ÀºêÁ§Æ® ÂïÈ÷¸é Å×½ºÆ®!
+			for (auto& pLine : m_LineList) {
+				if (pLine->getPos()->y <= *_Y) {
+					*_Y = pLine->getPos()->y;
+				}
+			}
 		}
 	}
 	return true;

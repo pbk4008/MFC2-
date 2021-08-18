@@ -175,6 +175,7 @@
     <ClInclude Include="PlayBtn.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="RunEffect.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScrollMgr.h" />
@@ -209,6 +210,7 @@
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="PlayBtn.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RunEffect.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScrollMgr.cpp" />

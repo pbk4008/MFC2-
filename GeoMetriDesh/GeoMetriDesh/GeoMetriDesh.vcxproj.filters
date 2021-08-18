@@ -100,6 +100,15 @@
     <Filter Include="01.Object\03. Obstacle">
       <UniqueIdentifier>{ef8f5eef-20cc-4cf8-9680-8d37a7d670dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Object\04.Effect">
+      <UniqueIdentifier>{f7f59fb8-0968-4bec-9a27-849abe48832f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\04.Effect\00.RunEffect">
+      <UniqueIdentifier>{c8b7a165-dd83-430a-8095-0f37cc7ec612}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Object\04.Effect\01.JumpEffect">
+      <UniqueIdentifier>{00ddd04a-2936-4958-84fa-ea2ea7144aae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -207,6 +216,9 @@
     <ClInclude Include="Obstacle.h">
       <Filter>01.Object\03. Obstacle</Filter>
     </ClInclude>
+    <ClInclude Include="RunEffect.h">
+      <Filter>01.Object\04.Effect\00.RunEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GeoMetriDesh.rc">
@@ -299,6 +311,9 @@
     </ClCompile>
     <ClCompile Include="Obstacle.cpp">
       <Filter>01.Object\03. Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="RunEffect.cpp">
+      <Filter>01.Object\04.Effect\00.RunEffect</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

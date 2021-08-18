@@ -37,7 +37,7 @@ public:
 	}
 
 
-	inline Object* GetPlayer() { return objList[PLAYER].back(); };
+	inline Object*& GetPlayer() { return objList[PLAYER].back(); };
 
 	inline bool GetShowLineCheck() { return showLineCheck; }
 	inline void SetShowLineCheck(bool _b) { showLineCheck = _b; };
