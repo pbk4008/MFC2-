@@ -11,6 +11,7 @@ private:
 	CLineMgr();
 	~CLineMgr();
 public:
+	void Update();
 	void Render();
 	void Release();
 public:
@@ -20,7 +21,7 @@ public:
 public:
 	inline void AddLine(CLine* _Line) { m_LineList.emplace_back(_Line); }
 
-	bool CollisionLine(float _infoX, float _infoY, float* _Y);
+
 };
 #endif
 

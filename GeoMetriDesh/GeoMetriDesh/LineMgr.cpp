@@ -13,6 +13,12 @@ CLineMgr::~CLineMgr()
 	Release();
 }
 
+void CLineMgr::Update()
+{
+	for (auto& pLine : m_LineList)
+		pLine->Update();
+}
+
 void CLineMgr::Render()
 {
 	for (auto& pLine : m_LineList)
@@ -90,33 +96,4 @@ float CLineMgr::getLineDist(D3DXVECTOR2& _start, D3DXVECTOR2& _end)
 	D3DXVECTOR2 DistVec = tmp - min;
 	float fDist = D3DXVec2Length(&DistVec);
 	return fDist;
-}
-
-bool CLineMgr::CollisionLine(float _infoX, float _infoY, float* _Y)
-{
-	if (m_LineList.empty()) {
-		return false;
-	}
-
-	// x Å½»ö
-	for (auto& rLine : m_LineList) {
-		if (rLine->getPos()[0].x <= _infoX &&
-			rLine->getPos()[1].x > _infoX) 
-		{
-			float	x1 = rLine->getPos()[0].x;
-			float	y1 = rLine->getPos()[0].y;
-			float	x2 = rLine->getPos()[1].x;
-			float	y2 = rLine->getPos()[1].y;
-
-			*_Y = ((y2 - y1) / (x2 - x1)) * (_infoX - x1) + y1;
-			//
-			//// y Å½»ö
-			//for (auto& pLine : m_LineList) {
-			//	if (pLine->getPos()->y <= *_Y) {
-			//		*_Y = pLine->getPos()->y;
-			//	}
-			//}
-		}
-	}
-	return true;
 }

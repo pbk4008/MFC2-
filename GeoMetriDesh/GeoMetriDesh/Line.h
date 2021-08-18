@@ -11,6 +11,7 @@ private:
 public:
 	~CLine();
 public:
+	void Update();
 	void Render();
 	void Release();
 
