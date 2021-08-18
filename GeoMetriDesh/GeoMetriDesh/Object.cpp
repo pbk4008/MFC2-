@@ -36,7 +36,7 @@ void Object::DrawImage()
     // 그림그리기
     GraphicDevice::GetInstance()->GetSprite()->Draw(pTextInfo->texture, nullptr,
         &centerVec,
-        &info.pos, D3DCOLOR_ARGB(255, 255, 255, 255));
+        nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 
     // 라인 보이기 체크(키보드 L or K)
     if (ObjectManager::GetInstance()->GetShowLineCheck()) {
