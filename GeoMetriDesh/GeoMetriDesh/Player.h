@@ -21,6 +21,7 @@ public:
 
 	void KeyChecking();
 	void WriteMatrix();
+	void RotateAngle();
 
 private:
 	float		m_fAngle;

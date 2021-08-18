@@ -5,6 +5,9 @@
 #include "KeyManager.h"
 #include "LineMgr.h"
 
+
+#include "ObjectManager.h"
+
 Player::Player()
     : m_fAngle(0.f)
 {
@@ -24,7 +27,7 @@ HRESULT Player::ReadObject()
     pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Player");
 
     // info의 pos, size, dir는 직접 지정해줘야 한다
-    info.pos = { 100.f, 100.f, 0.f }; //xyz
+    info.pos = { 300.f, 100.f, 0.f }; //xyz
     info.size = { 100.f, 100.f, 0.f };
     info.dir = { 1.f, 0.f, 0.f };
 
@@ -36,13 +39,12 @@ HRESULT Player::ReadObject()
     // 반복 연산을 줄이기 위해 선언!
     keyMgr = KeyManager::GetInstance();
 
-
     // 점프!
     GRAVITIY = 9.8f;
 
     jumpState = true;
     jumpTime = 100.f;
-    jumpPower = 50.f;
+    jumpPower = 70.f;
     jumpY = 0;
 
 
@@ -53,7 +55,8 @@ HRESULT Player::ReadObject()
 int Player::UpdateObject()
 {
     KeyChecking();
-    if (jumpState) Jumping();
+    Jumping();
+    RotateAngle();
     return NOEVENT;
 }
 
@@ -74,7 +77,18 @@ void Player::RenderObject()
         &centerVec,
         nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 
-    DrawImage(); // 필수!
+    //DrawImage(); // 필수!
+
+
+    // 라인 보이기 체크(키보드 L or K)
+    if (ObjectManager::GetInstance()->GetShowLineCheck()) {
+        // 그래픽디바이스를 끄고  다시 그려야 한다!
+        GraphicDevice::GetInstance()->GetSprite()->End();
+        GraphicDevice::GetInstance()->GetLine()->SetWidth(2.f);
+        GraphicDevice::GetInstance()->GetLine()->Draw(lineList, 5, D3DCOLOR_ARGB(rgb.A, rgb.R, rgb.G, rgb.B));
+        GraphicDevice::GetInstance()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
+    }
+
 }
 
 void Player::ReleaseObject()
@@ -84,6 +98,9 @@ void Player::ReleaseObject()
 
 void Player::Jumping()
 {
+    if (!jumpState) {
+        return;
+    }
 
     // 내가 떨어질 Y값을 담을 변수
     float fY = 0.f;
@@ -92,7 +109,7 @@ void Player::Jumping()
 
     if (lineCheck) {
 
-        jumpTime += 0.4f;
+        jumpTime += 0.6f;
         info.pos.y = jumpY - ((jumpPower * jumpTime) - (0.5f * GRAVITIY * jumpTime * jumpTime));
 
         if (lineCheck && info.pos.y >= fY) {
@@ -111,19 +128,14 @@ void Player::Jumping()
 
 void Player::KeyChecking()
 {
-    // 풀링 테스트
-    if (keyMgr->KeyDown(VK_SPACE)) {
-        //int iCount = 0;
-        //for (0; iCount <= 18; ++iCount)
-        //{
-        //    m_fAngle += 5.f;
-        //}
-        //iCount = 0;
-        jumpY = info.pos.y;
-        jumpState = true;
-    };
-
-
+    if (!jumpState) {
+        // 풀링 테스트
+        if (keyMgr->KeyDown(VK_SPACE)) {
+           
+            jumpY = info.pos.y;
+            jumpState = true;
+        };
+    }
     //if (keyMgr->KeyPressing('W')) {
     //    SetDeadCheck(false);
     //};
@@ -153,11 +165,28 @@ void Player::WriteMatrix()
     //m_fAngle += 5.f;
 
     D3DXMatrixRotationZ(&matRotZ, D3DXToRadian(m_fAngle));
-    D3DXMatrixTranslation(&matTrans, 100.f, 100.f, 0.f);
+    D3DXMatrixTranslation(&matTrans, info.pos.x, info.pos.y, 0.f);
 
     matWorld = matScale * matRotZ * matTrans;
 
 
 
     GraphicDevice::GetInstance()->GetSprite()->SetTransform(&matWorld);
+}
+
+void Player::RotateAngle()
+{
+    // 임시방편!!
+    if (jumpState) {
+
+        m_fAngle += 5.f;
+
+        if (m_fAngle >= 90) {
+            m_fAngle = 90;
+        }
+    }
+    else {
+        m_fAngle = 0;
+    }
+
 }

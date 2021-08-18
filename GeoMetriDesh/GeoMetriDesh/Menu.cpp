@@ -19,10 +19,10 @@ HRESULT Menu::Initialize()
         L"../Texture/BackGround/Square.png",
         L"BackGround" );
 
-    //TextureManager::GetInstance()->InsertTexture(
-    //    TextureManager::SINGLE,
-    //    L"../Texture/BackGround/Square2.png",
-    //    L"BackGround2");
+    TextureManager::GetInstance()->InsertTexture(
+        TextureManager::SINGLE,
+        L"../Texture/BackGround/Square2.png",
+        L"BackGround2");
 
     // RGB값 조정 가능
     rgb.A = 150;
@@ -70,20 +70,23 @@ void Menu::Render()
     GraphicDevice::GetInstance()->GetSprite()->Draw(
         pTextInfo1->texture, nullptr, nullptr,&centerVec1,D3DCOLOR_ARGB(rgb.A, rgb.R, rgb.G, rgb.B)
     );
+
+    TEXTINFO* pTextInfo2 = TextureManager::GetInstance()->GetTextInfo(L"BackGround");
+    D3DXVECTOR3 centerVec2 = {
+       pTextInfo1->imageInfo.Width+(-scollX),
+        0.f,
+        0.f
+    };
+
+    GraphicDevice::GetInstance()->GetSprite()->Draw(
+        pTextInfo2->texture, nullptr, nullptr, &centerVec2, D3DCOLOR_ARGB(rgb.A, rgb.R, rgb.G, rgb.B)
+    );
+
     // 배경 끝나고
 
 
-    if (subScroll >= 100) {
-        TEXTINFO* pTextInfo2 = TextureManager::GetInstance()->GetTextInfo(L"BackGround");
-        D3DXVECTOR3 centerVec2 = {
-           pTextInfo1->imageInfo.Width + (-scollX),
-            0.f,
-            0.f };
-
-        GraphicDevice::GetInstance()->GetSprite()->Draw(
-            pTextInfo2->texture, nullptr, nullptr, &centerVec2, D3DCOLOR_ARGB(rgb.A, rgb.R, rgb.G, rgb.B)
-        );
-        subScroll = 0;
+    if (scollX >= pTextInfo1->imageInfo.Width) {
+        CScrollMgr::GetInstance()->setUpdateScrollX(0.f);
     }
 
     ObjectManager::GetInstance()->Render();
