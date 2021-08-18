@@ -21,6 +21,10 @@ public:
 	inline void setScrollY(float _scrolly) { m_fScrollY += _scrolly; }
 	inline void setSpeed(float _speed) { m_fSpeed = _speed; }
 	inline void reSetSpeed() { m_fSpeed = 0.f; }
+
+
+	inline void setUpdateScrollX(float _scrollx) { m_fUpdateScrollX = _scrollx; }
+
 public:
 	inline float getScrollX() { return m_fScrollX; }
 	inline float getScrollY() { return m_fScrollY; }
