@@ -40,9 +40,9 @@ HRESULT Player::ReadObject()
     // 점프!
     GRAVITIY = 9.8f;
 
-    jumpState = false;
-    jumpTime = 0.f;
-    jumpPower = 20.f;
+    jumpState = true;
+    jumpTime = 100.f;
+    jumpPower = 50.f;
     jumpY = 0;
 
 
@@ -53,7 +53,7 @@ HRESULT Player::ReadObject()
 int Player::UpdateObject()
 {
     KeyChecking();
-    Jumping();
+    if (jumpState) Jumping();
     return NOEVENT;
 }
 
@@ -84,9 +84,6 @@ void Player::ReleaseObject()
 
 void Player::Jumping()
 {
-  
-
-
 
     // 내가 떨어질 Y값을 담을 변수
     float fY = 0.f;
@@ -95,7 +92,7 @@ void Player::Jumping()
 
     if (lineCheck) {
 
-        jumpTime += 0.2f;
+        jumpTime += 0.4f;
         info.pos.y = jumpY - ((jumpPower * jumpTime) - (0.5f * GRAVITIY * jumpTime * jumpTime));
 
         if (lineCheck && info.pos.y >= fY) {
@@ -116,13 +113,13 @@ void Player::KeyChecking()
 {
     // 풀링 테스트
     if (keyMgr->KeyDown(VK_SPACE)) {
-        int iCount = 0;
-        for (0; iCount <= 18; ++iCount)
-        {
-            m_fAngle += 5.f;
-        }
-        iCount = 0;
-
+        //int iCount = 0;
+        //for (0; iCount <= 18; ++iCount)
+        //{
+        //    m_fAngle += 5.f;
+        //}
+        //iCount = 0;
+        jumpY = info.pos.y;
         jumpState = true;
     };
 
