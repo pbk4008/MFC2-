@@ -20,8 +20,7 @@ public:
 	float getLineDist(D3DXVECTOR2& _start, D3DXVECTOR2& _end);
 public:
 	inline void AddLine(CLine* _Line) { m_LineList.emplace_back(_Line); }
-
-
+	bool CollisionLine(float _infoX, float _infoY, float* _Y);
 };
 #endif
 
