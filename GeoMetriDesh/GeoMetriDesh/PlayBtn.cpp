@@ -52,7 +52,6 @@ void PlayBtn::RenderObject()
     else {
         pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"PlayBtn");
     }
-   
     SetMatrix();
     DrawImage();
 }
@@ -64,8 +63,11 @@ void PlayBtn::ReleaseObject()
 
 void PlayBtn::SetMatrix()
 {
-    D3DXMATRIX matScale;
+    D3DXMATRIX matScale, matTrans;
     D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
+    D3DXMatrixTranslation(&matTrans, info.pos.x, info.pos.y, 0.f);
+
+    matScale *= matTrans;
 
     GraphicDevice::GetInstance()->GetSprite()->SetTransform(&matScale);
 }

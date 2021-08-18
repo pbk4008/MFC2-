@@ -59,28 +59,43 @@ void Menu::LateUpdate()
 
 void Menu::Render()
 {
+  
+    D3DXMATRIX matScale, matTrans;
+    D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
+    D3DXMatrixTranslation(&matTrans, 0.f, 0.f, 0.f);
+    matScale*= matTrans;
+    GraphicDevice::GetInstance()->GetSprite()->SetTransform(&matScale);
+
     float scollX = CScrollMgr::GetInstance()->getUpdateScrollX();
+
     TEXTINFO* pTextInfo1 = TextureManager::GetInstance()->GetTextInfo(L"BackGround");
     D3DXVECTOR3 centerVec1 = {
-       -scollX,
+       +scollX,
         0.f,
         0.f
     };
 
+    D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
+    D3DXMatrixTranslation(&matTrans, WINCX, 0.f, 0.f);
+    matScale *= matTrans;
+    GraphicDevice::GetInstance()->GetSprite()->SetTransform(&matScale);
+
     GraphicDevice::GetInstance()->GetSprite()->Draw(
-        pTextInfo1->texture, nullptr, nullptr,&centerVec1,D3DCOLOR_ARGB(rgb.A, rgb.R, rgb.G, rgb.B)
+        pTextInfo1->texture, nullptr, &centerVec1,nullptr,D3DCOLOR_ARGB(rgb.A, rgb.R, rgb.G, rgb.B)
     );
 
-    TEXTINFO* pTextInfo2 = TextureManager::GetInstance()->GetTextInfo(L"BackGround");
+    TEXTINFO* pTextInfo2 = TextureManager::GetInstance()->GetTextInfo(L"BackGround2");
     D3DXVECTOR3 centerVec2 = {
-       pTextInfo1->imageInfo.Width+(-scollX),
+       pTextInfo1->imageInfo.Width+(+scollX),
         0.f,
         0.f
     };
 
     GraphicDevice::GetInstance()->GetSprite()->Draw(
-        pTextInfo2->texture, nullptr, nullptr, &centerVec2, D3DCOLOR_ARGB(rgb.A, rgb.R, rgb.G, rgb.B)
+        pTextInfo2->texture, nullptr, &centerVec2, nullptr, D3DCOLOR_ARGB(rgb.A, rgb.R, rgb.G, rgb.B)
     );
+
+
 
     // 배경 끝나고
 

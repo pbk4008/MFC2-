@@ -74,6 +74,7 @@ void Stage::Render()
 	);
 	// 배경 끝나고
 
+
 	objMgr->Render();
 	//lineMgr->Render();
 }

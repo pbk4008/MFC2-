@@ -79,7 +79,6 @@ void Player::RenderObject()
 
     //DrawImage(); // 필수!
 
-
     // 라인 보이기 체크(키보드 L or K)
     if (ObjectManager::GetInstance()->GetShowLineCheck()) {
         // 그래픽디바이스를 끄고  다시 그려야 한다!
@@ -104,26 +103,23 @@ void Player::Jumping()
 
     // 내가 떨어질 Y값을 담을 변수
     float fY = 0.f;
-    bool lineCheck = CLineMgr::GetInstance()->CollisionLine(info.pos.x, info.pos.y, &fY);
-
+    bool lineCheck = CLineMgr::GetInstance()->CollisionLine(info.pos.x, rc.bottom, &fY);
 
     if (lineCheck) {
-
         jumpTime += 0.6f;
-        info.pos.y = jumpY - ((jumpPower * jumpTime) - (0.5f * GRAVITIY * jumpTime * jumpTime));
+        rc.bottom = jumpY - ((jumpPower * jumpTime) - (0.5f * GRAVITIY * jumpTime * jumpTime));
 
-        if (lineCheck && info.pos.y >= fY) {
+        if (lineCheck && rc.bottom >= fY) {
             jumpState = false;
             jumpTime = 0.f;
-            info.pos.y = fY;
+            rc.bottom = fY;
 
         }
     }
     else if(lineCheck){
-        info.pos.y = fY;
+        rc.bottom = fY;
     }
-
-
+    info.pos.y = rc.bottom - (info.size.y * 0.5f);
 }
 
 void Player::KeyChecking()
@@ -136,24 +132,7 @@ void Player::KeyChecking()
             jumpState = true;
         };
     }
-    //if (keyMgr->KeyPressing('W')) {
-    //    SetDeadCheck(false);
-    //};
-
-    //// 키 테스트
-    //if (keyMgr->KeyPressing(VK_LEFT)) {
-    //    info.pos.x -= 5.f;
-    //}
-    //if (keyMgr->KeyPressing(VK_RIGHT)) {
-    //    info.pos.x += 5.f;
-    //}
-    //if (keyMgr->KeyPressing(VK_UP)) {
-    //    info.pos.y -= 5.f;
-    //}
-    //if (keyMgr->KeyPressing(VK_DOWN)) {
-    //    info.pos.y += 5.f;
-    //}
-
+   
 }
 
 void Player::WriteMatrix()
@@ -168,8 +147,6 @@ void Player::WriteMatrix()
     D3DXMatrixTranslation(&matTrans, info.pos.x, info.pos.y, 0.f);
 
     matWorld = matScale * matRotZ * matTrans;
-
-
 
     GraphicDevice::GetInstance()->GetSprite()->SetTransform(&matWorld);
 }
@@ -188,5 +165,4 @@ void Player::RotateAngle()
     else {
         m_fAngle = 0;
     }
-
 }

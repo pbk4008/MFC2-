@@ -15,7 +15,7 @@ HRESULT Title::ReadObject()
 
     pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Title", L"Title", 0);
 
-    info.pos = { 450, 100.f, 0.f };
+    info.pos = { 400, 100.f, 0.f };
     info.size = { pTextInfo->imageInfo.Width * 0.5f, pTextInfo->imageInfo.Height * 0.5f, 0.f };
     info.dir = { 1.f, 0.f, 0.f };
 
@@ -66,9 +66,10 @@ void Title::ReleaseObject()
 
 void Title::SetMatrix()
 {
-    D3DXMATRIX matScale;
+    D3DXMATRIX matScale, matTrans;
 
     D3DXMatrixScaling(&matScale, size, size, 0.f);
-    info.mat = matScale;
+    D3DXMatrixTranslation(&matTrans, info.pos.x, info.pos.y, 0.f);
+    info.mat = matScale* matTrans;
     GraphicDevice::GetInstance()->GetSprite()->SetTransform(&info.mat);
 }
