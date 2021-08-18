@@ -22,8 +22,6 @@ HRESULT CLand::ReadObject()
 	m_fLandDist = CLineMgr::GetInstance()->getLineDist(m_fLandStart, m_fLandEnd);
 	SetObjectInfo();
 
-	m_pScrollMgr->reSetSpeed();
-	m_pScrollMgr->setSpeed(3.f);
 	m_tRGBInfo = { 255,0,0,255 };
 
 	return S_OK;
@@ -31,8 +29,6 @@ HRESULT CLand::ReadObject()
 
 int CLand::UpdateObject()
 {
-	m_pScrollMgr->XUpdate();
-
 	return 0;
 }
 

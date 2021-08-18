@@ -13,6 +13,12 @@ CLineMgr::~CLineMgr()
 	Release();
 }
 
+void CLineMgr::Update()
+{
+	for (auto& pLine : m_LineList)
+		pLine->Update();
+}
+
 void CLineMgr::Render()
 {
 	for (auto& pLine : m_LineList)

@@ -11,6 +11,7 @@ private:
 	CLineMgr();
 	~CLineMgr();
 public:
+	void Update();
 	void Render();
 	void Release();
 public:
