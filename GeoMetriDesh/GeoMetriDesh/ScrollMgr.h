@@ -30,7 +30,6 @@ public:
 	inline float getScrollY() { return m_fScrollY; }
 	inline float getUpdateScrollX() { return m_fUpdateScrollX; }
 	inline float getUpdateScrollY() { return m_fUpdateScrollY; }
-	inline float getSpeed() { return m_fSpeed; }
 };
 #endif
 

@@ -1,12 +1,11 @@
 #include "framework.h"
 #include "Obstacle.h"
 #include "TextureManager.h"
-#include "ScrollMgr.h"
 
-CObstacle::CObstacle() : m_pScrollMgr(nullptr)
+CObstacle::CObstacle()
 {
 	m_pSprite = GraphicDevice::GetInstance()->GetSprite();
-	ZeroMemory(&m_tObstacleInfo, sizeof(OBSTACLEINFO));
+	ZeroMemory(&m_tObstalceInfo, sizeof(OBSTACLEINFO));
 }
 
 CObstacle::~CObstacle()
@@ -16,26 +15,11 @@ CObstacle::~CObstacle()
 
 HRESULT CObstacle::ReadObject()
 {
-	m_pScrollMgr = CScrollMgr::GetInstance();
 	return S_OK;
 }
 
 int CObstacle::UpdateObject()
 {
-	float fScollX = m_pScrollMgr->getUpdateScrollX();
-	float fScollY = m_pScrollMgr->getUpdateScrollY();
-	D3DXMATRIX argTrans;
-	D3DXMatrixTranslation(&argTrans, -m_pScrollMgr->getSpeed(), 0.f, 0.f);
-	m_tObstacleInfo.tMatrix *= argTrans;
-	info.size.x = OBSTACLECX*m_tObstacleInfo.tMatrix._11;
-	info.size.y = OBSTACLECY*m_tObstacleInfo.tMatrix._22;
-	info.size.z = 0.f;
-
-	info.pos.x = m_tObstacleInfo.tMatrix._41;
-	info.pos.y = m_tObstacleInfo.tMatrix._42;
-	info.pos.z = 0.f;
-
-	UpdateObjectInfo();
 	return 0;
 }
 
@@ -45,31 +29,19 @@ void CObstacle::LateUpdateObject()
 
 void CObstacle::RenderObject()
 {
-	m_pSprite->SetTransform(&(m_tObstacleInfo.tMatrix));
-	DrawImage();
-	//m_pSprite->Draw(pTextInfo->texture, nullptr, &centerVec, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+	m_pSprite->SetTransform(&(m_tObstalceInfo.tMatrix));
+	m_pSprite->Draw(pTextInfo->texture, nullptr, &centerVec, nullptr, D3DCOLOR_ARGB(rgb.A, rgb.R, rgb.G, rgb.B));
 }
-	
 
 void CObstacle::ReleaseObject()
 {
 }
 
-void CObstacle::Respawn(const OBSTACLEINFO& _Info)
-{
-	deadCheck = false;
-	setIndex(_Info.iIndex);
-	setMatrix(_Info.tMatrix);
-	pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Tile", L"Obstacle", m_tObstacleInfo.iIndex);
-	rgb = { 255,255,255,255 };
-	SetObjectInfo();
-}
-
-void CObstacle::Respawn(const int& _iIndex, const D3DMATRIX& _matMatrix)
+void CObstacle::Respawn(const int _iIndex, const D3DXMATRIX& _matrix)
 {
 	setIndex(_iIndex);
-	setMatrix(_matMatrix);
-	pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Tile", L"Obstacle", m_tObstacleInfo.iIndex);
+	setMatrix(_matrix);
+	pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Tile", L"Obstacle", _iIndex);
 	rgb = { 255,255,255,255 };
 	SetObjectInfo();
 }

@@ -115,5 +115,5 @@ void Stage::ChangeColor()
 			rgb.R = 0;
 		break;
 	}
-	dynamic_cast<CLand*>(objMgr->GetList(ObjectManager::TERRAIN).back())->setColor(rgb);
+	dynamic_cast<CLand*>(objMgr->GetList(ObjectManager::TERRAIN).front())->setColor(rgb);
 }

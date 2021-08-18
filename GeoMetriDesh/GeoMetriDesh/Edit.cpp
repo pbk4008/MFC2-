@@ -31,7 +31,6 @@ HRESULT CEdit::Initialize()
 	m_pLineMgr = CLineMgr::GetInstance();
 	m_pScrollMgr = CScrollMgr::GetInstance();
 	m_pObjMgr = ObjectManager::GetInstance();
-	m_pObjMgr->Intialize();
 	m_pLineMgr->LoadLine();
 
 	m_pTextureMgr->InsertTexture(TextureManager::MULTI, L"../Texture/Obstacle/Obstacle00%d.png", L"Tile", L"Obstacle", 6);
@@ -40,15 +39,11 @@ HRESULT CEdit::Initialize()
 	m_pLand->ReadObject();
 
 	m_fSize = 1.f;
-	m_pScrollMgr->reSetSpeed();
-	
 	return S_OK;
 }
 
 int CEdit::Update()
 {
-	m_pScrollMgr->XUpdate();
-
 	GetCursorPos(&m_tMouse);
 	ScreenToClient(g_hWnd, &m_tMouse);
 	if (m_pKeyMgr->KeyDown('1'))
@@ -68,21 +63,14 @@ int CEdit::Update()
 
 	if (m_pKeyMgr->KeyDown('K'))
 		m_pObjMgr->SaveObject();
-	if (m_pKeyMgr->KeyDown('J'))
-		m_pObjMgr->LoadObject();
-
-	if(m_pKeyMgr->KeyDown(VK_SPACE))
-		m_pScrollMgr->setSpeed(1.f);
-
 
 	if (m_bTile)
 		CreateTile();
 	else
 		CreateLine();
 
-	/*m_pLand->UpdateObject();*/
-
-	m_pObjMgr->Update();
+	m_pLand->UpdateObject();
+	
 	return 0;
 }
 
@@ -109,7 +97,7 @@ void CEdit::Render()
 	}
 	m_pLineMgr->Render();
 	m_pObjMgr->Render();
-	m_pLand->RenderObject();
+	//m_pLand->RenderObject();
 }
 
 void CEdit::Release()

@@ -15,7 +15,12 @@ HRESULT ObjectManager::Intialize()
 {
     keyMgr = KeyManager::GetInstance();
     collisionMgr = CollisionMgr::GetInstance();
-   
+    m_hFile = CreateFile(L"../Data/Tile.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (m_hFile == INVALID_HANDLE_VALUE)
+    {
+        MessageBox(g_hWnd, L"파일 개방 실패", L"실패", MB_OK);
+        return E_FAIL;
+    }
     return S_OK;
 }
 
@@ -80,7 +85,7 @@ void ObjectManager::Release()
         objList[i].clear(); 
     }
 
-    
+    CloseHandle(m_hFile);
     SAFE_DELETE(keyMgr);
     SAFE_DELETE(collisionMgr);
 }
@@ -118,46 +123,6 @@ void ObjectManager::SaveObject()
     }
     MessageBox(g_hWnd, L"저장 성공", L"성공", MB_OK);
     CloseHandle(hFile);
-}
-
-void ObjectManager::LoadObject()
-{
-    if (!m_hFile)
-    {
-        m_hFile = CreateFile(L"../Data/Tile.dat", GENERIC_READ, 0, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
-        if (m_hFile == INVALID_HANDLE_VALUE)
-        {
-            MessageBox(g_hWnd, L"파일 개방 실패", L"실패", MB_OK);
-        }
-    }
-    DWORD dwByte = 0;
-    OBSTACLEINFO argInfo = {};
-    ReadFile(m_hFile, &argInfo, sizeof(OBSTACLEINFO), &dwByte, nullptr);
-    if (dwByte == 0)
-    {
-        CloseHandle(m_hFile);
-        return;
-    }
-    if (objList[OBJECT_ID::OBSTACLE].empty())
-    {
-        Object* argObj = AbstractFactory<CObstacle>::Create();
-        dynamic_cast<CObstacle*>(argObj)->Respawn(argInfo);
-        objList[OBJECT_ID::OBSTACLE].emplace_back(argObj);
-    }
-    else
-    {
-        for (auto& rObj : objList[OBJECT_ID::OBSTACLE])
-        {
-            if (rObj->GetDeadCheck())
-            {
-                dynamic_cast<CObstacle*>(rObj)->Respawn(argInfo);
-                return;
-            }
-        }
-        Object* argObj = AbstractFactory<CObstacle>::Create();
-        dynamic_cast<CObstacle*>(argObj)->Respawn(argInfo);
-        objList[OBJECT_ID::OBSTACLE].emplace_back(argObj);
-    }
 }
 
 
