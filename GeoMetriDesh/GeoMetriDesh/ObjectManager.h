@@ -10,7 +10,7 @@ class ObjectManager
 {
 	DECLARE_SINGLETON(ObjectManager)
 public:
-	enum OBJECT_ID {BACKGROUND, UI, PLAYER, TERRAIN, EFFECT, OBSTACLE, OBJECT_ID_END};
+	enum OBJECT_ID {BACKGROUND, UI, TERRAIN, EFFECT, PLAYER, OBSTACLE, OBJECT_ID_END};
 private:
 	explicit ObjectManager() : showLineCheck(false){};
 public:
@@ -36,8 +36,22 @@ public:
 		objList[_typeID].emplace_back(AbstractFactory<T>::Create());
 	}
 
+	// 좌표값도 받을예정
+	template<typename T>
+	void InsertObject(OBJECT_ID _typeID, D3DXVECTOR3 _vector)
+	{
+		for (auto& rObj : objList[_typeID]) {
+			if (rObj->GetDeadCheck()) {
+				rObj->SetDeadCheck(false);
+				rObj->SetPos(_vector);
+				return;
+			}
+		}
+		objList[_typeID].emplace_back(AbstractFactory<T>::Create(_vector));
+	}
 
-	inline Object* GetPlayer() { return objList[PLAYER].back(); };
+
+	inline Object*& GetPlayer() { return objList[PLAYER].back(); };
 
 	inline bool GetShowLineCheck() { return showLineCheck; }
 	inline void SetShowLineCheck(bool _b) { showLineCheck = _b; };
