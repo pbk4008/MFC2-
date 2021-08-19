@@ -34,8 +34,8 @@ HRESULT MainGame::ReadyMainGame()
 	//	L"../Texture/BackGround/Black.png",
 	//	L"Black");
 
-	sceneManager->ChangeScene(SceneManager::MENU);
-	//sceneManager->ChangeScene(SceneManager::EDIT);
+	//sceneManager->ChangeScene(SceneManager::MENU);
+	sceneManager->ChangeScene(SceneManager::EDIT);
 
 
 	return S_OK;

@@ -59,7 +59,6 @@ HRESULT Player::ReadObject()
     effectDelay = GetTickCount();
     SetObjectInfo(); // 필수!
 
-    fStartY = dynamic_cast<CLand*>(ObjectManager::GetInstance()->GetList(ObjectManager::TERRAIN).front())->getStartY();
     return S_OK;
 }
 
@@ -146,37 +145,27 @@ void Player::Jumping()
 {
     if (flyState == false)
     {
+        if (!jumpState) {
+            return;
+        }
         // 내가 떨어질 Y값을 담을 변수
         float fY = 0.f;
         bool lineCheck = CLineMgr::GetInstance()->CollisionLine(info.pos.x, rc.bottom, &fY);
 
-        if (lineCheck && jumpState) {
+        if (lineCheck) {
             jumpTime += 0.6f;
-            rc.bottom = jumpY - ((jumpPower * jumpTime) - (0.5f * GRAVITIY * jumpTime * jumpTime)); 
-            info.pos.y = rc.bottom - (info.size.y * 0.5f);
-
+            rc.bottom = jumpY - ((jumpPower * jumpTime) - (0.5f * GRAVITIY * jumpTime * jumpTime));
 
             if (lineCheck && rc.bottom >= fY) {
                 jumpState = false;
                 jumpTime = 0.f;
                 rc.bottom = fY;
-                info.pos.y = rc.bottom - (info.size.y * 0.5f);
-                CScrollMgr::GetInstance()->setScrollY(fStartY - rc.bottom);
             }
         }
-        else{
-            rc.bottom += GRAVITIY;
-            info.pos.y = rc.bottom - (info.size.y * 0.5f);
-            fallRotateAngle = true;
-
-            if (rc.bottom >= fY) {
-                rc.bottom = fY;
-                info.pos.y = rc.bottom - (info.size.y * 0.5f);
-                CScrollMgr::GetInstance()->setScrollY(fStartY - rc.bottom);
-                fallRotateAngle = false;
-            }
-
+        else if (lineCheck) {
+            rc.bottom = fY;
         }
+        info.pos.y = rc.bottom - (info.size.y * 0.5f);
     }
 }
 

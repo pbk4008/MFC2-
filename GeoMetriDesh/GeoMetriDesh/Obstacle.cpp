@@ -45,7 +45,7 @@ void CObstacle::LateUpdateObject()
 
 void CObstacle::RenderObject()
 {
-	float fScrollX = m_pScrollMgr->getUpdateScrollX();
+	float fScrollX = m_pScrollMgr->getScrollX();
 	float fScrollY = m_pScrollMgr->getScrollY();
 
 	D3DXMATRIX matShow = {};

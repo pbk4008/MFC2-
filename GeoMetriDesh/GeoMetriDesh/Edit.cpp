@@ -91,8 +91,8 @@ int CEdit::Update()
 	if (m_pKeyMgr->KeyDown('A'))
 		m_pLineMgr->LoadLine();
 
-	/*if (m_pKeyMgr->KeyDown('K'))
-		m_pObjMgr->SaveObject();*/
+	//if (m_pKeyMgr->KeyDown('K'))
+	//	m_pObjMgr->SaveObject();
 	if (m_pKeyMgr->KeyDown('J'))
 		m_pObjMgr->LoadObject();
 
