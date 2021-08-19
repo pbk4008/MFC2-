@@ -145,27 +145,33 @@ void Player::Jumping()
 {
     if (flyState == false)
     {
-        if (!jumpState) {
-            return;
-        }
         // 내가 떨어질 Y값을 담을 변수
         float fY = 0.f;
         bool lineCheck = CLineMgr::GetInstance()->CollisionLine(info.pos.x, rc.bottom, &fY);
 
-        if (lineCheck) {
+        if (jumpState) {
             jumpTime += 0.6f;
             rc.bottom = jumpY - ((jumpPower * jumpTime) - (0.5f * GRAVITIY * jumpTime * jumpTime));
-
+            info.pos.y = rc.bottom - (info.size.y * 0.5f);
             if (lineCheck && rc.bottom >= fY) {
                 jumpState = false;
                 jumpTime = 0.f;
                 rc.bottom = fY;
+                info.pos.y = rc.bottom - (info.size.y * 0.5f);
             }
         }
-        else if (lineCheck) {
-            rc.bottom = fY;
+        else {
+            rc.bottom += GRAVITIY;
+            info.pos.y = rc.bottom - (info.size.y * 0.5f);
+            fallRotateAngle = true;
+
+            if (rc.bottom >= fY) {
+                rc.bottom = fY;
+                info.pos.y = rc.bottom - (info.size.y * 0.5f);
+                fallRotateAngle = false;
+            }
+
         }
-        info.pos.y = rc.bottom - (info.size.y * 0.5f);
     }
 }
 
@@ -306,13 +312,3 @@ void Player::SetEffect()
     }
 }
 
-void Player::Offset()
-{
-    int iOffSetY = WINCY >> 1;
-    float fScrollY = CScrollMgr::GetInstance()->getScrollY();
-
-    if (iOffSetY < (info.pos.y + fScrollY))
-        CScrollMgr::GetInstance()->setScrollY(iOffSetY - (info.pos.y + fScrollY));
-    if (iOffSetY > (info.pos.y + fScrollY))
-        CScrollMgr::GetInstance()->setScrollY(iOffSetY - (info.pos.y + fScrollY));
-}

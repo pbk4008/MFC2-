@@ -18,7 +18,7 @@ public:
 public:
 	static CLine* Create(const D3DXVECTOR3& _lPos, const D3DXVECTOR3& _rPos);
 	static CLine* Create(const D3DXVECTOR2& _lPos, const D3DXVECTOR2& _rPos);
-private:
+public:
 	HRESULT setLineInfo(const D3DXVECTOR3& _lPos, const D3DXVECTOR3& _rPos);
 	HRESULT setLineInfo(const D3DXVECTOR2& _lPos, const D3DXVECTOR2& _rPos);
 public:
