@@ -6,6 +6,7 @@ void Object::SetObjectInfo()
 {
     // 이미지 센터!
     centerVec = { pTextInfo->imageInfo.Width * 0.5f, pTextInfo->imageInfo.Height * 0.5f, 0.f };
+    ZeroMemory(&rc, sizeof(RECT));
 }
 
 void Object::UpdateObjectInfo()

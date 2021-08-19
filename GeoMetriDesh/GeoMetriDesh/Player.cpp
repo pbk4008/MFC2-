@@ -4,6 +4,7 @@
 #include "TextureManager.h"
 #include "KeyManager.h"
 #include "LineMgr.h"
+#include "ScrollMgr.h"
 #include "RunEffect.h"
 
 
@@ -21,75 +22,49 @@ Player::~Player()
 
 HRESULT Player::ReadObject()
 {
-    if (flyState == false)
-    {// 텍스트 정보를 추가하고 불러야함
+    // 텍스트 정보를 추가하고 불러야함
     // 추가!
-        TextureManager::GetInstance()->InsertTexture(TextureManager::SINGLE, L"../Texture/Player.png", L"Player");
-        // 부르기!
-        pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Player");
+    TextureManager::GetInstance()->InsertTexture(TextureManager::SINGLE, L"../Texture/Player.png", L"Player");
+    TextureManager::GetInstance()->InsertTexture(TextureManager::SINGLE, L"../Texture/Plane.png", L"Plane");
+    // 부르기!
+    pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Player");
+    //pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Plane");
 
-        // info의 pos, size, dir는 직접 지정해줘야 한다
-        info.pos = { 300.f, 100.f, 0.f }; //xyz
-        info.size = { 100.f, 100.f, 0.f };
-        info.dir = { 1.f, 0.f, 0.f };
 
-        rgb.A = 255;
-        rgb.R = 255;
-        rgb.G = 0;
-        rgb.B = 0;
+    // info의 pos, size, dir는 직접 지정해줘야 한다
+    info.pos = { 300.f, 400.f, 0.f }; //xyz
+    info.size = { 100.f, 100.f, 0.f };
+    info.dir = { 1.f, 0.f, 0.f };
 
-        // 반복 연산을 줄이기 위해 선언!
-        keyMgr = KeyManager::GetInstance();
+    rgb.A = 255;
+    rgb.R = 255;
+    rgb.G = 0;
+    rgb.B = 0;
 
     // 반복 연산을 줄이기 위해 선언!
-
-        // 점프!
-        GRAVITIY = 9.8f;
-        jumpState = true;
-        jumpTime = 100.f;
-        jumpPower = 70.f;
-        jumpY = 0;
+    keyMgr = KeyManager::GetInstance();
 
 
-        SetObjectInfo(); // 필수!
-        return S_OK;
-    }
+    // 점프!
+    GRAVITIY = 9.8f;
+    jumpState = false;
+    jumpTime = 0.f;
+    jumpPower = 70.f;
+    jumpY = 0;
 
-    ////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////
+    fallY = 0;
+    fallState = true;
+    flyState = false;
+    fallRotateAngle = false;
 
-
-    if (flyState == true)
-    {
-        TextureManager::GetInstance()->InsertTexture(TextureManager::SINGLE, L"../Texture/Plane.png", L"Plane");
-        // 부르기!
-        pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Plane");
-
-        // info의 pos, size, dir는 직접 지정해줘야 한다
-        info.pos = { 300.f, 100.f, 0.f }; //xyz
-        info.size = { 100.f, 100.f, 0.f };
-        info.dir = { 1.f, 0.f, 0.f };
-
-        rgb.A = 255;
-        rgb.R = 255;
-        rgb.G = 0;
-        rgb.B = 0;
-
-        effectDelay = GetTickCount();
-
-        // 나락(?)
-        GRAVITIY = 5.8f;
-        fallY = 0;
-        fallState = true;
-
-        effectDelay = GetTickCount();
-        SetObjectInfo(); // 필수!
-        return S_OK;
-    }
+    effectDelay = GetTickCount();
+    SetObjectInfo(); // 필수!
+    return S_OK;
 }
 
 int Player::UpdateObject()
 {
+   
     KeyChecking();
 
     if (flyState)
@@ -100,6 +75,7 @@ int Player::UpdateObject()
 
     RotateAngle();
     SetEffect();
+    
     return NOEVENT;
 }
 
@@ -110,7 +86,7 @@ void Player::LateUpdateObject()
 
 void Player::RenderObject()
 {
-    if (flyState == false)
+    if (!flyState)
     {
         WriteMatrix();
         float fCenterX = info.pos.x * 0.5f;
@@ -166,27 +142,35 @@ void Player::Jumping()
 {
     if (flyState == false)
     {
-        if (!jumpState) {
-            return;
-        }
         // 내가 떨어질 Y값을 담을 변수
         float fY = 0.f;
         bool lineCheck = CLineMgr::GetInstance()->CollisionLine(info.pos.x, rc.bottom, &fY);
 
-        if (lineCheck) {
+        if (lineCheck && jumpState) {
             jumpTime += 0.6f;
-            rc.bottom = jumpY - ((jumpPower * jumpTime) - (0.5f * GRAVITIY * jumpTime * jumpTime));
+            rc.bottom = jumpY - ((jumpPower * jumpTime) - (0.5f * GRAVITIY * jumpTime * jumpTime)); 
+            info.pos.y = rc.bottom - (info.size.y * 0.5f);
+
 
             if (lineCheck && rc.bottom >= fY) {
                 jumpState = false;
                 jumpTime = 0.f;
                 rc.bottom = fY;
+                info.pos.y = rc.bottom - (info.size.y * 0.5f);
             }
         }
-        else if (lineCheck) {
-            rc.bottom = fY;
+        else{
+            rc.bottom += GRAVITIY;
+            info.pos.y = rc.bottom - (info.size.y * 0.5f);
+            fallRotateAngle = true;
+
+            if (rc.bottom >= fY) {
+                rc.bottom = fY;
+                info.pos.y = rc.bottom - (info.size.y * 0.5f);
+                fallRotateAngle = false;
+            }
+
         }
-        info.pos.y = rc.bottom - (info.size.y * 0.5f);
     }
 }
 
@@ -276,6 +260,13 @@ void Player::RotateAngle()
     {// 임시방편!!
         if (jumpState) {
 
+            m_fAngle += 5.f;
+
+            if (m_fAngle >= 90) {
+                m_fAngle = 90;
+            }
+        }
+        else if (fallRotateAngle) {
             m_fAngle += 5.f;
 
             if (m_fAngle >= 90) {
