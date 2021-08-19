@@ -19,7 +19,7 @@ HRESULT RunEffect::ReadObject()
     //info.pos = ObjectManager::GetInstance()->GetPlayer()->GetPos();
     info.dir = {1.f, 0.f, 0.f};
 
-    rgb.A = 200;
+    rgb.A = 100;
     rgb.R = 255;
     rgb.G = 237;
     rgb.B = 0;

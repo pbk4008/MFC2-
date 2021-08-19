@@ -13,7 +13,6 @@ void SceneManager::ChangeScene(SCENE_ID _ID)
 {
 	currScene = _ID;
 
-
 	if (preScene != currScene) 
 	{
 		Release();
@@ -57,4 +56,13 @@ void SceneManager::Render()
 void SceneManager::Release()
 {
 	SAFE_DELETE(scene);
+}
+
+void SceneManager::FadeIn()
+{
+
+}
+
+void SceneManager::FadeOut()
+{
 }

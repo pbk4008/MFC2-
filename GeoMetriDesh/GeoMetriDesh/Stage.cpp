@@ -8,6 +8,7 @@
 #include "Land.h"
 #include "RunEffect.h"
 #include "ScrollMgr.h"
+#include "SoundMgr.h"
 
 HRESULT Stage::Initialize()
 {
@@ -53,6 +54,8 @@ HRESULT Stage::Initialize()
 	CScrollMgr::GetInstance()->reSetSpeed();
 	CScrollMgr::GetInstance()->setSpeed(2.f);
 	
+	CSoundMgr::Get_Instance()->PlayBGM(L"01.Forever Bound - Stereo Madness.mp3");
+
 	return S_OK;
 }
 
@@ -70,7 +73,9 @@ void Stage::LateUpdate()
 
 void Stage::Render()
 {
-	D3DXMATRIX matWorld;
+	D3DXMATRIX matWorld, matScale, matTrans;
+	D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
+	D3DXMatrixTranslation(&matTrans, 0.f, 0.f, 0.f);
 
 	TEXTINFO* pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"BackGround");
 	D3DXVECTOR3 centerVec = {
@@ -79,6 +84,7 @@ void Stage::Render()
 		0.f
 	};
 
+	matWorld = matScale * matTrans;
 	GraphicDevice::GetInstance()->GetSprite()->SetTransform(&matWorld);
 
 	GraphicDevice::GetInstance()->GetSprite()->Draw(
@@ -92,6 +98,7 @@ void Stage::Render()
 
 void Stage::Release()
 {
+	CSoundMgr::Get_Instance()->StopAll();
 	SAFE_DELETE(objMgr);
 }
 

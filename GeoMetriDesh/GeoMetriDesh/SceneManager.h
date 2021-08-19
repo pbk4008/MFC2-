@@ -20,11 +20,19 @@ public:
 	void Render();
 	void Release();
 
+	void FadeIn();
+	void FadeOut();
+
 
 private:
 	Scene* scene;
 	SCENE_ID currScene;
 	SCENE_ID preScene;
+
+	DWORD dwFadeTime;
+
+	int aa = 255;
+	bool fadeChcck = false;
 };
 
 

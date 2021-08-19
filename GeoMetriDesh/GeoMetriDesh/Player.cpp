@@ -49,7 +49,6 @@ HRESULT Player::ReadObject()
     jumpPower = 70.f;
     jumpY = 0;
 
-
     effectDelay = GetTickCount();
 
     SetObjectInfo(); // ÇÊ¼ö!
