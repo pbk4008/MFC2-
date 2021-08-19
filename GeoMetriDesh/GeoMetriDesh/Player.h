@@ -18,6 +18,7 @@ public:
 	virtual void ReleaseObject() override;
 
 	void Jumping();
+	void PlaneMovement();
 
 	void KeyChecking();
 	void WriteMatrix();
@@ -34,11 +35,16 @@ private:
 	D3DXMATRIX  matTrans;
 
 	float GRAVITIY;
+	bool fallState;
+	bool flyState;
+
 
 	bool jumpState;
 	float jumpTime;
 	float jumpPower;
 	float jumpY;
+
+	float fallY;
 };
 
 
