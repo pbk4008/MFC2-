@@ -14,21 +14,17 @@ CLine::~CLine()
 
 void CLine::Update()
 {
-	float fScrollX = CScrollMgr::GetInstance()->getUpdateScrollX();
-	float fScrollY = CScrollMgr::GetInstance()->getUpdateScrollY();
-
-	m_tLinePos[0].x -= fScrollX;
-	m_tLinePos[0].y -= fScrollY;
-
-	m_tLinePos[1].x -= fScrollX;
-	m_tLinePos[1].y -= fScrollY;
+	
 }
 
 void CLine::Render()
 {
-	D3DXVECTOR2 argLinePos[2] = { {m_tLinePos[0].x , m_tLinePos[0].y},
-		{m_tLinePos[1].x, m_tLinePos[1].y} };
+	float fScrollX = CScrollMgr::GetInstance()->getUpdateScrollX();
+	float fScrollY = CScrollMgr::GetInstance()->getUpdateScrollX();
+	D3DXVECTOR2 argLinePos[2] = { {m_tLinePos[0].x - fScrollX , m_tLinePos[0].y- fScrollY},
+		{m_tLinePos[1].x- fScrollX, m_tLinePos[1].y-fScrollY} };
 	
+
 	m_pLine->SetWidth(3.f);
 	m_pLine->Draw(argLinePos, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
 }

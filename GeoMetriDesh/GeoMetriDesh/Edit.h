@@ -21,11 +21,12 @@ private:
     int m_iIndex;
     bool m_bTile;//타일그릴건지 라인 그릴건지 판단
     bool m_bFirst;
-
+    bool m_bRemove;
     Object* m_pLand;
-
+    RECT m_tMouseRect;
 
     D3DXMATRIX m_matWorld;
+    D3DXMATRIX m_MouseMatrix;
     float m_fSize;
     float m_fAngle;
 public:
@@ -41,6 +42,6 @@ public:
 private:
     void CreateTile();
     void CreateLine();
-
+    void Remove();
 };
 

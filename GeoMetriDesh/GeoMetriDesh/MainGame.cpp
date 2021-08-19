@@ -36,6 +36,8 @@ HRESULT MainGame::ReadyMainGame()
 
 	sceneManager->ChangeScene(SceneManager::MENU);
 	//sceneManager->ChangeScene(SceneManager::EDIT);
+	//sceneManager->ChangeScene(SceneManager::MENU);
+	//sceneManager->ChangeScene(SceneManager::EDIT);
 
 
 	return S_OK;

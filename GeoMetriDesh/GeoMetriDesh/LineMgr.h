@@ -17,6 +17,7 @@ public:
 public:
 	void SaveLine();
 	void LoadLine();
+	void DeleteLine();
 	float getLineDist(D3DXVECTOR2& _start, D3DXVECTOR2& _end);
 public:
 	inline void AddLine(CLine* _Line) { m_LineList.emplace_back(_Line); }

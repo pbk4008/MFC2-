@@ -2,6 +2,7 @@
 #include "Stage.h"
 #include "ObjectManager.h"
 #include "TextureManager.h"
+#include "ScrollMgr.h"
 #include "LineMgr.h"
 #include "Player.h"
 #include "SubObject.h"
@@ -47,6 +48,7 @@ HRESULT Stage::Initialize()
 	lineMgr = CLineMgr::GetInstance();
 	lineMgr->LoadLine();
 
+	CScrollMgr::GetInstance()->setSpeed(3.f);
 	objMgr->InsertObject<CLand>(ObjectManager::TERRAIN);
 
 
