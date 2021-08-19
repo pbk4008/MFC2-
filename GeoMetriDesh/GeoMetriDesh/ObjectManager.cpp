@@ -104,6 +104,8 @@ void ObjectManager::KeyChecking()
 
 void ObjectManager::SaveObject()
 {
+    if (m_hFile)
+        CloseHandle(m_hFile);
     HANDLE hFile = CreateFile(L"../Data/Tile.dat", GENERIC_WRITE, 0, 0, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
     if (INVALID_HANDLE_VALUE == hFile)
     {

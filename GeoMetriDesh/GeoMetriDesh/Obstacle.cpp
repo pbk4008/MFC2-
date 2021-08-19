@@ -45,9 +45,19 @@ void CObstacle::LateUpdateObject()
 
 void CObstacle::RenderObject()
 {
-	m_pSprite->SetTransform(&(m_tObstacleInfo.tMatrix));
-	DrawImage();
-	//m_pSprite->Draw(pTextInfo->texture, nullptr, &centerVec, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+	float fScrollX = m_pScrollMgr->getScrollX();
+	float fScrollY = m_pScrollMgr->getScrollY();
+
+	D3DXMATRIX matShow = {};
+	matShow = m_tObstacleInfo.tMatrix;
+
+	matShow._41 = m_tObstacleInfo.tMatrix._41 - fScrollX;
+	matShow._42 = m_tObstacleInfo.tMatrix._42 - fScrollY;
+	m_pSprite->SetTransform(&matShow);
+	m_pSprite->Draw(pTextInfo->texture, nullptr, &centerVec, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+	//m_pSprite->SetTransform(&(m_tObstacleInfo.tMatrix));
+	
+	//DrawImage();
 }
 	
 

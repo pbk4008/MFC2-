@@ -73,6 +73,12 @@ void CLineMgr::LoadLine()
 	CloseHandle(hfile);
 }
 
+void CLineMgr::DeleteLine()
+{
+	Safe_Delete(m_LineList.back());
+	m_LineList.pop_back();
+}
+
 float CLineMgr::getLineDist(D3DXVECTOR2& _start, D3DXVECTOR2& _end)
 {
 	float argDist=0.f;
