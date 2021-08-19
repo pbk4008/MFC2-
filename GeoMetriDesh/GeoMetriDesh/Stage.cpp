@@ -6,6 +6,8 @@
 #include "Player.h"
 #include "SubObject.h"
 #include "Land.h"
+#include "RunEffect.h"
+#include "ScrollMgr.h"
 
 HRESULT Stage::Initialize()
 {
@@ -37,12 +39,19 @@ HRESULT Stage::Initialize()
 	// 플레이어 오브젝트
 	objMgr = ObjectManager::GetInstance();
 	objMgr->InsertObject<Player>(ObjectManager::PLAYER);
+	
+
 	//objMgr->InsertObject<SubObject>(ObjectManager::TERRAIN);
 
 	lineMgr = CLineMgr::GetInstance();
 	lineMgr->LoadLine();
 
 	objMgr->InsertObject<CLand>(ObjectManager::TERRAIN);
+
+
+
+	CScrollMgr::GetInstance()->reSetSpeed();
+	CScrollMgr::GetInstance()->setSpeed(2.f);
 	
 	return S_OK;
 }
@@ -61,19 +70,21 @@ void Stage::LateUpdate()
 
 void Stage::Render()
 {
-	TEXTINFO* pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"BackGround");
+	D3DXMATRIX matWorld;
 
+	TEXTINFO* pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"BackGround");
 	D3DXVECTOR3 centerVec = {
 		float(pTextInfo->imageInfo.Width >> 1),
 		float(pTextInfo->imageInfo.Height >> 1),
 		0.f
 	};
 
+	GraphicDevice::GetInstance()->GetSprite()->SetTransform(&matWorld);
+
 	GraphicDevice::GetInstance()->GetSprite()->Draw(
 		pTextInfo->texture, nullptr, nullptr, nullptr, D3DCOLOR_ARGB(rgb.A, rgb.R, rgb.G, rgb.B)
 	);
 	// 배경 끝나고
-
 
 	objMgr->Render();
 	//lineMgr->Render();

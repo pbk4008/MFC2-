@@ -22,6 +22,7 @@ public:
 	void KeyChecking();
 	void WriteMatrix();
 	void RotateAngle();
+	void SetEffect();
 
 private:
 	float		m_fAngle;
@@ -39,6 +40,9 @@ private:
 	float jumpTime;
 	float jumpPower;
 	float jumpY;
+
+
+	DWORD effectDelay;
 };
 
 

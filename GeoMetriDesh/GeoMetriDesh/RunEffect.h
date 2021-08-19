@@ -11,6 +11,9 @@ class RunEffect : public Object
 	virtual void RenderObject() override;
 	virtual void ReleaseObject() override;
 
+	void Offset();
+	void DeadEffect();
+
 private:
 	float scaleSize;
 	Object* mPlayer;

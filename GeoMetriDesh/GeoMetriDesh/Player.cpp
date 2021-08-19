@@ -4,6 +4,7 @@
 #include "TextureManager.h"
 #include "KeyManager.h"
 #include "LineMgr.h"
+#include "RunEffect.h"
 
 
 #include "ObjectManager.h"
@@ -36,6 +37,7 @@ HRESULT Player::ReadObject()
     rgb.G = 0;
     rgb.B = 0;
 
+
     // 반복 연산을 줄이기 위해 선언!
     keyMgr = KeyManager::GetInstance();
 
@@ -48,6 +50,8 @@ HRESULT Player::ReadObject()
     jumpY = 0;
 
 
+    effectDelay = GetTickCount();
+
     SetObjectInfo(); // 필수!
     return S_OK;
 }
@@ -57,6 +61,7 @@ int Player::UpdateObject()
     KeyChecking();
     Jumping();
     RotateAngle();
+    SetEffect();
     return NOEVENT;
 }
 
@@ -164,5 +169,20 @@ void Player::RotateAngle()
     }
     else {
         m_fAngle = 0;
+    }
+}
+
+void Player::SetEffect()
+{
+    if (jumpState) {
+        return;
+    }
+
+    if (effectDelay + 100 < GetTickCount64()) {
+
+        D3DXVECTOR3 temp = { info.pos.x - 65.f , info.pos.y + 25.f, 0.f };
+
+        ObjectManager::GetInstance()->InsertObject<RunEffect>(ObjectManager::EFFECT, temp);
+        effectDelay = GetTickCount64();
     }
 }
