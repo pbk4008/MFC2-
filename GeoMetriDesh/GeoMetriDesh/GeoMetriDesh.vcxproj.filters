@@ -109,6 +109,9 @@
     <Filter Include="01.Object\04.Effect\01.JumpEffect">
       <UniqueIdentifier>{00ddd04a-2936-4958-84fa-ea2ea7144aae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="97.Manager\07.SoundMgr">
+      <UniqueIdentifier>{259ad276-dc68-4c93-8975-049538f4b8a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -219,6 +222,9 @@
     <ClInclude Include="RunEffect.h">
       <Filter>01.Object\04.Effect\00.RunEffect</Filter>
     </ClInclude>
+    <ClInclude Include="SoundMgr.h">
+      <Filter>97.Manager\07.SoundMgr</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GeoMetriDesh.rc">
@@ -314,6 +320,9 @@
     </ClCompile>
     <ClCompile Include="RunEffect.cpp">
       <Filter>01.Object\04.Effect\00.RunEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundMgr.cpp">
+      <Filter>97.Manager\07.SoundMgr</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

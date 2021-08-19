@@ -180,6 +180,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScrollMgr.h" />
     <ClInclude Include="SingleTexture.h" />
+    <ClInclude Include="SoundMgr.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="SubObject.h" />
@@ -215,6 +216,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScrollMgr.cpp" />
     <ClCompile Include="SingleTexture.cpp" />
+    <ClCompile Include="SoundMgr.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="SubObject.cpp" />
     <ClCompile Include="Texture.cpp" />

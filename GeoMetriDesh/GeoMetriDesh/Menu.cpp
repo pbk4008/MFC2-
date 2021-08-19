@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "KeyManager.h"
 #include "ScrollMgr.h"
+#include "SoundMgr.h"
 #include "PlayBtn.h"
 #include "Title.h"
 
@@ -37,6 +38,8 @@ HRESULT Menu::Initialize()
     CScrollMgr::GetInstance()->reSetSpeed();
     CScrollMgr::GetInstance()->setSpeed(2.f);
     subScroll = 0;
+
+    CSoundMgr::Get_Instance()->PlayBGM(L"Menu.mp3");
 
     return S_OK;
 }
@@ -109,6 +112,7 @@ void Menu::Render()
 
 void Menu::Release()
 {
+    //CSoundMgr::Get_Instance()->StopAll();
     ObjectManager::GetInstance()->ReleaseObject(ObjectManager::UI);
 }
 
@@ -136,8 +140,11 @@ void Menu::SetPlayBtn()
 void Menu::KeyChecking()
 {
     if (btnCollisionCheck) {
-        if (KeyManager::GetInstance()->KeyPressing(VK_LBUTTON)) {
+        if (KeyManager::GetInstance()->KeyDown(VK_LBUTTON)) {
             //TextureManager::GetInstance()->Release();
+
+            CSoundMgr::Get_Instance()->PlaySound(L"playSound_01.mp3", CSoundMgr::UI);
+
             SceneManager::GetInstance()->ChangeScene(SceneManager::STAGE);
         }
     }

@@ -108,7 +108,7 @@ void GraphicDevice::ReleaseDevice()
 
 void GraphicDevice::RenderBegin()
 {
-	mDevice->Clear(0, nullptr, D3DCLEAR_STENCIL | D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(255, 0, 0, 255), 1, 0);
+	mDevice->Clear(0, nullptr, D3DCLEAR_STENCIL | D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(50, 0, 0, 100), 1, 0);
 	mDevice->BeginScene();
 	mSprite->Begin(D3DXSPRITE_ALPHABLEND);
 }

@@ -75,6 +75,7 @@ HRESULT Player::ReadObject()
         rgb.G = 0;
         rgb.B = 0;
 
+        effectDelay = GetTickCount();
 
         // ³ª¶ô(?)
         GRAVITIY = 5.8f;
