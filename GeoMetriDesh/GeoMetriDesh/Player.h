@@ -48,6 +48,8 @@ private:
 	float fallY;
 
 	DWORD effectDelay;
+
+	bool fallRotateAngle;
 };
 
 

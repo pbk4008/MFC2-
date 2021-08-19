@@ -116,10 +116,8 @@ void Stage::Render()
 	if (scollX >= pTextInfo1->imageInfo.Width) {
 		CScrollMgr::GetInstance()->setBackGroundScrollX(0.f);
 	}
-
-
 	objMgr->Render();
-	//lineMgr->Render();
+	lineMgr->Render();
 }
 
 void Stage::Release()
