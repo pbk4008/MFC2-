@@ -15,13 +15,13 @@ HRESULT Stage::Initialize()
 	// 배경!
 	TextureManager::GetInstance()->InsertTexture(
 		TextureManager::SINGLE,
-		L"../Texture/BackGround/Square.png",
-		L"BackGround");
+		L"../Texture/BackGround/RectangleLarge.png",
+		L"RectangleLarge1");
 
 	TextureManager::GetInstance()->InsertTexture(
 		TextureManager::SINGLE,
-		L"../Texture/BackGround/Square1.png",
-		L"BackGround1");
+		L"../Texture/BackGround/RectangleLarge2.png",
+		L"RectangleLarge2");
 
 	TextureManager::GetInstance()->InsertTexture(
 		TextureManager::MULTI, 
@@ -50,9 +50,11 @@ HRESULT Stage::Initialize()
 	objMgr->InsertObject<CLand>(ObjectManager::TERRAIN);
 
 
-
 	CScrollMgr::GetInstance()->reSetSpeed();
-	CScrollMgr::GetInstance()->setSpeed(2.f);
+	CScrollMgr::GetInstance()->setSpeed(10.f);
+
+	CScrollMgr::GetInstance()->reSetBackSpeed();
+	CScrollMgr::GetInstance()->setBackSpeed(2.f);
 	
 	CSoundMgr::Get_Instance()->PlayBGM(L"01.Forever Bound - Stereo Madness.mp3");
 
@@ -61,6 +63,7 @@ HRESULT Stage::Initialize()
 
 int Stage::Update()
 {
+	CScrollMgr::GetInstance()->XUpdate();
 	objMgr->Update();
 	ChangeColor();
 	return NOEVENT;
@@ -73,24 +76,45 @@ void Stage::LateUpdate()
 
 void Stage::Render()
 {
-	D3DXMATRIX matWorld, matScale, matTrans;
+	D3DXMATRIX matScale, matTrans;
 	D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
 	D3DXMatrixTranslation(&matTrans, 0.f, 0.f, 0.f);
+	matScale *= matTrans;
+	GraphicDevice::GetInstance()->GetSprite()->SetTransform(&matScale);
 
-	TEXTINFO* pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"BackGround");
-	D3DXVECTOR3 centerVec = {
-		float(pTextInfo->imageInfo.Width >> 1),
-		float(pTextInfo->imageInfo.Height >> 1),
+	float scollX = CScrollMgr::GetInstance()->getBackGroundScrollX();
+
+	TEXTINFO* pTextInfo1 = TextureManager::GetInstance()->GetTextInfo(L"RectangleLarge1");
+	D3DXVECTOR3 centerVec1 = {
+	   +scollX,
+		0.f,
 		0.f
 	};
 
-	matWorld = matScale * matTrans;
-	GraphicDevice::GetInstance()->GetSprite()->SetTransform(&matWorld);
+	D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
+	D3DXMatrixTranslation(&matTrans, WINCX, 0.f, 0.f);
+	matScale *= matTrans;
+	GraphicDevice::GetInstance()->GetSprite()->SetTransform(&matScale);
 
 	GraphicDevice::GetInstance()->GetSprite()->Draw(
-		pTextInfo->texture, nullptr, nullptr, nullptr, D3DCOLOR_ARGB(rgb.A, rgb.R, rgb.G, rgb.B)
+		pTextInfo1->texture, nullptr, &centerVec1, nullptr, D3DCOLOR_ARGB(rgb.A, rgb.R, rgb.G, rgb.B)
+	);
+
+	TEXTINFO* pTextInfo2 = TextureManager::GetInstance()->GetTextInfo(L"RectangleLarge2");
+	D3DXVECTOR3 centerVec2 = {
+	   pTextInfo1->imageInfo.Width + (+scollX),
+		0.f,
+		0.f
+	};
+
+	GraphicDevice::GetInstance()->GetSprite()->Draw(
+		pTextInfo2->texture, nullptr, &centerVec2, nullptr, D3DCOLOR_ARGB(rgb.A, rgb.R, rgb.G, rgb.B)
 	);
 	// 배경 끝나고
+	if (scollX >= pTextInfo1->imageInfo.Width) {
+		CScrollMgr::GetInstance()->setBackGroundScrollX(0.f);
+	}
+
 
 	objMgr->Render();
 	//lineMgr->Render();

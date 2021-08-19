@@ -36,7 +36,13 @@ HRESULT Menu::Initialize()
     ObjectManager::GetInstance()->InsertObject<PlayBtn>(ObjectManager::UI);
 
     CScrollMgr::GetInstance()->reSetSpeed();
-    CScrollMgr::GetInstance()->setSpeed(2.f);
+    CScrollMgr::GetInstance()->setSpeed(1.f);
+
+
+    CScrollMgr::GetInstance()->reSetBackSpeed();
+    CScrollMgr::GetInstance()->setBackSpeed(2.f);
+
+
     subScroll = 0;
 
     CSoundMgr::Get_Instance()->PlayBGM(L"Menu.mp3");
@@ -47,7 +53,6 @@ HRESULT Menu::Initialize()
 int Menu::Update()
 {
     CScrollMgr::GetInstance()->XUpdate();
-    subScroll++;
 
     ObjectManager::GetInstance()->Update();
     SetPlayBtn();
@@ -69,7 +74,7 @@ void Menu::Render()
     matScale*= matTrans;
     GraphicDevice::GetInstance()->GetSprite()->SetTransform(&matScale);
 
-    float scollX = CScrollMgr::GetInstance()->getUpdateScrollX();
+    float scollX = CScrollMgr::GetInstance()->getBackGroundScrollX();
 
     TEXTINFO* pTextInfo1 = TextureManager::GetInstance()->GetTextInfo(L"BackGround");
     D3DXVECTOR3 centerVec1 = {
@@ -99,12 +104,9 @@ void Menu::Render()
     );
 
 
-
     // 배경 끝나고
-
-
     if (scollX >= pTextInfo1->imageInfo.Width) {
-        CScrollMgr::GetInstance()->setUpdateScrollX(0.f);
+        CScrollMgr::GetInstance()->setBackGroundScrollX(0.f);
     }
 
     ObjectManager::GetInstance()->Render();
@@ -112,7 +114,7 @@ void Menu::Render()
 
 void Menu::Release()
 {
-    //CSoundMgr::Get_Instance()->StopAll();
+    CSoundMgr::Get_Instance()->StopSound(CSoundMgr::BGM);
     ObjectManager::GetInstance()->ReleaseObject(ObjectManager::UI);
 }
 
