@@ -22,7 +22,7 @@ HRESULT CObstacle::ReadObject()
 
 int CObstacle::UpdateObject()
 {
-	float fScollX = m_pScrollMgr->getUpdateScrollX();
+	/*float fScollX = m_pScrollMgr->getUpdateScrollX();
 	float fScollY = m_pScrollMgr->getUpdateScrollY();
 	D3DXMATRIX argTrans;
 	D3DXMatrixTranslation(&argTrans, -m_pScrollMgr->getSpeed(), 0.f, 0.f);
@@ -33,7 +33,7 @@ int CObstacle::UpdateObject()
 
 	info.pos.x = m_tObstacleInfo.tMatrix._41;
 	info.pos.y = m_tObstacleInfo.tMatrix._42;
-	info.pos.z = 0.f;
+	info.pos.z = 0.f;*/
 
 	UpdateObjectInfo();
 	return 0;
@@ -45,19 +45,21 @@ void CObstacle::LateUpdateObject()
 
 void CObstacle::RenderObject()
 {
-	float fScrollX = m_pScrollMgr->getScrollX();
+	float fScrollX = m_pScrollMgr->getUpdateScrollX();
 	float fScrollY = m_pScrollMgr->getScrollY();
 
 	D3DXMATRIX matShow = {};
 	matShow = m_tObstacleInfo.tMatrix;
 
 	matShow._41 = m_tObstacleInfo.tMatrix._41 - fScrollX;
-	matShow._42 = m_tObstacleInfo.tMatrix._42 - fScrollY;
+	matShow._42 = m_tObstacleInfo.tMatrix._42 + fScrollY;
 	m_pSprite->SetTransform(&matShow);
 	m_pSprite->Draw(pTextInfo->texture, nullptr, &centerVec, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
-	//m_pSprite->SetTransform(&(m_tObstacleInfo.tMatrix));
+
+
+	/*m_pSprite->SetTransform(&(m_tObstacleInfo.tMatrix));
 	
-	//DrawImage();
+	DrawImage();*/
 }
 	
 

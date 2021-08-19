@@ -18,17 +18,15 @@ private:
 public:
 	void XUpdate();
 	void YUpdate();
+	void OffSet();
+	void setScrollY(float _scrolly);
 public:
 	inline void setScrollX(float _scrollx) { m_fScrollX += _scrollx; }
-	inline void setScrollY(float _scrolly) { m_fScrollY += _scrolly; }
 	inline void setSpeed(float _speed) { m_fSpeed = _speed; }
 	inline void setBackSpeed(float _speed) { m_fBackSpeed = _speed; }
 	inline void reSetSpeed() { m_fSpeed = 0.f; }
 	inline void reSetBackSpeed() { m_fBackSpeed = 0.f; }
-
 	inline void setBackGroundScrollX(float _scrollx) { m_fBackGroundScrollX = _scrollx; }
-
-
 	inline void setUpdateScrollX(float _scrollx) { m_fUpdateScrollX = _scrollx; }
 
 public:

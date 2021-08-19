@@ -22,3 +22,18 @@ void CScrollMgr::YUpdate()
 {
 	m_fUpdateScrollY += m_fSpeed;
 }
+
+void CScrollMgr::OffSet()
+{
+
+}
+
+void CScrollMgr::setScrollY(float _scrolly)
+{
+	m_fScrollY = _scrolly;
+	/*
+	while (_scrolly != m_fScrollY)
+	{
+		m_fScrollY += 10.f;
+	}*/
+}

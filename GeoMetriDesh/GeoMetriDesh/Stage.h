@@ -21,6 +21,7 @@ private:
     CLineMgr* lineMgr;
     
     DWORD dwCurTime;
+    DWORD dwSpawnTime;
     COLOR eColor;
 };
 

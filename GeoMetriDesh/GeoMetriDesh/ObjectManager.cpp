@@ -137,7 +137,6 @@ void ObjectManager::LoadObject()
     ReadFile(m_hFile, &argInfo, sizeof(OBSTACLEINFO), &dwByte, nullptr);
     if (dwByte == 0)
     {
-        CloseHandle(m_hFile);
         return;
     }
     if (objList[OBJECT_ID::OBSTACLE].empty())

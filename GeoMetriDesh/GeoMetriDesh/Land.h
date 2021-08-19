@@ -27,5 +27,6 @@ public:
     virtual void ReleaseObject() override;
 public:
     inline void setColor(const RGBINFO& _rInfo) { m_tRGBInfo = _rInfo; }
+    inline float getStartY() {return m_fLandStart.y ;}
 };
 

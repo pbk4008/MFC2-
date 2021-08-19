@@ -86,10 +86,10 @@ int CEdit::Update()
 		m_pScrollMgr->setScrollY(5.f);
 	if (m_pKeyMgr->KeyPressing('W'))
 		m_pScrollMgr->setScrollY(-5.f);
-	/*if (m_pKeyMgr->KeyDown('S'))
+	if (m_pKeyMgr->KeyDown('S'))
 		m_pLineMgr->SaveLine();
 	if (m_pKeyMgr->KeyDown('A'))
-		m_pLineMgr->LoadLine();*/
+		m_pLineMgr->LoadLine();
 
 	/*if (m_pKeyMgr->KeyDown('K'))
 		m_pObjMgr->SaveObject();*/

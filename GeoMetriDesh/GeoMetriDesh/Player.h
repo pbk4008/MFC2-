@@ -24,17 +24,18 @@ public:
 	void WriteMatrix();
 	void RotateAngle();
 	void SetEffect();
-
+private:
+	void Offset();
 private:
 	float		m_fAngle;
 
 	KeyManager* keyMgr;
-
+	float argPos;
 	D3DXMATRIX	matScale;
 	D3DXMATRIX	matRotZ;
 	D3DXMATRIX	matWorld;
 	D3DXMATRIX  matTrans;
-
+	D3DXMATRIX  matTotal;
 	float GRAVITIY;
 	bool fallState;
 	bool flyState;
@@ -50,6 +51,8 @@ private:
 	DWORD effectDelay;
 
 	bool fallRotateAngle;
+
+	float fStartY;
 };
 
 

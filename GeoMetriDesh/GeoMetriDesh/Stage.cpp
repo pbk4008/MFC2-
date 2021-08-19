@@ -24,11 +24,7 @@ HRESULT Stage::Initialize()
 		L"../Texture/BackGround/RectangleLarge2.png",
 		L"RectangleLarge2");
 
-	TextureManager::GetInstance()->InsertTexture(
-		TextureManager::MULTI, 
-		L"../Texture/Obstacle/Obstacle00%d.png", 
-		L"Tile", 
-		L"Obstacle", 6);
+	TextureManager::GetInstance()->InsertTexture(TextureManager::MULTI, L"../Texture/Obstacle/Obstacle00%d.png", L"Tile", L"Obstacle", 19);
 
 	// RGB값 조정 가능
 	rgb.A = 150;
@@ -40,7 +36,6 @@ HRESULT Stage::Initialize()
 	dwCurTime = GetTickCount64();//색깔 체인지 시간
 	// 플레이어 오브젝트
 	objMgr = ObjectManager::GetInstance();
-	objMgr->InsertObject<Player>(ObjectManager::PLAYER);
 	
 
 	//objMgr->InsertObject<SubObject>(ObjectManager::TERRAIN);
@@ -48,24 +43,30 @@ HRESULT Stage::Initialize()
 	lineMgr = CLineMgr::GetInstance();
 	lineMgr->LoadLine();
 
-	CScrollMgr::GetInstance()->setSpeed(3.f);
 	objMgr->InsertObject<CLand>(ObjectManager::TERRAIN);
+	objMgr->InsertObject<Player>(ObjectManager::PLAYER);
+	CScrollMgr::GetInstance()->setSpeed(3.f);
 
 
 	CScrollMgr::GetInstance()->reSetSpeed();
-	CScrollMgr::GetInstance()->setSpeed(10.f);
+	CScrollMgr::GetInstance()->setSpeed(3.f);
 
 	CScrollMgr::GetInstance()->reSetBackSpeed();
 	CScrollMgr::GetInstance()->setBackSpeed(2.f);
 	
 	CSoundMgr::Get_Instance()->PlayBGM(L"01.Forever Bound - Stereo Madness.mp3");
-
+	dwSpawnTime = GetTickCount64();
 	return S_OK;
 }
 
 int Stage::Update()
 {
 	CScrollMgr::GetInstance()->XUpdate();
+	if (dwSpawnTime + 10 <= GetTickCount64())
+	{
+		objMgr->LoadObject();
+		dwSpawnTime = GetTickCount64();
+	}
 	objMgr->Update();
 	ChangeColor();
 	return NOEVENT;
@@ -78,11 +79,9 @@ void Stage::LateUpdate()
 
 void Stage::Render()
 {
-	D3DXMATRIX matScale, matTrans;
-	D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
-	D3DXMatrixTranslation(&matTrans, 0.f, 0.f, 0.f);
-	matScale *= matTrans;
-	GraphicDevice::GetInstance()->GetSprite()->SetTransform(&matScale);
+	D3DXMATRIX matScale, matTrans,matWorld;
+	D3DXMatrixIdentity(&matWorld);
+	GraphicDevice::GetInstance()->GetSprite()->SetTransform(&matWorld);
 
 	float scollX = CScrollMgr::GetInstance()->getBackGroundScrollX();
 

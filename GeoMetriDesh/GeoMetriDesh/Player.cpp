@@ -6,9 +6,8 @@
 #include "LineMgr.h"
 #include "ScrollMgr.h"
 #include "RunEffect.h"
-
-
 #include "ObjectManager.h"
+#include "Land.h"
 
 Player::Player()
     : m_fAngle(0.f), flyState(true)
@@ -59,6 +58,8 @@ HRESULT Player::ReadObject()
 
     effectDelay = GetTickCount();
     SetObjectInfo(); // ÇÊ¼ö!
+
+    fStartY = dynamic_cast<CLand*>(ObjectManager::GetInstance()->GetList(ObjectManager::TERRAIN).front())->getStartY();
     return S_OK;
 }
 
@@ -75,7 +76,7 @@ int Player::UpdateObject()
 
     RotateAngle();
     SetEffect();
-    
+
     return NOEVENT;
 }
 
@@ -89,9 +90,12 @@ void Player::RenderObject()
     if (!flyState)
     {
         WriteMatrix();
+
         float fCenterX = info.pos.x * 0.5f;
         float fCenterY = info.pos.y * 0.5f;
         // D3DXVECTOR3 spinCenter{ (info.pos.x * 0.5f), (info.pos.y * 0.5f), 0.f };
+
+        GraphicDevice::GetInstance()->GetSprite()->SetTransform(&matWorld);
 
         GraphicDevice::GetInstance()->GetSprite()->Draw(pTextInfo->texture, nullptr,
             &centerVec,
@@ -157,6 +161,7 @@ void Player::Jumping()
                 jumpTime = 0.f;
                 rc.bottom = fY;
                 info.pos.y = rc.bottom - (info.size.y * 0.5f);
+                CScrollMgr::GetInstance()->setScrollY(fStartY - rc.bottom);
             }
         }
         else{
@@ -167,6 +172,7 @@ void Player::Jumping()
             if (rc.bottom >= fY) {
                 rc.bottom = fY;
                 info.pos.y = rc.bottom - (info.size.y * 0.5f);
+                CScrollMgr::GetInstance()->setScrollY(fStartY - rc.bottom);
                 fallRotateAngle = false;
             }
 
@@ -234,7 +240,6 @@ void Player::WriteMatrix()
 
         matWorld = matScale * matRotZ * matTrans;
 
-        GraphicDevice::GetInstance()->GetSprite()->SetTransform(&matWorld);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////
@@ -310,4 +315,15 @@ void Player::SetEffect()
         ObjectManager::GetInstance()->InsertObject<RunEffect>(ObjectManager::EFFECT, temp);
         effectDelay = GetTickCount64();
     }
+}
+
+void Player::Offset()
+{
+    int iOffSetY = WINCY >> 1;
+    float fScrollY = CScrollMgr::GetInstance()->getScrollY();
+
+    if (iOffSetY < (info.pos.y + fScrollY))
+        CScrollMgr::GetInstance()->setScrollY(iOffSetY - (info.pos.y + fScrollY));
+    if (iOffSetY > (info.pos.y + fScrollY))
+        CScrollMgr::GetInstance()->setScrollY(iOffSetY - (info.pos.y + fScrollY));
 }

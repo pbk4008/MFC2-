@@ -110,8 +110,8 @@ float CLineMgr::getLineDist(D3DXVECTOR2& _start, D3DXVECTOR2& _end)
 bool CLineMgr::CollisionLine(float _infoX, float _infoY, float* _Y)
 {
 	float scrollX = CScrollMgr::GetInstance()->getUpdateScrollX();
-	float scrollY = CScrollMgr::GetInstance()->getUpdateScrollY();
-
+	float scrollY = CScrollMgr::GetInstance()->getScrollY();
+	_infoY += scrollY;
 	if (m_LineList.empty()) {
 		return false;
 	}
@@ -124,9 +124,9 @@ bool CLineMgr::CollisionLine(float _infoX, float _infoY, float* _Y)
 			rLine->getPos()[1].x - scrollX > _infoX)
 		{
 			float	x1 = rLine->getPos()[0].x - scrollX;
-			float	y1 = rLine->getPos()[0].y - scrollY;
+			float	y1 = rLine->getPos()[0].y + scrollY;
 			float	x2 = rLine->getPos()[1].x - scrollX;
-			float	y2 = rLine->getPos()[1].y - scrollY;
+			float	y2 = rLine->getPos()[1].y + scrollY;
 
 			// ‹LÀ» ¶¥ÀÌ°í
 			ny = ((y2 - y1) / (x2 - x1)) * (_infoX - x1) + y1;
