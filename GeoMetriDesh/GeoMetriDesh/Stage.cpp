@@ -11,6 +11,7 @@
 #include "RunEffect.h"
 #include "ScrollMgr.h"
 #include "SoundMgr.h"
+#include "Potal.h"
 
 HRESULT Stage::Initialize()
 {
@@ -26,6 +27,7 @@ HRESULT Stage::Initialize()
 		L"RectangleLarge2");
 
 	TextureManager::GetInstance()->InsertTexture(TextureManager::MULTI, L"../Texture/Obstacle/Obstacle00%d.png", L"Tile", L"Obstacle", 19);
+	TextureManager::GetInstance()->InsertTexture(TextureManager::MULTI, L"../Texture/Effect/Potal00%d.png", L"Potal", L"Potal", 2);
 
 	// RGB값 조정 가능
 	rgb.A = 150;
@@ -55,6 +57,15 @@ HRESULT Stage::Initialize()
 	CScrollMgr::GetInstance()->setBackSpeed(2.f);
 	
 	CSoundMgr::Get_Instance()->PlayBGM(L"01.Forever Bound - Stereo Madness.mp3");
+
+	objMgr->InsertObject<CPotal>(ObjectManager::POTAL,D3DXVECTOR3(11580.f,66.f,0.f));
+	dynamic_cast<CPotal*>(objMgr->GetList(ObjectManager::POTAL).back())->iIndex = 0;
+	dynamic_cast<CPotal*>(objMgr->GetList(ObjectManager::POTAL).back())->posX = 11580.f;
+
+	objMgr->InsertObject<CPotal>(ObjectManager::POTAL, D3DXVECTOR3(20704.f, 205.f, 0.f));
+	dynamic_cast<CPotal*>(objMgr->GetList(ObjectManager::POTAL).back())->iIndex = 1;
+	dynamic_cast<CPotal*>(objMgr->GetList(ObjectManager::POTAL).back())->posX = 20704.f;
+
 	dwSpawnTime = GetTickCount64();
 	return S_OK;
 }
@@ -77,6 +88,9 @@ void Stage::LateUpdate()
 	objMgr->LateUpdate();
 	if(!dynamic_cast<Player*>(objMgr->GetPlayer())->getGod())
 		CollisionMgr::GetInstance()->CollisionObject(objMgr->GetList(ObjectManager::PLAYER), objMgr->GetList(ObjectManager::OBSTACLE));
+
+	CollisionMgr::GetInstance()->CollisionPotal(objMgr->GetList(ObjectManager::PLAYER), objMgr->GetList(ObjectManager::POTAL));
+
 }
 
 void Stage::Render()

@@ -40,6 +40,7 @@ HRESULT CEdit::Initialize()
 	m_pLineMgr->LoadLine();
 
 	m_pTextureMgr->InsertTexture(TextureManager::MULTI, L"../Texture/Obstacle/Obstacle00%d.png", L"Tile", L"Obstacle", 19);
+	m_pTextureMgr->InsertTexture(TextureManager::MULTI, L"../Texture/Effect/Potal00%d.png", L"Potal", L"Potal", 2);
 	
 	m_pLand = new CLand();
 	m_pLand->ReadObject();
@@ -124,19 +125,22 @@ void CEdit::LateUpdate()
 
 void CEdit::Render()
 {
+	float fScrollX = m_pScrollMgr->getScrollX();
+	float fScrollY = m_pScrollMgr->getScrollY();
 	if (m_bTile)
 	{
 		const TEXTINFO* pTexture = m_pTextureMgr->GetTextInfo(L"Tile", L"Obstacle", m_iIndex);
 
 		float fCenterX = float(pTexture->imageInfo.Width >> 1);
 		float fCenterY = float(pTexture->imageInfo.Height >> 1);
-		float fScrollX = m_pScrollMgr->getScrollX();
-		float fScrollY = m_pScrollMgr->getScrollY();
+		
 
 		D3DXVECTOR3 vecCenter{ fCenterX, fCenterY, 0.f };
 	
 		m_pSprite->SetTransform(&m_MouseMatrix);
 		m_pSprite->Draw(pTexture->texture, nullptr, &vecCenter, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+		
 	}
 	if (m_bRemove)
 	{
@@ -157,6 +161,9 @@ void CEdit::Render()
 	m_pLineMgr->Render();
 	m_pObjMgr->Render();
 	m_pLand->RenderObject();
+	TCHAR argBuff[1024] = L"";
+	swprintf_s(argBuff, L"x : %f , y : %d", m_tMouse.x + fScrollX, m_tMouse.y);
+	SetWindowText(g_hWnd, argBuff);
 }
 
 void CEdit::Release()

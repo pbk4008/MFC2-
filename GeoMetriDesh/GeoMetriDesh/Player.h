@@ -2,7 +2,7 @@
 #include "Object.h"
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
-
+#include"TextureManager.h"
 class KeyManager;
 class Player : public Object
 {
@@ -25,6 +25,8 @@ public:
 	void RotateAngle();
 	void SetEffect();
 	bool getGod() { return m_bGod; }
+	void setFly(bool _bFly) { flyState = _bFly; pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Plane");}
+	void setEnd(bool _bEnd) { ending = _bEnd; }
 private:
 	void Ending();
 private:

@@ -112,6 +112,9 @@
     <Filter Include="97.Manager\07.SoundMgr">
       <UniqueIdentifier>{259ad276-dc68-4c93-8975-049538f4b8a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Object\05.Potal">
+      <UniqueIdentifier>{69958664-18e9-432e-9734-a3aa0f3c7b0e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -225,6 +228,9 @@
     <ClInclude Include="SoundMgr.h">
       <Filter>97.Manager\07.SoundMgr</Filter>
     </ClInclude>
+    <ClInclude Include="Potal.h">
+      <Filter>01.Object\05.Potal</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GeoMetriDesh.rc">
@@ -323,6 +329,9 @@
     </ClCompile>
     <ClCompile Include="SoundMgr.cpp">
       <Filter>97.Manager\07.SoundMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Potal.cpp">
+      <Filter>01.Object\05.Potal</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

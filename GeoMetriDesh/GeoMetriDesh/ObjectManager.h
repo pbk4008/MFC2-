@@ -10,7 +10,7 @@ class ObjectManager
 {
 	DECLARE_SINGLETON(ObjectManager)
 public:
-	enum OBJECT_ID {BACKGROUND, UI, TERRAIN, EFFECT, PLAYER, OBSTACLE, OBJECT_ID_END};
+	enum OBJECT_ID {BACKGROUND, UI, TERRAIN, EFFECT, PLAYER, OBSTACLE, POTAL,OBJECT_ID_END};
 private:
 	explicit ObjectManager() : showLineCheck(false){};
 public:

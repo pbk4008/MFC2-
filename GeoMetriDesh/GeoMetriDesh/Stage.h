@@ -23,5 +23,8 @@ private:
     DWORD dwCurTime;
     DWORD dwSpawnTime;
     COLOR eColor;
+
+    Object* m_pPotal1;
+    Object* m_pPotal2;
 };
 

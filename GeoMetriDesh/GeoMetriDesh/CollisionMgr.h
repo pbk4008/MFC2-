@@ -12,7 +12,7 @@ public:
 	virtual ~CollisionMgr() {};
 
 	static void CollisionObject(list<Object*>& _Dst, list<Object*>& _Src);
-
+	static void CollisionPotal(list<Object*>& _Dst, list<Object*>& _Src);
 };
 
 

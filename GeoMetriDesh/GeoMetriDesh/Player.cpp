@@ -26,8 +26,8 @@ HRESULT Player::ReadObject()
     TextureManager::GetInstance()->InsertTexture(TextureManager::SINGLE, L"../Texture/Player.png", L"Player");
     TextureManager::GetInstance()->InsertTexture(TextureManager::SINGLE, L"../Texture/Plane.png", L"Plane");
     // 부르기!
-    //pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Player");
-    pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Plane");
+    pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Player");
+    
 
 
     // info의 pos, size, dir는 직접 지정해줘야 한다
@@ -53,7 +53,7 @@ HRESULT Player::ReadObject()
 
     fallY = 0;
     fallState = true;
-    flyState = true;
+    flyState = false;
     fallRotateAngle = false;
 
     effectDelay = GetTickCount();
