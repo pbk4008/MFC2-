@@ -308,15 +308,16 @@ void Player::RotateAngle()
 
     if (flyState == true)
     {
-        if (fallState)
-        {
-            m_fAngle + 15.f;
-            //if (m_fAngle >= 45) {
-            //    m_fAngle = 45;
-            //}
-        }
-        else        
-            m_fAngle - 15.f;               
+        m_fAngle = 0;
+        //if (fallState)
+        //{
+        //    m_fAngle + 15.f;
+        //    //if (m_fAngle >= 45) {
+        //    //    m_fAngle = 45;
+        //    //}
+        //}
+        //else        
+        //    m_fAngle - 15.f;               
     }
 }
 
