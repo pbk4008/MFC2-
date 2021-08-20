@@ -25,7 +25,7 @@ public:
 	void RotateAngle();
 	void SetEffect();
 private:
-	void Offset();
+	void Ending();
 private:
 	float		m_fAngle;
 
@@ -53,6 +53,8 @@ private:
 	bool fallRotateAngle;
 
 	float fStartY;
+
+	bool ending;
 };
 
 

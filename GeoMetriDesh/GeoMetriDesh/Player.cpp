@@ -26,8 +26,8 @@ HRESULT Player::ReadObject()
     TextureManager::GetInstance()->InsertTexture(TextureManager::SINGLE, L"../Texture/Player.png", L"Player");
     TextureManager::GetInstance()->InsertTexture(TextureManager::SINGLE, L"../Texture/Plane.png", L"Plane");
     // 부르기!
-    pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Player");
-    //pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Plane");
+    //pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Player");
+    pTextInfo = TextureManager::GetInstance()->GetTextInfo(L"Plane");
 
 
     // info의 pos, size, dir는 직접 지정해줘야 한다
@@ -53,20 +53,25 @@ HRESULT Player::ReadObject()
 
     fallY = 0;
     fallState = true;
-    flyState = false;
+    flyState = true;
     fallRotateAngle = false;
 
     effectDelay = GetTickCount();
-    SetObjectInfo(); // 필수!
 
+    ending = false;
+
+    SetObjectInfo(); // 필수!
     return S_OK;
 }
 
 int Player::UpdateObject()
 {
-   
+    if (ending) {
+        Ending();
+    }
+    else
+    {
     KeyChecking();
-
     if (flyState)
         PlaneMovement();
 
@@ -76,6 +81,7 @@ int Player::UpdateObject()
     RotateAngle();
     SetEffect();
 
+    }
     return NOEVENT;
 }
 
@@ -86,6 +92,17 @@ void Player::LateUpdateObject()
 
 void Player::RenderObject()
 {
+    if (ending) {
+
+        GraphicDevice::GetInstance()->GetSprite()->SetTransform(&matWorld);
+
+        GraphicDevice::GetInstance()->GetSprite()->Draw(pTextInfo->texture, nullptr,
+            &centerVec,
+            nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+
+        return;
+    }
+
     if (!flyState)
     {
         WriteMatrix();
@@ -183,14 +200,14 @@ void Player::PlaneMovement()
     {
         info.pos.y += GRAVITIY;
 
-        float fY = 0.f;
-        bool lineCheck = CLineMgr::GetInstance()->CollisionLine(info.pos.x, rc.bottom, &fY);
+        //float fY = 0.f;
+        //bool lineCheck = CLineMgr::GetInstance()->CollisionLine(info.pos.x, rc.bottom, &fY);
 
-        if (lineCheck && info.pos.y >= fY)
-        {
-            info.pos.y = fY;
-            m_fAngle = 0;
-        }
+        //if (lineCheck && info.pos.y >= fY)
+        //{
+        //    info.pos.y = fY;
+        //    m_fAngle = 0;
+        //}
     }
 }
 
@@ -214,10 +231,14 @@ void Player::KeyChecking()
 
     if (flyState == true)
     {       
-            if (keyMgr->KeyPressing(VK_SPACE)) //         
-                fallState = false;          
-            else
-                fallState = true;               
+        if (keyMgr->KeyPressing(VK_SPACE)) //         
+            fallState = false;
+        else if (keyMgr->KeyPressing('W')) {
+            ending = true;
+            m_fAngle = 0.f;
+        }
+        else
+            fallState = true;
     }
 }
 
@@ -285,14 +306,13 @@ void Player::RotateAngle()
     {
         if (fallState)
         {
-            m_fAngle += 2.f;
-
-            if (m_fAngle >= 45) {
-                m_fAngle = 45;
-            }
+            m_fAngle + 15.f;
+            //if (m_fAngle >= 45) {
+            //    m_fAngle = 45;
+            //}
         }
         else        
-            m_fAngle -= 1.f;               
+            m_fAngle - 15.f;               
     }
 }
 
@@ -310,5 +330,19 @@ void Player::SetEffect()
         ObjectManager::GetInstance()->InsertObject<RunEffect>(ObjectManager::EFFECT, temp);
         effectDelay = GetTickCount64();
     }
+}
+
+void Player::Ending()
+{
+    D3DXMatrixIdentity(&matWorld);
+
+    m_fAngle += D3DXToRadian(5.f);
+
+    D3DXMATRIX matScale2, matRotate2, matTrans2;
+    D3DXMatrixScaling(&matScale2, 1.f, 1.f, 1.f);
+    D3DXMatrixRotationZ(&matRotate2, m_fAngle);
+    D3DXMatrixTranslation(&matTrans2, info.pos.x += 7.f, info.pos.y, 0.f);
+
+    matWorld = matScale2 * matRotate2 * matTrans2;
 }
 
