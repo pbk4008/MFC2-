@@ -2,6 +2,7 @@
 #include "Stage.h"
 #include "ObjectManager.h"
 #include "TextureManager.h"
+#include "CollisionMgr.h"
 #include "ScrollMgr.h"
 #include "LineMgr.h"
 #include "Player.h"
@@ -45,11 +46,10 @@ HRESULT Stage::Initialize()
 
 	objMgr->InsertObject<CLand>(ObjectManager::TERRAIN);
 	objMgr->InsertObject<Player>(ObjectManager::PLAYER);
-	CScrollMgr::GetInstance()->setSpeed(3.f);
 
 
 	CScrollMgr::GetInstance()->reSetSpeed();
-	CScrollMgr::GetInstance()->setSpeed(3.f);
+	CScrollMgr::GetInstance()->setSpeed(10.f);
 
 	CScrollMgr::GetInstance()->reSetBackSpeed();
 	CScrollMgr::GetInstance()->setBackSpeed(2.f);
@@ -75,6 +75,8 @@ int Stage::Update()
 void Stage::LateUpdate()
 {
 	objMgr->LateUpdate();
+	if(!dynamic_cast<Player*>(objMgr->GetPlayer())->getGod())
+		CollisionMgr::GetInstance()->CollisionObject(objMgr->GetList(ObjectManager::PLAYER), objMgr->GetList(ObjectManager::OBSTACLE));
 }
 
 void Stage::Render()

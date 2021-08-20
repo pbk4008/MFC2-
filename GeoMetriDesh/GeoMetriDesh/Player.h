@@ -24,6 +24,7 @@ public:
 	void WriteMatrix();
 	void RotateAngle();
 	void SetEffect();
+	bool getGod() { return m_bGod; }
 private:
 	void Offset();
 private:
@@ -53,6 +54,8 @@ private:
 	bool fallRotateAngle;
 
 	float fStartY;
+
+	bool m_bGod=false;
 };
 
 

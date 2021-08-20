@@ -111,7 +111,7 @@ bool CLineMgr::CollisionLine(float _infoX, float _infoY, float* _Y)
 {
 	float scrollX = CScrollMgr::GetInstance()->getUpdateScrollX();
 	float scrollY = CScrollMgr::GetInstance()->getScrollY();
-	_infoY += scrollY;
+
 	if (m_LineList.empty()) {
 		return false;
 	}
@@ -119,6 +119,7 @@ bool CLineMgr::CollisionLine(float _infoX, float _infoY, float* _Y)
 	// x Å½»ö
 	float min = WINCY;
 	float ny;
+	float dist;
 	for (auto& rLine : m_LineList) {
 		if (rLine->getPos()[0].x - scrollX <= _infoX &&
 			rLine->getPos()[1].x - scrollX > _infoX)
@@ -131,8 +132,6 @@ bool CLineMgr::CollisionLine(float _infoX, float _infoY, float* _Y)
 			// ‹LÀ» ¶¥ÀÌ°í
 			ny = ((y2 - y1) / (x2 - x1)) * (_infoX - x1) + y1;
 			
-			float dist;
-
 			if (ny >= _infoY) {
 				dist = ny - _infoY;
 
