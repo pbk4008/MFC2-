@@ -2,6 +2,7 @@
 #include "Stage.h"
 #include "ObjectManager.h"
 #include "TextureManager.h"
+#include "CollisionMgr.h"
 #include "ScrollMgr.h"
 #include "LineMgr.h"
 #include "Player.h"
@@ -74,6 +75,8 @@ int Stage::Update()
 void Stage::LateUpdate()
 {
 	objMgr->LateUpdate();
+	if(!dynamic_cast<Player*>(objMgr->GetPlayer())->getGod())
+		CollisionMgr::GetInstance()->CollisionObject(objMgr->GetList(ObjectManager::PLAYER), objMgr->GetList(ObjectManager::OBSTACLE));
 }
 
 void Stage::Render()

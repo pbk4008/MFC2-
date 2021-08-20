@@ -7,8 +7,8 @@ class CObstacle :
     public Object
 {
 private:
-    const static int OBSTACLECX = 81;
-    const static int OBSTACLECY = 81;
+    const static int OBSTACLECX = 40;
+    const static int OBSTACLECY = 40;
 private:
     OBSTACLEINFO m_tObstacleInfo;
     LPD3DXSPRITE m_pSprite;

@@ -1,12 +1,14 @@
 #include "framework.h"
 #include "Obstacle.h"
 #include "TextureManager.h"
+#include "ObjectManager.h"
 #include "ScrollMgr.h"
 
 CObstacle::CObstacle() : m_pScrollMgr(nullptr)
 {
 	m_pSprite = GraphicDevice::GetInstance()->GetSprite();
 	ZeroMemory(&m_tObstacleInfo, sizeof(OBSTACLEINFO));
+
 }
 
 CObstacle::~CObstacle()
@@ -17,23 +19,21 @@ CObstacle::~CObstacle()
 HRESULT CObstacle::ReadObject()
 {
 	m_pScrollMgr = CScrollMgr::GetInstance();
+	//SetObjectInfo(); // 필수!
 	return S_OK;
 }
 
 int CObstacle::UpdateObject()
 {
-	/*float fScollX = m_pScrollMgr->getUpdateScrollX();
-	float fScollY = m_pScrollMgr->getUpdateScrollY();
-	D3DXMATRIX argTrans;
-	D3DXMatrixTranslation(&argTrans, -m_pScrollMgr->getSpeed(), 0.f, 0.f);
-	m_tObstacleInfo.tMatrix *= argTrans;
+	float fScrollX = m_pScrollMgr->getUpdateScrollX();
+
 	info.size.x = OBSTACLECX*m_tObstacleInfo.tMatrix._11;
 	info.size.y = OBSTACLECY*m_tObstacleInfo.tMatrix._22;
 	info.size.z = 0.f;
 
-	info.pos.x = m_tObstacleInfo.tMatrix._41;
+	info.pos.x = m_tObstacleInfo.tMatrix._41- fScrollX;
 	info.pos.y = m_tObstacleInfo.tMatrix._42;
-	info.pos.z = 0.f;*/
+	info.pos.z = 0.f;
 
 	UpdateObjectInfo();
 	return 0;
@@ -57,6 +57,13 @@ void CObstacle::RenderObject()
 	m_pSprite->Draw(pTextInfo->texture, nullptr, &centerVec, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 
 
+	if (ObjectManager::GetInstance()->GetShowLineCheck()) {
+		// 그래픽디바이스를 끄고  다시 그려야 한다!
+		GraphicDevice::GetInstance()->GetSprite()->End();
+		GraphicDevice::GetInstance()->GetLine()->SetWidth(2.f);
+		GraphicDevice::GetInstance()->GetLine()->Draw(lineList, 5, D3DCOLOR_ARGB(rgb.A, rgb.R, rgb.G, rgb.B));
+		GraphicDevice::GetInstance()->GetSprite()->Begin(D3DXSPRITE_ALPHABLEND);
+	}
 	/*m_pSprite->SetTransform(&(m_tObstacleInfo.tMatrix));
 	
 	DrawImage();*/

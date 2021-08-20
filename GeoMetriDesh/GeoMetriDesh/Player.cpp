@@ -166,11 +166,13 @@ void Player::Jumping()
         float fY = 0.f;
         bool lineCheck = CLineMgr::GetInstance()->CollisionLine(info.pos.x, rc.bottom, &fY);
 
-        if (jumpState) {
+        if (jumpState)
+        {
             jumpTime += 0.6f;
             rc.bottom = jumpY - ((jumpPower * jumpTime) - (0.5f * GRAVITIY * jumpTime * jumpTime));
             info.pos.y = rc.bottom - (info.size.y * 0.5f);
-            if (lineCheck && rc.bottom >= fY) {
+            if (lineCheck && rc.bottom >= fY)
+            {
                 jumpState = false;
                 jumpTime = 0.f;
                 rc.bottom = fY;
@@ -273,6 +275,8 @@ void Player::WriteMatrix()
 
         GraphicDevice::GetInstance()->GetSprite()->SetTransform(&matWorld);
     }
+    if (keyMgr->KeyDown(VK_RETURN))
+        m_bGod = true;
 }
 
 void Player::RotateAngle()
